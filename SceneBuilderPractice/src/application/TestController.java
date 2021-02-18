@@ -19,8 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class TestController implements Initializable {
-	@FXML
-	private Label loginLabel;
+//	@FXML
+//	private Label loginLabel;
 	@FXML
 	private PasswordField passwordTextField;
 	@FXML

@@ -16,7 +16,7 @@
 	<children>
       <ImageView fitHeight="262.0" fitWidth="461.0" layoutX="-5.0" layoutY="-5.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../../../../../OneDrive/Desktop/Random/Wallpapers/portal.jpg" />
+            <Image url="@portal.jpg" />
          </image>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />

@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TestController">
+<AnchorPane accessibleRole="MENU_BAR" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TestController">
 	<children>
 		<PasswordField fx:id="passwordTextField" layoutX="126.0" layoutY="200.0" prefHeight="25.0" prefWidth="210.0" />
 		<TextField fx:id="usernameTextField" layoutX="126.0" layoutY="161.0" prefHeight="25.0" prefWidth="210.0" />
 		<Label layoutX="61.0" layoutY="165.0" text="Username" />
 		<Label layoutX="61.0" layoutY="204.0" prefHeight="17.0" prefWidth="50.0" text="Password" />
-		<Label layoutX="61.0" layoutY="30.0" text="Portal To Knowledge">
+		<Label layoutX="7.0" layoutY="7.0" text="Portal To Knowledge">
 			<font>
 				<Font name="Bodoni MT Bold" size="32.0" />
 			</font>
 		</Label>
-		<CheckBox fx:id="parentCheckBox" layoutX="267.0" layoutY="101.0" mnemonicParsing="false" text="Parent/Guardian" />
-		<CheckBox fx:id="studentCheckBox" layoutX="267.0" layoutY="125.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="108.0" text="Student" />
 		<Label fx:id="loginLabel" layoutX="126.0" layoutY="133.0" text="Login" textFill="#1d7b97">
 			<font>
 				<Font name="System Italic" size="14.0" />
 			</font>
 		</Label>
-		<Button layoutX="351.0" layoutY="201.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#login" text="Login">
+		<Button layoutX="351.0" layoutY="201.0" mnemonicParsing="false" onAction="#userLogin" text="Login">
 			<font>
 				<Font name="Arial Rounded MT Bold" size="12.0" />
 			</font>
 		</Button>
-		<Label fx:id="textShowLabel" contentDisplay="CENTER" layoutX="81.0" layoutY="101.0" prefHeight="17.0" prefWidth="150.0" text="Ready" textAlignment="CENTER" textFill="#184aa1">
+		<Label fx:id="textShowLabel" contentDisplay="CENTER" layoutX="11.0" layoutY="71.0" prefHeight="21.0" prefWidth="279.0" text="Ready" textAlignment="CENTER" textFill="#184aa1">
          <font>
             <Font name="Cooper Black" size="18.0" />
          </font></Label>
-      <CheckBox fx:id="teacherCheckBox" layoutX="267.0" layoutY="77.0" mnemonicParsing="false" text="Teacher" />
-      <RadioButton layoutX="126.0" layoutY="228.0" mnemonicParsing="false" onAction="#forgotInfoHyperText" />
-      <Label fx:id="wrongTryLabel" layoutX="146.0" layoutY="228.0" />
+      <MenuButton fx:id="userDropDownMenuButton" layoutX="316.0" layoutY="14.0" mnemonicParsing="false" text="Select User Type">
+        <items>
+          <MenuItem fx:id="teacherMenuItem" mnemonicParsing="false" text="Teacher" />
+          <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" text="Student" />
+            <MenuItem fx:id="guardianMenuItem" mnemonicParsing="false" text="Guardian" />
+        </items>
+      </MenuButton>
 	</children>
 </AnchorPane>

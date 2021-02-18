@@ -55,17 +55,17 @@ public class TestController implements Initializable {
 
 	public void login() {
 		if (studentCheckBox.isSelected()) {
-			String username = "";
-			String password = "";
-			username = usernameTextField.getText();
-			password = passwordTextField.getText();
+//			String username = "";
+//			String password = "";
+////			username = usernameTextField.getText();
+//			password = passwordTextField.getText();
 
-			if (username.equals("Loel")) {
-				if (password.equals("123")) {
+			if (usernameTextField.getText().equals("Loel")) {
+				if (passwordTextField.getText().equals("123")) {
 					textShowLabel.setText("Successful Login");
 
 				}
-			} else if (!username.equals("Loel")) {
+			} else if (!usernameTextField.getText().equals("Loel")) {
 				failedCounter += 1;
 			}
 			if (failedCounter > 3) {

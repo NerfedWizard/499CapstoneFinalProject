@@ -2,6 +2,7 @@ package application;
 	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -9,8 +10,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public  void start(Stage primaryStage) {
 		try {
+			primaryStage.setTitle("Login");
+//			Parent root = (Parent) FXMLLoader.load(getClass().getResourceAsStream("FirstTest.fxml"));
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FirstTest.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

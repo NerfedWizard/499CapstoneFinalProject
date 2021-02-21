@@ -7,14 +7,22 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
+/**
+ * Load the new stage in the controller and start the new controller to handle
+ * the methods needed for the profileView
+ */
 public class StudentProfileView extends Application {
-	@FXML private Stage studentView;
-	@FXML private Scene studentScene;
-	@FXML private AnchorPane root;
+	@FXML
+	private Stage studentView;
+	@FXML
+	private Scene studentScene;
+	@FXML
+	private AnchorPane root;
+
 	public StudentProfileView() {
-		
+
 	}
+
 	@Override
 	public void start(Stage studentView) throws Exception {
 		try {

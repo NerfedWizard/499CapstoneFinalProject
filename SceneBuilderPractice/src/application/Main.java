@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -22,6 +23,7 @@ public class Main extends Application {
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Main.primaryStage.setScene(scene);
+//			Main.primaryStage.initModality(Modality.APPLICATION_MODAL);
 			Main.primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

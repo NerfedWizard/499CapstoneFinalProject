@@ -3,21 +3,32 @@ package application;
 import java.util.ArrayList;
 
 public class Teacher {
+	int id = 0;
 	private String username;
 	private String name;
 	private ArrayList<Student> students = new ArrayList<Student>();
 	private ArrayList<Guardian> guardians = new ArrayList<Guardian>();
-	private String schoolClass;
+	private int classID;
 	private String facultyEmail;
 	private String password;
+	private String assignmentName;
+	private int assignID;
 
-	public Teacher(String username, String name, String facultyEmail, String password, String schoolClass) {
+	public Teacher(String username, String name, String facultyEmail, String password, int classID) {
+		this.setId(getId());
 		this.setUsername(username);
 		this.setName(name);
 		this.setFacultyEmail(facultyEmail);
 		this.setPassword(password);
-		this.setSchoolClass(schoolClass);
+		this.setSchoolClass(classID);
 
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+		this.id+=1;
 	}
 	public void addStudent(Student student) {
 		this.students.add(student);
@@ -72,11 +83,23 @@ public class Teacher {
 	public void setGuardians(ArrayList<Guardian> guardians) {
 		this.guardians = guardians;
 	}
-	public String getSchoolClass() {
-		return schoolClass;
+	public int getSchoolClass() {
+		return classID;
 	}
-	public void setSchoolClass(String schoolClass) {
-		this.schoolClass = schoolClass;
+	public void setSchoolClass(int classID2) {
+		this.classID = classID2;
+	}
+	public String getAssignmentName() {
+		return assignmentName;
+	}
+	public void setAssignmentName(String assignmentName) {
+		this.assignmentName = assignmentName;
+	}
+	public int getAssignID() {
+		return assignID;
+	}
+	public void setAssignID(int assignID) {
+		this.assignID = assignID;
 	}
 
 }

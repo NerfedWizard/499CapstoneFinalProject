@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 
 public class Guardian {
+	private int id = 0;
 	private String username;
 	private String name;
 	private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
@@ -12,6 +13,7 @@ public class Guardian {
 	private Student student;
 
 	public Guardian(String username, String name, String guardianEmail, String password, Student student) {
+		this.setId(id);
 		this.setUsername(username);
 		this.setName(name);
 		this.setFacultyEmail(guardianEmail);
@@ -83,6 +85,13 @@ public class Guardian {
 	}
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+		this.id+=1;
 	}
 
 }

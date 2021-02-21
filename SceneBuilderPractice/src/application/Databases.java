@@ -2,15 +2,16 @@ package application;
 
 import java.util.ArrayList;
 
-public class UserPasswordDatabase {
+public class Databases {
 //	private static String[] userNames = {"Erin","Cedar","Adnan","Luke","Loel"};
 //	private static String[] passwords = {"111","222","333","444","555"};
 //	private static String[] email = new String[5];
 	private ArrayList<Student> studentArchive = new ArrayList<Student>();
 	private ArrayList<Guardian> guardianArchive = new ArrayList<Guardian>();
 	private ArrayList<Teacher> teacherArchive = new ArrayList<Teacher>();
+	private ArrayList<ClassInformation> classInfo = new ArrayList<ClassInformation>();
 
-	public UserPasswordDatabase() {
+	public Databases() {
 
 	}
 
@@ -45,5 +46,13 @@ public class UserPasswordDatabase {
 //	public static String[] getEmail() {
 //		return email;
 //	}
+
+	public ArrayList<ClassInformation> getClassInfo() {
+		return classInfo;
+	}
+
+	public void setClassInfo(ArrayList<ClassInformation> classInfo) {
+		this.classInfo = classInfo;
+	}
 
 }

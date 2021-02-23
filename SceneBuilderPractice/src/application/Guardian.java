@@ -12,7 +12,7 @@ public class Guardian {
 	private String password;
 	private Student student;
 
-	public Guardian(String username, String name, String guardianEmail, String password, Student student) {
+	public Guardian(int id, String username, String name, String guardianEmail, String password, Student student) {
 		this.setId(id);
 		this.setUsername(username);
 		this.setName(name);
@@ -91,7 +91,7 @@ public class Guardian {
 	}
 	public void setId(int id) {
 		this.id = id;
-		this.id+=1;
+		
 	}
 
 }

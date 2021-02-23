@@ -1,58 +1,53 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Databases {
-//	private static String[] userNames = {"Erin","Cedar","Adnan","Luke","Loel"};
-//	private static String[] passwords = {"111","222","333","444","555"};
-//	private static String[] email = new String[5];
+	private ArrayList<String> userLogin = new ArrayList<String>();
 	private ArrayList<Student> studentArchive = new ArrayList<Student>();
 	private ArrayList<Guardian> guardianArchive = new ArrayList<Guardian>();
 	private ArrayList<Teacher> teacherArchive = new ArrayList<Teacher>();
-	private ArrayList<ClassInformation> classInfo = new ArrayList<ClassInformation>();
+	private ArrayList<ClassInformation> classArchive = new ArrayList<ClassInformation>();
 
 	public Databases() {
 
 	}
 
-	public void addStudent(Student student, int id) {
-		this.studentArchive.add(id,student);
+	public void addStudent(Student student, AtomicInteger userID) {
+		this.studentArchive.add(userID.get(),student);
 	}
 
-	public void addGuardian(Guardian guardian, int id) {
-		this.guardianArchive.add(id, guardian);
+	public void addGuardian(Guardian guardian, AtomicInteger userID) {
+		this.guardianArchive.add(userID.get(), guardian);
 	}
 
-	public void addTeacher(Teacher teacher, int id) {
-		this.teacherArchive.add(id,teacher);
+	public void addTeacher(Teacher teacher, AtomicInteger userID) {
+		this.teacherArchive.add(userID.get(),teacher);
 	}
-	public Student getStudentArchive(int id) {
-		return studentArchive.get(id);
+	public Student getStudentArchive(AtomicInteger userID) {
+		return studentArchive.get(userID.get());
 	}
-	public Guardian getGuardianArchive(int id) {
-		return guardianArchive.get(id);
+	public Guardian getGuardianArchive(AtomicInteger userID) {
+		return guardianArchive.get(userID.get());
 	}
-	public Teacher getTeacherArchive(int id) {
-		return teacherArchive.get(id);
-	}
-//	public static String[] getLoginInfo() {
-//		return userNames;
-//	}
-//
-//	public static String[] getPasswords() {
-//		return passwords;
-//	}
-//
-//	public static String[] getEmail() {
-//		return email;
-//	}
-
-	public ArrayList<ClassInformation> getClassInfo() {
-		return classInfo;
+	public Teacher getTeacherArchive(AtomicInteger userID) {
+		return teacherArchive.get(userID.get());
 	}
 
-	public void setClassInfo(ArrayList<ClassInformation> classInfo) {
-		this.classInfo = classInfo;
+	public ArrayList<ClassInformation> getClassArchive() {
+		return classArchive;
+	}
+
+	public void setClassInfo(ArrayList<ClassInformation> classArchive) {
+		this.classArchive = classArchive;
+	}
+
+	public void setUserLogin(ArrayList<String> userLogin) {
+		this.userLogin = userLogin;
+	}
+	public ArrayList<String> userLogin(){
+		return userLogin;
 	}
 
 }

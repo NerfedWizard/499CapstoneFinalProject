@@ -14,8 +14,8 @@ public class Teacher {
 	private String assignmentName;
 	private int assignID;
 
-	public Teacher(String username, String name, String facultyEmail, String password, int classID) {
-		this.setId(getId());
+	public Teacher(int id, String username, String name, String facultyEmail, String password, int classID) {
+		this.setId(id);
 		this.setUsername(username);
 		this.setName(name);
 		this.setFacultyEmail(facultyEmail);

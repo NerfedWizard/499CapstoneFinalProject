@@ -8,5 +8,12 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/ons.jar"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/orai18n.jar"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/simplefan.jar"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/ucp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/loeln/OneDrive/Desktop/ICS_499/OJDBC-Full/xdb6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

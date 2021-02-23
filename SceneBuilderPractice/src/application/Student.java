@@ -6,40 +6,23 @@ import java.util.ArrayList;
 public class Student {
 	private int id = 0;
 	private String username;
-	private String name;
-	private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
-	private ArrayList<String> classes = new ArrayList<String>();
+	private String fullName;
+	private ArrayList<ClassInformation> classes = new ArrayList<ClassInformation>();
 	private String studentEmail;
 	private String password;
 	private Guardian guardian;
-	private String attendance;
 
-	public Student(String username, String name, String studentEmail, String password, Guardian guardian) {
-		this.setId(this.id);
+	public Student(int id, String username, String name, String studentEmail, String password, Guardian guardian) {
+		this.id = id;
 		this.setUsername(username);
-		this.setName(name);
-		this.setFacultyEmail(studentEmail);
+		this.setFullName(name);
+		this.setStudentEmail(studentEmail);
 		this.setPassword(password);
 		this.setGuardian(guardian);
-		
 
 	}
 
-	public String getAttendance() {
-		return this.attendance;
-	}
 
-	public void setAttendance(String status) {
-		this.attendance = status;
-	}
-
-	public void addTeacher(Teacher teacher) {
-		this.teachers.add(teacher);
-	}
-
-//	public void addGuardian(Guardian guardian) {
-//		this.guardian = guardian;
-//	}
 	public String getUsername() {
 		return this.username;
 	}
@@ -48,20 +31,20 @@ public class Student {
 		this.username = username;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getFullName() {
+		return this.fullName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFullName(String name) {
+		this.fullName = name;
 	}
 
-	public String getFacultyEmail() {
+	public String getStudentEmail() {
 		return this.studentEmail;
 	}
 
-	public void setFacultyEmail(String facultyEmail) {
-		this.studentEmail = facultyEmail;
+	public void setStudentEmail(String studentEmail) {
+		this.studentEmail = studentEmail;
 	}
 
 	public String getPassword() {
@@ -72,28 +55,17 @@ public class Student {
 		this.password = password;
 	}
 
-	public ArrayList<Teacher> getTeachers() {
-		return this.teachers;
-	}
 
-//	public void setTeachers(ArrayList<Student> students) {
-//		this.teachers = students;
-//	}
 
-	public ArrayList<String> getClasses() {
+	public ArrayList<ClassInformation> getClasses() {
 		return this.classes;
 	}
 
-	public void addClasses(String classTaken) {
+	public void addClasses(ClassInformation classTaken) {
 		this.classes.add(classTaken);
 	}
 
-//	public ArrayList<String> getClasses() {
-//		return classes;
-//	}
-//	public void setClasses(ArrayList<String> classes) {
-//		this.classes = classes;
-//	}
+
 	public Guardian getGuardian() {
 		return this.guardian;
 	}
@@ -104,11 +76,6 @@ public class Student {
 
 	public int getId() {
 		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-		this.id+=1;
 	}
 
 }

@@ -34,7 +34,7 @@ public class StudentProfileView extends Application {
 			studentView.setScene(studentScene);
 //			Main.primaryStage.close();
 			studentView.show();
-			Main.getPrimaryStage().close();
+//			Main.getPrimaryStage().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

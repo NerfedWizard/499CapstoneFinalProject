@@ -34,11 +34,4 @@ public class Admin {
 		Teacher teacher = new Teacher(userID.getAndIncrement(), username, name, facultyEmail, password, classID);
 		db.addTeacher(teacher, userID);
 	}
-
-//	public void createUserPassword() {
-//		char[] possibleCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?")).toCharArray();
-//		String randomStr = randomStr.random( randomStr, 0, possibleCharacters.length-1, false, false, possibleCharacters, new SecureRandom() );
-//		System.out.println( randomStr );
-//	}
-
 }

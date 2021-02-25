@@ -7,7 +7,7 @@ public class Teacher {
 	private String username;
 	private String name;
 	private ArrayList<Student> students = new ArrayList<Student>();
-	private ArrayList<Guardian> guardians = new ArrayList<Guardian>();
+//	private ArrayList<Guardian> guardians = new ArrayList<Guardian>();
 	private int classID;
 	private String facultyEmail;
 	private String password;
@@ -20,7 +20,7 @@ public class Teacher {
 		this.setName(name);
 		this.setFacultyEmail(facultyEmail);
 		this.setPassword(password);
-		this.setSchoolClass(classID);
+//		.setSchoolClass(classID);
 
 	}
 	public int getId() {
@@ -33,9 +33,9 @@ public class Teacher {
 	public void addStudent(Student student) {
 		this.students.add(student);
 	}
-	public void addGuardian(Guardian guardian) {
-		this.guardians.add(guardian);
-	}
+//	public void addGuardian(Guardian guardian) {
+//		this.guardians.add(guardian);
+//	}
 	public String getUsername() {
 		return username;
 	}
@@ -76,20 +76,11 @@ public class Teacher {
 		this.students = students;
 	}
 
-	public ArrayList<Guardian> getGuardians() {
-		return guardians;
-	}
+//	public ArrayList<Guardian> getGuardians() {
+//		return guardians;
+//	}
 
-	public void setGuardians(ArrayList<Guardian> guardians) {
-		this.guardians = guardians;
-	}
-	public int getSchoolClass() {
-		return classID;
-	}
-	public void setSchoolClass(int classID2) {
-		this.classID = classID2;
-	}
-	public String getAssignmentName() {
+public String getAssignmentName() {
 		return assignmentName;
 	}
 	public void setAssignmentName(String assignmentName) {

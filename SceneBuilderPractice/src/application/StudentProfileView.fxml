@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.stage.Stage?>
 
-
 <Stage xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.profileViewController">
    <scene>
       <Scene fx:id="studentScene" fill="#a2a3ab">
@@ -24,63 +23,28 @@
                   </ImageView>
                   <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="222.0">
                     <menus>
-                      <Menu mnemonicParsing="false" text="Account">
-                        <items>
-                              <MenuItem mnemonicParsing="false" text="Profile" />
-                          <MenuItem mnemonicParsing="false" text="Academic Records" />
-                              <MenuItem mnemonicParsing="false" text="Change Login Credentials " />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Classes">
-                        <items>
-                              <Menu mnemonicParsing="false" text="Current Classes">
-                                <items>
-                                    <Menu mnemonicParsing="false" text="Phy. Ed.">
-                                      <items>
-                                          <MenuItem mnemonicParsing="false" text="Announcements" />
-                                        <MenuItem mnemonicParsing="false" text="Grade" />
-                                        <MenuItem mnemonicParsing="false" text="Assignments" />
-                                          <MenuItem mnemonicParsing="false" text="Tests" />
-                                          <MenuItem mnemonicParsing="false" text="Message" />
-                                      </items>
-                                    </Menu>
-                                    <Menu mnemonicParsing="false" text="Math">
-                                       <items>
-                                          <MenuItem mnemonicParsing="false" text="Announcements" />
-                                          <MenuItem mnemonicParsing="false" text="Grade" />
-                                      <MenuItem mnemonicParsing="false" text="Assignments" />
-                                          <MenuItem mnemonicParsing="false" text="Tests" />
-                                          <MenuItem mnemonicParsing="false" text="Message" />
-                                       </items>
-                                    </Menu>
-                                    <Menu mnemonicParsing="false" text="Computer Science">
-                                       <items>
-                                          <MenuItem mnemonicParsing="false" text="Announcements" />
-                                          <MenuItem mnemonicParsing="false" text="Grade" />
-                                          <MenuItem mnemonicParsing="false" text="Assignments" />
-                                          <MenuItem mnemonicParsing="false" text="Tests" />
-                                          <MenuItem mnemonicParsing="false" text="Message" />
-                                       </items>
-                                    </Menu>
-                                </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="Records">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="Unofficial Transcript" />
-                                    <MenuItem mnemonicParsing="false" text="Registration" />
-                                </items>
-                              </Menu>
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="News">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Current School Calendar" />
-                        </items>
-                      </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
+                        <Menu mnemonicParsing="false" text="Course">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="FAQ" />
-                              <MenuItem mnemonicParsing="false" text="Contact Information" />
+                              <MenuItem mnemonicParsing="false" text="Grades" />
+                              <Menu mnemonicParsing="false" text="Course Material">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Assignments" />
+                                    <MenuItem mnemonicParsing="false" text="Materials" />
+                                 </items>
+                              </Menu>
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Messages">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Send Email" />
+                              <MenuItem mnemonicParsing="false" text="Check Email" />
+                              <MenuItem mnemonicParsing="false" text="Manage Meeting" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Login">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Change Password" />
+                              <MenuItem mnemonicParsing="false" text="Logout" />
                            </items>
                         </Menu>
                     </menus>

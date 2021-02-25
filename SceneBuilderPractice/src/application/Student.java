@@ -61,7 +61,8 @@ public class Student {
 		return this.classes;
 	}
 
-	public void addClasses(ClassInformation classTaken) {
+	public void addClasses(int classID, String classSubject, Teacher teacher) {
+		ClassInformation classTaken = new ClassInformation(classID, classSubject, teacher);
 		this.classes.add(classTaken);
 	}
 

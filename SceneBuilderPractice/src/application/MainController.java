@@ -81,10 +81,9 @@ public class MainController implements Initializable {
 		studentMenuItem.setOnAction(event1);
 		guardianMenuItem.setOnAction(event1);
 		teacherMenuItem.setOnAction(event1);
-	/** Announcements Unofficial */
+		/** Announcements Unofficial */
 
 	}
-
 
 	public void userLogin() {
 
@@ -109,12 +108,12 @@ public class MainController implements Initializable {
 	}
 
 	public void profileView() {
-		
+
 		StudentProfileView spv = new StudentProfileView();
 		try {
 			spv.start(profileStage);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 

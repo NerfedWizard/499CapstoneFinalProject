@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane accessibleRole="MENU_BAR" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
 	<children>
       <ImageView fitHeight="262.0" fitWidth="461.0" layoutX="-5.0" layoutY="-5.0" pickOnBounds="true" smooth="false">
@@ -32,22 +31,23 @@
 				<Font name="Bodoni MT Bold" size="32.0" />
 			</font>
 		</Label>
-		<Button layoutX="351.0" layoutY="201.0" mnemonicParsing="false" onAction="#userLogin" text="Login">
+		<Button fx:id="submitButton" layoutX="351.0" layoutY="201.0" mnemonicParsing="false" onAction="#userLogin" text="Login">
 			<font>
 				<Font name="Arial Rounded MT Bold" size="12.0" />
 			</font>
 		</Button>
-		<Label fx:id="textShowLabel" contentDisplay="CENTER" layoutX="11.0" layoutY="71.0" prefHeight="21.0" prefWidth="279.0" text="Ready" textAlignment="CENTER" textFill="WHITE">
+		<Label fx:id="textShowLabel" contentDisplay="CENTER" layoutX="11.0" layoutY="71.0" prefHeight="21.0" prefWidth="279.0" text="Sign in" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Cooper Black" size="14.0" />
          </font>
       </Label>
-      <MenuButton fx:id="userDropDownMenuButton" layoutX="316.0" layoutY="14.0" mnemonicParsing="false" text="Select User Type">
+      <MenuButton fx:id="userDropDownMenuButton" layoutX="316.0" layoutY="14.0" mnemonicParsing="false" text="User Selection">
         <items>
           <MenuItem fx:id="teacherMenuItem" mnemonicParsing="false" text="Teacher" />
           <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" text="Student" />
             <MenuItem fx:id="guardianMenuItem" mnemonicParsing="false" text="Guardian" />
             <MenuItem mnemonicParsing="false" text="Reset Password" />
+            <MenuItem fx:id="adminMenuItem" mnemonicParsing="false" text="Admin" />
         </items>
       </MenuButton>
 	</children>

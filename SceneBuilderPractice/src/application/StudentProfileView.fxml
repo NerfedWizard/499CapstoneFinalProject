@@ -10,7 +10,7 @@
 
 <AnchorPane accessibleRole="MENU_BAR" maxHeight="1080.0" maxWidth="1920.0" minHeight="5.0" minWidth="5.0" prefHeight="825.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StudentController">
    <children>
-      <ImageView fitHeight="844.0" fitWidth="1200.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backgroundImage" fitHeight="844.0" fitWidth="1200.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Metropolitan_State_Library_and_Learning_Center.jpg" />
          </image>
@@ -19,11 +19,11 @@
         <menus>
             <Menu mnemonicParsing="false" text="Course">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Grades" />
+                  <MenuItem mnemonicParsing="false" onAction="#me" text="Grades" />
                   <Menu mnemonicParsing="false" text="Course Material">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Assignments" />
-                        <MenuItem mnemonicParsing="false" text="Materials" />
+                        <MenuItem fx:id="materialsMenuItem" mnemonicParsing="false" onAction="#changeImage" text="Materials" />
                      </items>
                   </Menu>
                </items>

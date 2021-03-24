@@ -41,12 +41,15 @@ public class MainController implements Initializable {
 	private String userSelection = "";
 	private StudentProfileView studentView;
 	private AdminView adminView;
+	private TeacherView teacherView;
 	private boolean successfulLogin = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		studentView = new StudentProfileView();
 		adminView = new AdminView();
+		teacherView = new TeacherView();
+		
 		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				setUserSelection(((MenuItem) e.getSource()).getText());
@@ -59,6 +62,12 @@ public class MainController implements Initializable {
 		guardianMenuItem.setOnAction(event1);
 		teacherMenuItem.setOnAction(event1);
 		adminMenuItem.setOnAction(event1);
+		MySQLAccess database = new MySQLAccess();
+		try {
+			database.readDataBase();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		/** Announcements Unofficial */
 
 	}
@@ -84,6 +93,8 @@ public class MainController implements Initializable {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+				}else if (getUserSelection().equals("Teacher")) {
+					
 				}
 
 			} else {

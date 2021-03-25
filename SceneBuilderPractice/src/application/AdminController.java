@@ -12,6 +12,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * I think making a text field for the database stuff is the way to go
+ */
 public class AdminController implements Initializable {
 	@FXML
 	private MenuButton adminMenuButton;
@@ -35,7 +38,7 @@ public class AdminController implements Initializable {
 		TextArea textArea = new TextArea("Hello");
 		textArea.setEditable(false);
 		textArea.setText("Hello World");
-		
+
 //		System.out.println("Hety");
 //		backgroundImage.setImage(image);
 	}

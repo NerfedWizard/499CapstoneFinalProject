@@ -7,10 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="5.0" minWidth="5.0" prefHeight="747.0" prefWidth="1124.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1">
+<AnchorPane minHeight="5.0" minWidth="5.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="781.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="934.0" fitWidth="1586.0" pickOnBounds="true" preserveRatio="true" translateX="1.0" translateY="1.0" translateZ="1.0">
          <image>
             <Image url="@Metropolitan_State_Library_and_Learning_Center.jpg" />
          </image>

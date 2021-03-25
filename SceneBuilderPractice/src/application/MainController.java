@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,6 +43,7 @@ public class MainController implements Initializable {
 	private StudentProfileView studentView;
 	private AdminView adminView;
 	private TeacherView teacherView;
+	private ResetPasswordView resetPassUser;
 	private boolean successfulLogin = false;
 
 	@Override
@@ -50,6 +52,7 @@ public class MainController implements Initializable {
 		adminView = new AdminView();
 		teacherView = new TeacherView();
 		
+
 		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				setUserSelection(((MenuItem) e.getSource()).getText());
@@ -62,20 +65,33 @@ public class MainController implements Initializable {
 		guardianMenuItem.setOnAction(event1);
 		teacherMenuItem.setOnAction(event1);
 		adminMenuItem.setOnAction(event1);
-		MySQLAccess database = new MySQLAccess();
-		try {
-			database.readDataBase();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+//		resetPasswordMenuItem.setOnAction(event1);
+//		MySQLAccess database = new MySQLAccess();
+//		try {
+//			database.readDataBase();
+//		} catch (Exception e1) {
+//			e1.printStackTrace();
+//		}
 		/** Announcements Unofficial */
 
 	}
 
 	public void userLogin() {
-
-		if (usernameTextField.getText().equals("Loel")) {
-			if (passwordTextField.getText().equals("123")) {
+//		int wrongCount = 0;
+		System.out.println(getUserSelection());
+		
+		/** Make something here that grabs the results and loops through checking the username and passwords 
+		 * 
+		 * 
+		 * Not doing the command now gotta look into that 
+		 * */
+		ArrayList<String> usernames = MySQLAccess.getUsername();
+		ArrayList<String> passwords = MySQLAccess.getPassword();
+		int count = usernames.size();
+//		System.out.println(MySQLAccess.getUsername().get(1));
+//		while(count != 0) {
+		if (usernameTextField.getText().equals(MySQLAccess.getUsername().get(count))) {
+			if (passwordTextField.getText().equals(passwords.get(count))) {
 				textShowLabel.setText("Success!");
 				if (getUserSelection().equals("Student")) {
 					Stage stage = (Stage) submitButton.getScene().getWindow();
@@ -93,16 +109,36 @@ public class MainController implements Initializable {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}else if (getUserSelection().equals("Teacher")) {
-					
+				} else if (getUserSelection().equals("Teacher")) {
+					Stage stage = (Stage) submitButton.getScene().getWindow();
+					try {
+						teacherView.start(stage);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					textShowLabel.setText("Please Select A User");
 				}
 
 			} else {
 				textShowLabel.setText("Invalid Password");
-
 			}
 		} else {
 			textShowLabel.setText("Invalid UserName");
+//			wrongCount++;
+//			int wrong = 5 - wrongCount;
+//			textShowLabel.setText("Only " + wrong + " Tries left!");
+//		}
+		count--;
+		}
+		if (getUserSelection().equals("Reset Password")) {
+			Stage stage = (Stage) submitButton.getScene().getWindow();
+			try {
+				resetPassUser.start(stage);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

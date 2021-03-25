@@ -84,6 +84,7 @@ public class MainController implements Initializable {
 		 * 
 		 * 
 		 * Not doing the command now gotta look into that 
+		 * going to bed 
 		 * */
 		ArrayList<String> usernames = MySQLAccess.getUsername();
 		ArrayList<String> passwords = MySQLAccess.getPassword();

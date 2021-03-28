@@ -24,9 +24,9 @@ public class TeacherView extends Application {
 	@Override
 	public void start(Stage teacherView) throws Exception {
 		try {
-			teacherView.setFullScreen(true);
-			teacherView.setFullScreenExitHint("Press F11 to Exit FullScreen");
-			teacherView.setTitle("Teacher");
+//			teacherView.setFullScreen(true);
+//			teacherView.setFullScreenExitHint("Press F11 to Exit FullScreen");
+			teacherView.setTitle(TeacherController.getUserTeacherNameForTitle());
 			teacherView.setFullScreen(true);
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("TeacherView.fxml"));
 			scene = new Scene(root);

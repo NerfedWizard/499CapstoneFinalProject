@@ -51,7 +51,6 @@ public class MainController implements Initializable {
 		studentView = new StudentProfileView();
 		adminView = new AdminView();
 		teacherView = new TeacherView();
-		
 
 		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
@@ -79,58 +78,69 @@ public class MainController implements Initializable {
 	public void userLogin() {
 //		int wrongCount = 0;
 		System.out.println(getUserSelection());
-		
-		/** Make something here that grabs the results and loops through checking the username and passwords 
+
+		/**
+		 * Make something here that grabs the results and loops through checking the
+		 * username and passwords
 		 * 
 		 * 
-		 * Not doing the command now gotta look into that 
-		 * going to bed 
-		 * */
-		ArrayList<String> usernames = MySQLAccess.getUsername();
-		ArrayList<String> passwords = MySQLAccess.getPassword();
-		int count = usernames.size();
+		 * Not doing the command now gotta look into that going to bed
+		 */
+//		ArrayList<String> usernames = MySQLAccess.getUsername();
+//		ArrayList<String> passwords = MySQLAccess.getPassword();
+//		int count = usernames.size();
 //		System.out.println(MySQLAccess.getUsername().get(1));
 //		while(count != 0) {
-		if (usernameTextField.getText().equals(MySQLAccess.getUsername().get(count))) {
-			if (passwordTextField.getText().equals(passwords.get(count))) {
-				textShowLabel.setText("Success!");
-				if (getUserSelection().equals("Student")) {
-					Stage stage = (Stage) submitButton.getScene().getWindow();
-					try {
-						studentView.start(stage);
-					} catch (Exception e) {
+		if(getUserSelection().equals("")) {
+			textShowLabel.setText("Please select the user from dropdown");
+		}else {
+		for (String s : MySQLAccess.getUsername(getUserSelection())) {
+			for (String p : MySQLAccess.getPassword()) {
+				if (usernameTextField.getText().equals(s)) {
+					if (passwordTextField.getText().equals(p)) {
+						textShowLabel.setText("Success!");
+						if (getUserSelection().equals("Student")) {
+							StudentController.setNameForTitle(s,getUserSelection());
+							Stage stage = (Stage) submitButton.getScene().getWindow();
+							try {
+								studentView.start(stage);
+							} catch (Exception e) {
 
-						e.printStackTrace();
-					}
+								e.printStackTrace();
+							}
 
-				} else if (getUserSelection().equals("Admin")) {
-					Stage stage = (Stage) submitButton.getScene().getWindow();
-					try {
-						adminView.start(stage);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				} else if (getUserSelection().equals("Teacher")) {
-					Stage stage = (Stage) submitButton.getScene().getWindow();
-					try {
-						teacherView.start(stage);
-					} catch (Exception e) {
-						e.printStackTrace();
+						} else if (getUserSelection().equals("Admin")) {
+							AdminController.setNameForTitle(s, getUserSelection());
+							Stage stage = (Stage) submitButton.getScene().getWindow();
+							try {
+								adminView.start(stage);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} else if (getUserSelection().equals("Teacher")) {
+							TeacherController.setNameForTitle(s, getUserSelection());
+							Stage stage = (Stage) submitButton.getScene().getWindow();
+							try {
+								teacherView.start(stage);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} else {
+							textShowLabel.setText("Please Select A User");
+						}
+
+					} else {
+						textShowLabel.setText("Invalid Password");
 					}
 				} else {
-					textShowLabel.setText("Please Select A User");
-				}
-
-			} else {
-				textShowLabel.setText("Invalid Password");
-			}
-		} else {
-			textShowLabel.setText("Invalid UserName");
+					textShowLabel.setText("Invalid UserName");
 //			wrongCount++;
 //			int wrong = 5 - wrongCount;
 //			textShowLabel.setText("Only " + wrong + " Tries left!");
 //		}
-		count--;
+				}
+			}
+		}
 		}
 		if (getUserSelection().equals("Reset Password")) {
 			Stage stage = (Stage) submitButton.getScene().getWindow();

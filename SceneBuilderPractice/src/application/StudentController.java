@@ -12,8 +12,7 @@ import javafx.scene.text.TextFlow;
 
 /** Controller to be used for the student profile */
 public class StudentController implements Initializable {
-//@FXML ImageView backgroundImage  = new ImageView();
-//@FXML Image image = new Image("disneyP.jpg");//Image that is needed to swap for current.
+
 	@FXML
 	MenuItem materialsMenuItem;
 	@FXML
@@ -24,40 +23,39 @@ public class StudentController implements Initializable {
 	TextArea textAreaRight;
 	private Text textForFlowLeft = new Text();
 	private Text textForFlowRight = new Text();
+	static String nameForTitle;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-//		textAreaRight.setPromptText("Enter Message");
+
+	}
+
+	public static void setNameForTitle(String name,String userType) {
+		System.out.println(name + "   In the student controller");
+		nameForTitle = MySQLAccess.getFirstName(name,userType);
+	}
+	public static String getUserStudentNameForTitle() {
+		return nameForTitle;
 	}
 
 	public void changeTextFlow(Text textLeft, Text textRight) {
-//		?String tLeft = textLeft.getText();
-//		String tRight = textRight.getText();
-//		System.out.println(tRight);
 		textAreaLeft.setText(textLeft.getText());
 		textAreaRight.setText(textRight.getText());
-//		textAreaLeft.clear();
 	}
 
 	public void getGrades() {
-//		clearTextArea();
-//		textAreaLeft.clear();
-//		textAreaRight.clear();
 		textForFlowLeft.setText("You are Failing");
 		textForFlowRight.setText("F-");
-
 		changeTextFlow(textForFlowLeft, textForFlowRight);
 	}
 
 	public void getAssignments() {
-//		clearTextArea();
 		textForFlowLeft.setText("Design a Dyson Sphere and harness the power of the sun ");
 		textForFlowRight.setText("Due Date is tomorrow");
 		changeTextFlow(textForFlowLeft, textForFlowRight);
 	}
 
 	public void getMaterials() {
-//		clearTextArea();
 		textForFlowLeft.setText("Loel Nelson\r\n" + "Beverly Hill \r\n" + "LING 316-01\r\n" + "November 29th, 2018\r\n"
 				+ "\tBilingual: Greek, English and More\r\n"
 				+ "Bilingual is defined by the Oxford dictionary as having or characterized by two languages.  To get a better handle on the ins and outs of bilinguals I interviewed a Greek family who run a local restaurant I work part time at.  Marcos and Athanasia Chouliouris were born in Greece and moved to the Untied States in the early 80s.  Marcos speaks Greek and English along with Turkish, Russian and some Spanish.  Athanasia or Sula as she likes to go by speaks only Greek and English and she has the heavier accent.  Shortly after moving they were married and had two children.  Anastasia or Stacy and Efstathios or Steven their children are both fluent in multiple languages.  Stacy speaks English, Greek, Spanish and French fluently and was always able to pick up languages faster.  Steven is fluent in Greek, English, Spanish and is in the process of learning Japanese.  Bilingual children have the potential to learn languages faster than monolingual children by having been exposed to it early on in childhood.  By speaking and understanding more than one language has opened many doors for Stacy and Steven in their adulthood.  Is learning two or more languages early on in childhood a benefit? Do all multilingual households end up having bilingual children? \r\n"
@@ -74,8 +72,4 @@ public class StudentController implements Initializable {
 		textForFlowRight.setText("");
 		changeTextFlow(textForFlowLeft, textForFlowRight);
 	}
-
-//	public void clearTextArea() {
-//		changeTextFlow(null,null);
-//	}
 }

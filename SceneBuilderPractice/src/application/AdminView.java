@@ -21,7 +21,7 @@ public class AdminView extends Application {
 	public void start(Stage adminStage) throws Exception {
 		try {
 //			adminStage.setFullScreen(true);
-			adminStage.setTitle("Admin");
+			adminStage.setTitle(AdminController.getUserAdminNameForTitle());
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("AdminView.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

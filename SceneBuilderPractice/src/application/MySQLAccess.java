@@ -17,6 +17,7 @@ public class MySQLAccess {
 	static Connection con;
 	static Statement stmt;
 	static ResultSet rs;
+	static String name = "";
 
 	public static void startDB() {
 		try
@@ -26,24 +27,37 @@ public class MySQLAccess {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, passwrd);
 			System.out.println("Made it here");
-//			stmt = con.createStatement();
-//			rs = stmt.executeQuery(query);
-//			while (rs.next())
-//				System.out.println(rs.getString(1));
-//			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	public static ArrayList<String> getUsername() {
+//	public static String getFirstName(String userID) {
+//		System.out.println("In MySQL access " + userID);
+//		try {
+//			stmt = con.createStatement();
+//			String queryString = "SELECT first_name FROM student where student_id = '" + userID + "';";
+//			rs = stmt.executeQuery(queryString);
+//
+//			name = rs.getString(1);
+//			System.out.println(name);
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return name;
+//	}
+
+	public static ArrayList<String> getUsername(String userType) {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select username FROM user_info;");
+			rs = stmt.executeQuery("select username FROM " + userType + ";");
 			while (rs.next()) {
 				result.add(rs.getString(1));
 				System.out.println(rs.getString(1));
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -51,11 +65,12 @@ public class MySQLAccess {
 		}
 		return result;
 	}
-	public static ArrayList<String> getPassword(){
+
+	public static ArrayList<String> getPassword() {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select password FROM user_info;");
+			rs = stmt.executeQuery("select password FROM student;");
 			while (rs.next()) {
 				result.add(rs.getString(1));
 			}
@@ -63,7 +78,24 @@ public class MySQLAccess {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return result;
+	}
+
+	public static String getFirstName(String username, String userType) {
+		System.out.println("In MySQL access " + username);
+		try {
+			stmt = con.createStatement();
+			String queryString = "SELECT first_name FROM " + userType + " where username = '" + username + "';";
+			rs = stmt.executeQuery(queryString);
+			if (rs.next()) {
+				name = rs.getString(1);
+				System.out.println(name);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
 	}
 }

@@ -26,6 +26,7 @@ public class AdminController implements Initializable {
 	MenuItem materialsMenuItem;
 	@FXML
 	SubScene subscene;
+	static String nameForTitle = "";
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -41,6 +42,13 @@ public class AdminController implements Initializable {
 
 //		System.out.println("Hety");
 //		backgroundImage.setImage(image);
+	}
+	public static void setNameForTitle(String name,String userType) {
+		System.out.println(name + "   In the student controller");
+		nameForTitle = MySQLAccess.getFirstName(name,userType);
+	}
+	public static String getUserAdminNameForTitle() {
+		return nameForTitle;
 	}
 
 }

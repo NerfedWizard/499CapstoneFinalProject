@@ -5,35 +5,58 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-/** Controller to be used for the student profile */
+/**
+ * Controller to be used for the student profile
+ * 
+ * Had to go with a login button outside of the menu for going back to the login
+ * view now inside the menu it will have change password and change user name
+ */
 public class StudentController implements Initializable {
 
 	@FXML
-	MenuItem materialsMenuItem;
+	private MenuItem materialsMenuItem;
 	@FXML
-	TextFlow textFlow;
+	private TextFlow textFlow;
 	@FXML
-	TextArea textAreaLeft;
+	private TextArea textAreaLeft;
 	@FXML
-	TextArea textAreaRight;
-	private Text textForFlowLeft = new Text();
+	private TextArea textAreaRight;
+	@FXML
+	private Button logoutButton;
+	@FXML
+	private MenuItem changePass;
+	private Text textForFlowLeft = new Text();// This is going to have to connect to the database for setting the
+												// queries to text but in a formatted output
 	private Text textForFlowRight = new Text();
 	static String nameForTitle;
+	private Main main;
+	static String userType;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		main = new Main();// This was the culprit for going back to login forgot to initialize it. ARGH!!
 	}
 
-	public static void setNameForTitle(String name,String userType) {
+	public void studentLogout() {
+		try {
+			main.start(Main.logStage);// shows you can go to any view from any view if needed
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void setNameForTitle(String name, String userType) {
+//		StudentController.userType = userType;
 		System.out.println(name + "   In the student controller");
-		nameForTitle = MySQLAccess.getFirstName(name,userType);
+		nameForTitle = MySQLAccess.getFirstName(name, userType);
 	}
+
 	public static String getUserStudentNameForTitle() {
 		return nameForTitle;
 	}
@@ -43,6 +66,7 @@ public class StudentController implements Initializable {
 		textAreaRight.setText(textRight.getText());
 	}
 
+	/** Needs connecting to database for grade pulls */
 	public void getGrades() {
 		textForFlowLeft.setText("You are Failing");
 		textForFlowRight.setText("F-");
@@ -71,5 +95,26 @@ public class StudentController implements Initializable {
 				+ "	\r\n" + "	\r\n" + "");
 		textForFlowRight.setText("");
 		changeTextFlow(textForFlowLeft, textForFlowRight);
+	}
+
+	public void changePassword() {
+		String newPassword = "";
+		String oldPassword = "";
+		String passwordsForReset = "";
+		textForFlowLeft.setText("Enter New Password and Old Password seperated by - ");
+		textForFlowRight.setText("Enter Passwords Here!");
+		textForFlowRight.setText("");
+		while (textForFlowRight.getText().equals("")) {
+			passwordsForReset = textForFlowRight.getText();
+		}
+		int indexPass = passwordsForReset.indexOf("-");
+		int endStr = passwordsForReset.length() - 1;
+		if (indexPass != -1) {
+			newPassword = passwordsForReset.substring(0, indexPass);
+			oldPassword = passwordsForReset.substring(indexPass + 1, endStr);
+		}
+		System.out.println(newPassword);
+		System.out.println(oldPassword);
+
 	}
 }

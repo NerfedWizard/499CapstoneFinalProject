@@ -1,8 +1,8 @@
 package application;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,11 +39,15 @@ public class MainController implements Initializable {
 	private MenuItem adminMenuItem;
 	@FXML
 	private MenuItem resetPasswordMenuItem;
+	@FXML
+	private MenuItem facultyMenuItem;
 	private String userSelection = "";
 	private StudentProfileView studentView;
 	private AdminView adminView;
 	private TeacherView teacherView;
 	private ResetPasswordView resetPassUser;
+	private GuardianView guardianView;
+	private FacultyView facultyView;
 	private boolean successfulLogin = false;
 
 	@Override
@@ -51,6 +55,9 @@ public class MainController implements Initializable {
 		studentView = new StudentProfileView();
 		adminView = new AdminView();
 		teacherView = new TeacherView();
+		resetPassUser = new ResetPasswordView();
+		guardianView = new GuardianView();
+		facultyView = new FacultyView();
 
 		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
@@ -64,95 +71,106 @@ public class MainController implements Initializable {
 		guardianMenuItem.setOnAction(event1);
 		teacherMenuItem.setOnAction(event1);
 		adminMenuItem.setOnAction(event1);
-//		resetPasswordMenuItem.setOnAction(event1);
-//		MySQLAccess database = new MySQLAccess();
-//		try {
-//			database.readDataBase();
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//		}
-		/** Announcements Unofficial */
+		facultyMenuItem.setOnAction(event1);
+		resetPasswordMenuItem.setOnAction(event1);
 
 	}
 
+	/**
+	 * For logging in the user of any type, but they have to select the user type
+	 * before able to move forward with login or it will tell them to select a user
+	 * type
+	 * 
+	 * 
+	 * For testing all but the admin can log in with 'root' 'password'
+	 */
 	public void userLogin() {
-//		int wrongCount = 0;
-		System.out.println(getUserSelection());
-
-		/**
-		 * Make something here that grabs the results and loops through checking the
-		 * username and passwords
-		 * 
-		 * 
-		 * Not doing the command now gotta look into that going to bed
-		 */
-//		ArrayList<String> usernames = MySQLAccess.getUsername();
-//		ArrayList<String> passwords = MySQLAccess.getPassword();
-//		int count = usernames.size();
-//		System.out.println(MySQLAccess.getUsername().get(1));
-//		while(count != 0) {
-		if(getUserSelection().equals("")) {
-			textShowLabel.setText("Please select the user from dropdown");
-		}else {
-		for (String s : MySQLAccess.getUsername(getUserSelection())) {
-			for (String p : MySQLAccess.getPassword()) {
-				if (usernameTextField.getText().equals(s)) {
-					if (passwordTextField.getText().equals(p)) {
-						textShowLabel.setText("Success!");
-						if (getUserSelection().equals("Student")) {
-							StudentController.setNameForTitle(s,getUserSelection());
-							Stage stage = (Stage) submitButton.getScene().getWindow();
-							try {
-								studentView.start(stage);
-							} catch (Exception e) {
-
-								e.printStackTrace();
-							}
-
-						} else if (getUserSelection().equals("Admin")) {
-							AdminController.setNameForTitle(s, getUserSelection());
-							Stage stage = (Stage) submitButton.getScene().getWindow();
-							try {
-								adminView.start(stage);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						} else if (getUserSelection().equals("Teacher")) {
-							TeacherController.setNameForTitle(s, getUserSelection());
-							Stage stage = (Stage) submitButton.getScene().getWindow();
-							try {
-								teacherView.start(stage);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						} else {
-							textShowLabel.setText("Please Select A User");
-						}
-
-					} else {
-						textShowLabel.setText("Invalid Password");
-					}
-				} else {
-					textShowLabel.setText("Invalid UserName");
-//			wrongCount++;
-//			int wrong = 5 - wrongCount;
-//			textShowLabel.setText("Only " + wrong + " Tries left!");
-//		}
-				}
-			}
-		}
-		}
+		System.out.println(getUserSelection());// Just Testing things
+		Stage stage = (Stage) submitButton.getScene().getWindow();
 		if (getUserSelection().equals("Reset Password")) {
-			Stage stage = (Stage) submitButton.getScene().getWindow();
+//			Stage stage = (Stage) submitButton.getScene().getWindow();
 			try {
 				resetPassUser.start(stage);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 
+		} else if (getUserSelection().equals("")) {
+			textShowLabel.setText("Please select the user from dropdown");
+		} else {
+			for (String s : MySQLAccess.getUsername(getUserSelection())) {
+				for (String p : MySQLAccess.getPassword(getUserSelection())) {
+					if (usernameTextField.getText().equals(s)) {
+						if (passwordTextField.getText().equals(p)) {
+							textShowLabel.setText("Success!");
+							if (getUserSelection().equals("Student")) {
+								StudentController.setNameForTitle(s, getUserSelection());
+//								Stage stage = (Stage) submitButton.getScene().getWindow();
+								try {
+									studentView.start(stage);
+								} catch (Exception e) {
+
+									e.printStackTrace();
+								}
+
+							} else if (getUserSelection().equals("Admin")) {
+								AdminController.setNameForTitle(s, getUserSelection());
+//								Stage stage = (Stage) submitButton.getScene().getWindow();
+								try {
+									adminView.start(stage);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else if (getUserSelection().equals("Teacher")) {
+								TeacherController.setNameForTitle(s, getUserSelection());
+//								Stage stage = (Stage) submitButton.getScene().getWindow();
+								try {
+									teacherView.start(stage);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else if (getUserSelection().equals("Faculty")) {
+								FacultyController.setNameForTitle(s, getUserSelection());
+								try {
+									facultyView.start(stage);
+								} catch (Exception e) {
+
+									e.printStackTrace();
+								}
+							} else if (getUserSelection().equals("Guardian")) {
+								GuardianController.setNameForTitle(s, getUserSelection());
+								try {
+									guardianView.start(stage);
+								} catch (Exception e) {
+
+									e.printStackTrace();
+								}
+							} else {
+								textShowLabel.setText("Please Select A User");
+							}
+
+						} else {
+							textShowLabel.setText("Invalid Password");
+						}
+					} else {
+						textShowLabel.setText("Invalid UserName");
+					}
+				}
+			}
+		}
 	}
+//		if (getUserSelection().equals("Reset Password")) {
+//			Stage stage = (Stage) submitButton.getScene().getWindow();
+//			try {
+//				resetPassUser.start(stage);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//
+//	}
 
 	public String getUserSelection() {
 		return userSelection;

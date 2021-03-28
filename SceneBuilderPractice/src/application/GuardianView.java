@@ -7,32 +7,31 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class AdminView extends Application {
-
+public class GuardianView extends Application {
 	@FXML
 	private Scene scene;
 	@FXML
 	private AnchorPane root;
 
-	public AdminView() {
+	public GuardianView() {
+
 	}
 
 	@Override
-	public void start(Stage adminStage) throws Exception {
+	public void start(Stage guardStage) throws Exception {
 		try {
-			adminStage.setTitle(AdminController.getUserAdminNameForTitle());
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+			guardStage.setTitle(AdminController.getUserAdminNameForTitle());
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("GuardianView.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			adminStage.setScene(scene);
-			adminStage.show();
+			guardStage.setScene(scene);
+			guardStage.show();
 		} catch (Exception e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 }

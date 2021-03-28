@@ -66,11 +66,11 @@ public class MySQLAccess {
 		return result;
 	}
 
-	public static ArrayList<String> getPassword() {
+	public static ArrayList<String> getPassword(String userType) {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select password FROM student;");
+			rs = stmt.executeQuery("select password FROM "+ userType +";");
 			while (rs.next()) {
 				result.add(rs.getString(1));
 			}
@@ -97,5 +97,39 @@ public class MySQLAccess {
 			e.printStackTrace();
 		}
 		return name;
+	}
+
+//	public static changePassword(String username)
+	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
+		String queryString = "";
+		boolean flag = false; 
+		try {
+			stmt = con.createStatement();
+			if (userType.equals("Teacher")) {
+				queryString = "update teacher set password='" + newPassword + "' where password ='" + oldPassword
+						+ "';";
+				flag = true;
+			}else if (userType.equals("Student")) {
+				queryString = "update student set password ='" + newPassword + "' where password ='" + oldPassword
+						+ "';";
+				flag = true;
+			}else if (userType.equals("Faculty")) {
+				queryString = "update faculty set password ='" + newPassword + "' where password ='" + oldPassword
+						+ "';";
+				flag = true;
+			}else if (userType.equals("Guardian")) {
+				queryString = "update guardian set password ='" + newPassword + "' where password ='" + oldPassword
+						+ "';";
+				flag = true;
+			}
+			
+
+			rs = stmt.executeQuery(queryString);
+
+		} catch (SQLException e) {
+			queryString = "Passwords didn't update";
+			e.printStackTrace();
+		}
+		return flag;
 	}
 }

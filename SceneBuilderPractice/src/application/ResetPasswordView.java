@@ -13,19 +13,22 @@ public class ResetPasswordView extends Application{
 	@FXML
 	private Scene scene;
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		try {
-			primaryStage.setTitle("Reset Password Username");
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("StudentProfileView.fxml"));
+	public void start(Stage resetStage) throws Exception {
+		try { 
+			resetStage.setTitle("Reset Password Username");
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			resetStage.setScene(scene);
+			resetStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		
+	}
+	public static void main(String[] args) {
+		launch(args);
 	}
 
 

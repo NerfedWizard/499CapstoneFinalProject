@@ -35,14 +35,14 @@ public class AdminController implements Initializable {
 
 	}
 
-	public void changeImage() {
-		TextArea textArea = new TextArea("Hello");
-		textArea.setEditable(false);
-		textArea.setText("Hello World");
-
-//		System.out.println("Hety");
-//		backgroundImage.setImage(image);
-	}
+//	public void changeImage() {
+//		TextArea textArea = new TextArea("Hello");
+//		textArea.setEditable(false);
+//		textArea.setText("Hello World"); 
+//
+////		System.out.println("Hety");
+////		backgroundImage.setImage(image);
+//	}
 	public static void setNameForTitle(String name,String userType) {
 		System.out.println(name + "   In the student controller");
 		nameForTitle = MySQLAccess.getFirstName(name,userType);

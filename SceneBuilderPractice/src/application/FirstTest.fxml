@@ -46,8 +46,9 @@
           <MenuItem fx:id="teacherMenuItem" mnemonicParsing="false" text="Teacher" />
           <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" text="Student" />
             <MenuItem fx:id="guardianMenuItem" mnemonicParsing="false" text="Guardian" />
-            <MenuItem mnemonicParsing="false" text="Reset Password" />
+            <MenuItem fx:id="resetPasswordMenuItem" mnemonicParsing="false" text="Reset Password" />
             <MenuItem fx:id="adminMenuItem" mnemonicParsing="false" text="Admin" />
+            <MenuItem fx:id="facultyMenuItem" mnemonicParsing="false" text="Faculty" />
         </items>
       </MenuButton>
 	</children>

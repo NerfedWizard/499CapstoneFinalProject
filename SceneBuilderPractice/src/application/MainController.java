@@ -76,7 +76,7 @@ public class MainController implements Initializable {
 		            userLogin();
 		        }
 		    }
-		});
+		}); 
 
 		studentMenuItem.setOnAction(event1);
 		guardianMenuItem.setOnAction(event1);

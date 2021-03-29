@@ -70,13 +70,13 @@ public class MainController implements Initializable {
 			}
 		};
 		passwordTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-		    @Override
-		    public void handle(KeyEvent ke) {
-		        if (ke.getCode().equals(KeyCode.ENTER)) {
-		            userLogin();
-		        }
-		    }
-		}); 
+			@Override
+			public void handle(KeyEvent ke) {
+				if (ke.getCode().equals(KeyCode.ENTER)) {
+					userLogin();
+				}
+			}
+		});
 
 		studentMenuItem.setOnAction(event1);
 		guardianMenuItem.setOnAction(event1);
@@ -95,17 +95,7 @@ public class MainController implements Initializable {
 	 * 
 	 * For testing all but the admin can log in with 'root' 'password'
 	 */
-	@FXML public void onEnter(ActionEvent ae) {
-		System.out.println("Test for enter");
-	}
-//	passwordTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//	    @Override
-//	    public void handle(KeyEvent ke) {
-//	        if (ke.getCode().equals(KeyCode.ENTER)) {
-//	            userLogin();
-//	        }
-//	    }
-//	});
+
 	public void userLogin() {
 		System.out.println(getUserSelection());// Just Testing things
 		Stage stage = (Stage) submitButton.getScene().getWindow();

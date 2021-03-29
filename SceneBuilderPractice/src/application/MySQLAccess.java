@@ -47,7 +47,7 @@ public class MySQLAccess {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return result;
@@ -62,7 +62,7 @@ public class MySQLAccess {
 				result.add(rs.getString(1));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -80,13 +80,13 @@ public class MySQLAccess {
 				System.out.println(name);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return name;
 	}
 
-//	public static changePassword(String username)
+
 	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
 		String queryString = "";
 		boolean flag = false;

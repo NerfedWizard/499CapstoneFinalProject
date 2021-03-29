@@ -14,6 +14,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -41,6 +43,7 @@ public class MainController implements Initializable {
 	private MenuItem resetPasswordMenuItem;
 	@FXML
 	private MenuItem facultyMenuItem;
+	private KeyCode keycode;
 	private String userSelection = "";
 	private StudentProfileView studentView;
 	private AdminView adminView;
@@ -66,6 +69,14 @@ public class MainController implements Initializable {
 
 			}
 		};
+		passwordTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent ke) {
+		        if (ke.getCode().equals(KeyCode.ENTER)) {
+		            userLogin();
+		        }
+		    }
+		});
 
 		studentMenuItem.setOnAction(event1);
 		guardianMenuItem.setOnAction(event1);
@@ -84,6 +95,17 @@ public class MainController implements Initializable {
 	 * 
 	 * For testing all but the admin can log in with 'root' 'password'
 	 */
+	@FXML public void onEnter(ActionEvent ae) {
+		System.out.println("Test for enter");
+	}
+//	passwordTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//	    @Override
+//	    public void handle(KeyEvent ke) {
+//	        if (ke.getCode().equals(KeyCode.ENTER)) {
+//	            userLogin();
+//	        }
+//	    }
+//	});
 	public void userLogin() {
 		System.out.println(getUserSelection());// Just Testing things
 		Stage stage = (Stage) submitButton.getScene().getWindow();

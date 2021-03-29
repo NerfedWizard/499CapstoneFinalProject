@@ -19,6 +19,10 @@ public class MySQLAccess {
 	static ResultSet rs;
 	static String name = "";
 
+	/**
+	 * Must have the sql server started on pc before the code will work meaning you must
+	 * open mysql before the java code will be able to look at the database
+	 */
 	public static void startDB() {
 		try
 
@@ -31,23 +35,6 @@ public class MySQLAccess {
 			System.out.println(e);
 		}
 	}
-
-//	public static String getFirstName(String userID) {
-//		System.out.println("In MySQL access " + userID);
-//		try {
-//			stmt = con.createStatement();
-//			String queryString = "SELECT first_name FROM student where student_id = '" + userID + "';";
-//			rs = stmt.executeQuery(queryString);
-//
-//			name = rs.getString(1);
-//			System.out.println(name);
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return name;
-//	}
 
 	public static ArrayList<String> getUsername(String userType) {
 		ArrayList<String> result = new ArrayList<String>();
@@ -70,7 +57,7 @@ public class MySQLAccess {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select password FROM "+ userType +";");
+			rs = stmt.executeQuery("select password FROM " + userType + ";");
 			while (rs.next()) {
 				result.add(rs.getString(1));
 			}
@@ -102,27 +89,26 @@ public class MySQLAccess {
 //	public static changePassword(String username)
 	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
 		String queryString = "";
-		boolean flag = false; 
+		boolean flag = false;
 		try {
 			stmt = con.createStatement();
 			if (userType.equals("Teacher")) {
 				queryString = "update teacher set password='" + newPassword + "' where password ='" + oldPassword
 						+ "';";
 				flag = true;
-			}else if (userType.equals("Student")) {
+			} else if (userType.equals("Student")) {
 				queryString = "update student set password ='" + newPassword + "' where password ='" + oldPassword
 						+ "';";
 				flag = true;
-			}else if (userType.equals("Faculty")) {
+			} else if (userType.equals("Faculty")) {
 				queryString = "update faculty set password ='" + newPassword + "' where password ='" + oldPassword
 						+ "';";
 				flag = true;
-			}else if (userType.equals("Guardian")) {
+			} else if (userType.equals("Guardian")) {
 				queryString = "update guardian set password ='" + newPassword + "' where password ='" + oldPassword
 						+ "';";
 				flag = true;
 			}
-			
 
 			rs = stmt.executeQuery(queryString);
 

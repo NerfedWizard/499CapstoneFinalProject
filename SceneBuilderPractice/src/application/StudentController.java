@@ -102,6 +102,7 @@ public class StudentController implements Initializable {
 		String oldPassword = "";
 		String passwordsForReset = "";
 		textForFlowLeft.setText("Enter New Password and Old Password seperated by - ");
+		textAreaRight.setText(textForFlowLeft.getText());
 		textForFlowRight.setText("Enter Passwords Here!");
 		textForFlowRight.setText("");
 		while (textForFlowRight.getText().equals("")) {

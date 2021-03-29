@@ -88,11 +88,10 @@ public class MainController implements Initializable {
 		System.out.println(getUserSelection());// Just Testing things
 		Stage stage = (Stage) submitButton.getScene().getWindow();
 		if (getUserSelection().equals("Reset Password")) {
-//			Stage stage = (Stage) submitButton.getScene().getWindow();
+
 			try {
 				resetPassUser.start(stage);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

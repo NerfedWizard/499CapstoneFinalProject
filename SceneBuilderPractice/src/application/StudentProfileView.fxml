@@ -6,6 +6,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,20 +20,27 @@
 				<Image url="@Metropolitan_State_Library_and_Learning_Center.jpg" />
 			</image>
 		</ImageView>
-		<TextFlow fx:id="textFlow" layoutX="-8.0" layoutY="392.0" prefHeight="248.0" prefWidth="978.0">
+		<TextFlow fx:id="textFlow" layoutY="528.0" prefHeight="167.0" prefWidth="554.0" textAlignment="RIGHT">
 			<children>
-				<TextArea fx:id="textAreaLeft" editable="false" prefHeight="268.0" prefWidth="570.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true">
-					<cursor>
-						<Cursor fx:constant="WAIT" />
-					</cursor>
-					<font>
-						<Font name="Consolas" size="12.0" />
-					</font>
-				</TextArea>
-				<TextArea fx:id="textAreaRight" prefHeight="268.0" prefWidth="379.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true" />
+      				<TextArea fx:id="textAreaLeft" editable="false" mouseTransparent="true" prefHeight="166.0" prefWidth="293.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true">
+      					<cursor>
+      						<Cursor fx:constant="DEFAULT" />
+      					</cursor>
+      					<font>
+      						<Font name="Consolas" size="12.0" />
+      					</font>
+      				</TextArea>
+      				<TextArea fx:id="textAreaRight" prefHeight="168.0" prefWidth="258.0" promptText="Enter Text Here:" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <effect>
+                  <Glow />
+               </effect>
+            </TextArea>
 			</children>
 		</TextFlow>
-		<MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="222.0">
+		<MenuBar layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="252.0">
 			<menus>
 				<Menu mnemonicParsing="false" text="Course">
 					<items>
@@ -52,9 +60,9 @@
 						<MenuItem mnemonicParsing="false" text="Manage Meeting" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="false" text="Login">
+				<Menu mnemonicParsing="false" text="Account Settings">
 					<items>
-						<MenuItem fx:id="changePass" mnemonicParsing="false" onMenuValidation="#changePassword" text="Change Password" />
+						<MenuItem mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
                   <MenuItem mnemonicParsing="false" text="Change Username" />
 					</items>
 				</Menu>

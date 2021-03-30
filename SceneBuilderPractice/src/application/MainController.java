@@ -171,17 +171,6 @@ public class MainController implements Initializable {
 			}
 		}
 	}
-//		if (getUserSelection().equals("Reset Password")) {
-//			Stage stage = (Stage) submitButton.getScene().getWindow();
-//			try {
-//				resetPassUser.start(stage);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//
-//	}
 
 	public String getUserSelection() {
 		return userSelection;

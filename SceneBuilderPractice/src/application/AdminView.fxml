@@ -22,7 +22,7 @@
             <items>
                   <Menu mnemonicParsing="false" text="Verify User">
                      <items>
-                        <MenuItem fx:id="materialsMenuItem" mnemonicParsing="false" onAction="#changeImage" text="Create Account" />
+                        <MenuItem fx:id="materialsMenuItem" mnemonicParsing="false" text="Create Account" />
                         <MenuItem mnemonicParsing="false" text="Delete Accounts">
                            <graphic>
                               <SubScene fx:id="subscene" height="755.0" width="1124.0">

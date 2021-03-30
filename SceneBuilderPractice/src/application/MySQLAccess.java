@@ -20,8 +20,8 @@ public class MySQLAccess {
 	static String name = "";
 
 	/**
-	 * Must have the sql server started on pc before the code will work meaning you must
-	 * open mysql before the java code will be able to look at the database
+	 * Must have the sql server started on pc before the code will work meaning you
+	 * must open mysql before the java code will be able to look at the database
 	 */
 	public static void startDB() {
 		try
@@ -47,7 +47,7 @@ public class MySQLAccess {
 
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		return result;
@@ -62,13 +62,17 @@ public class MySQLAccess {
 				result.add(rs.getString(1));
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
 		return result;
 	}
 
+	/**
+	 * Only something I made to the first name of the user for the title of the
+	 * window
+	 */
 	public static String getFirstName(String username, String userType) {
 		System.out.println("In MySQL access " + username);
 		try {
@@ -80,12 +84,11 @@ public class MySQLAccess {
 				System.out.println(name);
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		return name;
 	}
-
 
 	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
 		String queryString = "";
@@ -117,5 +120,13 @@ public class MySQLAccess {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	/**
+	 * Needs the string for the query and a number for how many columns you want
+	 * back
+	 */
+	public static void runQuery(String query) {
+		
 	}
 }

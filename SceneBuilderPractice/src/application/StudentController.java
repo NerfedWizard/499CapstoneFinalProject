@@ -104,13 +104,13 @@ public class StudentController implements Initializable {
 
 	public void changePassword() {
 		
-		String newPassword = "";
-		String oldPassword = "";
-		String passwordsForReset = "";
+//		String newPassword = "";
+//		String oldPassword = "";
+//		String passwordsForReset = "";
 //		textForFlowLeft.setText("Enter New Password and Old Password seperated by - ");
 //		textAreaLeft.endOfNextWord();
-		textAreaLeft.setText("Enter New Password press enter \nEnter old password ");
-		textForFlowRight.setText("Enter Passwords Here!\n");
+//		textAreaLeft.setText("Enter New Password press enter \nEnter old password ");
+//		textForFlowRight.setText("Enter Passwords Here!\n");
 //		textAreaRight.setPromptText(textForFlowRight.getText());
 //		
 //		textAreaRight.setText("");

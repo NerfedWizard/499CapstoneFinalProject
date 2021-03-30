@@ -170,7 +170,7 @@ public class MainController implements Initializable {
 				}
 			}
 		}
-	}
+	}  
 
 	public String getUserSelection() {
 		return userSelection;

@@ -18,6 +18,7 @@ public class MySQLAccess {
 	static Statement stmt;
 	static ResultSet rs;
 	static String name = "";
+	private static ResetPasswordView resetView;
 
 	/**
 	 * Must have the sql server started on pc before the code will work meaning you
@@ -27,6 +28,7 @@ public class MySQLAccess {
 		try
 
 		{
+			resetView = new ResetPasswordView();
 			// Connects to database
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, passwrd);
@@ -36,11 +38,25 @@ public class MySQLAccess {
 		}
 	}
 
+	/**
+	 * Starting of the password method have not updated the gui yet to reflect the
+	 * new idea of username - old pass - new pass but it should bring up the reset
+	 * view we already have made and we can make methods in the reset controller to
+	 * change and alter password
+	 */
+	public static void changePassword() {
+		try {
+			resetView.start(ResetPasswordView.resetStage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static ArrayList<String> getUsername(String userType) {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select username FROM " + userType + ";");
+			rs = stmt.executeQuery("select" + userType + "_id from " + userType + ";");
 			while (rs.next()) {
 				result.add(rs.getString(1));
 				System.out.println(rs.getString(1));
@@ -89,7 +105,7 @@ public class MySQLAccess {
 		}
 		return name;
 	}
-
+/**This method here might still be of use for chagning the passsword via the new method with the reseet view */
 	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
 		String queryString = "";
 		boolean flag = false;
@@ -123,10 +139,15 @@ public class MySQLAccess {
 	}
 
 	/**
-	 * Needs the string for the query and a number for how many columns you want
-	 * back
+	 * Trying a method here where we can just send in the query from any view and
+	 * run it instead of having all the different methods in here that are basically
+	 * doing the same thing but with different queries the ones that need to stay
+	 * are the username and login becasue I am returning a list instead of just a
+	 * string or strings Needs the string for the query and a number for how many
+	 * columns you want back
 	 */
+
 	public static void runQuery(String query) {
-		
+
 	}
 }

@@ -33,7 +33,7 @@ public class StudentController implements Initializable {
 	private MenuItem changePass;
 	private Text textForFlowLeft = new Text();// This is going to have to connect to the database for setting the
 												// queries to text but in a formatted output
-	private Text textForFlowRight = new Text();
+//	private Text textForFlowRight = new Text();
 	static String nameForTitle;
 	private Main main;
 	static String userType;

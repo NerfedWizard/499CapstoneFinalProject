@@ -4,14 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GuardianView extends Application {
 	@FXML
 	private Scene scene;
 	@FXML
-	private BorderPane root;
+	private AnchorPane root;
 
 	public GuardianView() {
 
@@ -21,7 +21,7 @@ public class GuardianView extends Application {
 	public void start(Stage guardStage) throws Exception {
 		try {
 			guardStage.setTitle("Guardian View");
-			 BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("GuardianView.fxml"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("GuardianView.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			guardStage.setScene(scene);

@@ -16,37 +16,18 @@ import javafx.scene.image.ImageView;
  * I think making a text field for the database stuff is the way to go
  */
 public class AdminController implements Initializable {
-	@FXML
-	private MenuButton adminMenuButton;
 
-	ImageView backgroundImage;
-
-	Image image;// Image that is needed to swap for current.
-	@FXML
-	MenuItem materialsMenuItem;
-	@FXML
-	SubScene subscene;
-	static String nameForTitle = "";
+	private static String nameForTitle = "";
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-//		image = new Image("disneyP.jpg");
-//		image = new Image("Metropolitan_State_Library_and_Learning_Center.jpg");
-
 	}
 
-//	public void changeImage() {
-//		TextArea textArea = new TextArea("Hello");
-//		textArea.setEditable(false);
-//		textArea.setText("Hello World"); 
-//
-////		System.out.println("Hety");
-////		backgroundImage.setImage(image);
-//	}
-	public static void setNameForTitle(String name,String userType) {
+	public static void setNameForTitle(String name, String userType) {
 		System.out.println(name + "   In the student controller");
-		nameForTitle = MySQLAccess.getFirstName(name,userType);
+		nameForTitle = MySQLAccess.getFirstName(name, userType);
 	}
+
 	public static String getUserAdminNameForTitle() {
 		return nameForTitle;
 	}

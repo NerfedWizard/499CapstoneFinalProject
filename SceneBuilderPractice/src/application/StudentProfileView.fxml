@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,25 +19,17 @@
 				<Image url="@Metropolitan_State_Library_and_Learning_Center.jpg" />
 			</image>
 		</ImageView>
-		<TextFlow fx:id="textFlow" layoutY="528.0" prefHeight="167.0" prefWidth="554.0" textAlignment="RIGHT">
-			<children>
-      				<TextArea fx:id="textAreaLeft" editable="false" mouseTransparent="true" prefHeight="166.0" prefWidth="293.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true">
+		<TextFlow fx:id="textFlow" layoutX="381.0" layoutY="297.0" prefHeight="385.0" prefWidth="619.0" textAlignment="RIGHT">
+         <children>
+      				<TextArea fx:id="textAreaLeft" editable="false" mouseTransparent="true" prefHeight="385.0" prefWidth="617.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true">
       					<cursor>
       						<Cursor fx:constant="DEFAULT" />
       					</cursor>
       					<font>
-      						<Font name="Consolas" size="12.0" />
+      						<Font name="Consolas" size="18.0" />
       					</font>
       				</TextArea>
-      				<TextArea fx:id="textAreaRight" prefHeight="168.0" prefWidth="258.0" promptText="Enter Text Here:" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-               <effect>
-                  <Glow />
-               </effect>
-            </TextArea>
-			</children>
+         </children>
 		</TextFlow>
 		<MenuBar layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="252.0">
 			<menus>

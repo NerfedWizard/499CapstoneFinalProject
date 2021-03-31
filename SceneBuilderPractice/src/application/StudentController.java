@@ -25,8 +25,8 @@ public class StudentController implements Initializable {
 	private TextFlow textFlow;
 	@FXML
 	private TextArea textAreaLeft;
-	@FXML
-	private TextArea textAreaRight;
+//	@FXML
+//	private TextArea textAreaRight;
 	@FXML
 	private Button logoutButton;
 	@FXML
@@ -42,7 +42,7 @@ public class StudentController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		textAreaRight.setPromptText("Enter text here:");
+//		textAreaRight.setPromptText("Enter text here:");
 		main = new Main();
 		rpv = new ResetPasswordView();
 	}
@@ -74,17 +74,20 @@ public class StudentController implements Initializable {
 		return StudentController.nameForTitle;
 	}
 
-	public void changeTextFlow(Text textLeft, Text textRight) {
+	public void changeTextFlow(Text textLeft) {
 		textAreaLeft.setText(textLeft.getText());
-		textAreaRight.setText(textRight.getText());
+//		textAreaRight.setText(textRight.getText());
 	}
 
 	/** Needs connecting to database for grade pulls */
 	public void getGrades() {
-
+		textForFlowLeft.setText("Course\tScore\tGrade\n" + MySQLAccess
+				.returnQuery("select course_name, score, grade from assignment a, course c where a.username ='"
+						+ getUsername() + "' and a.course_id = c.course_id", 3));
 //		textForFlowLeft.setText("You are Failing");
 //		textForFlowRight.setText("F-");
-//		changeTextFlow(textForFlowLeft, textForFlowRight);
+//		textForFlowLeft.setText(grades);
+		changeTextFlow(textForFlowLeft);
 	}
 
 	public void getAssignments() {
@@ -112,9 +115,9 @@ public class StudentController implements Initializable {
 //		changeTextFlow(textForFlowLeft, textForFlowRight);
 	}
 
-	public void changePassword() {
-		String passwordChange = "";
-		MySQLAccess.returnQuery(passwordChange, 2);
+//	public void changePassword() {
+//		String passwordChange = "";
+//		MySQLAccess.returnQuery(passwordChange, 2);
 //		String newPassword = "";
 //		String oldPassword = "";
 //		String passwordsForReset = "";
@@ -137,7 +140,7 @@ public class StudentController implements Initializable {
 //		System.out.println(newPassword);
 //		System.out.println(oldPassword);
 ////
-	}
+//	}
 
 	public void getQuery() {
 

@@ -37,6 +37,7 @@ public class ResetPasswordController implements Initializable {
 	private MenuItem passwordItem;
 	private String query = "";
 	private int choice = 0;
+	static String flag = "";
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -62,7 +63,7 @@ public class ResetPasswordController implements Initializable {
 
 	public void buttonSubmit() {
 		MainController mC = new MainController();
-		System.out.println(mC.getUserSelection());
+		System.out.println("in the buttonSubmit " + mC.getUserSelection());
 		if (this.choice == 1) {
 			this.query = "UPDATE student SET password ='" + newInsert.getText() + "'where password ='"
 					+ toBeChanged.getText() + "';";
@@ -78,5 +79,6 @@ public class ResetPasswordController implements Initializable {
 		} else {
 			MySQLAccess.noReturnQuery(this.query);
 		}
+		newEntry2.setText(ResetPasswordController.flag);
 	}
 }

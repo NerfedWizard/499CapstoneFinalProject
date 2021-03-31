@@ -160,8 +160,8 @@ public class MySQLAccess {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				for (int i = 0; i < resultsNumber; i++) {
-					returnResults.append(rs.getString(resultsNumber));
+				for (int i = 1; i <= resultsNumber; i++) {
+					returnResults.append(rs.getString(i)+ "\t");
 					System.out.println(returnResults.toString());
 
 				}
@@ -173,15 +173,18 @@ public class MySQLAccess {
 		}
 		return returnResults.toString();
 	}
-	/**Same as above it with no return from database */
+
+	/** Same as above it with no return from database */
 	public static void noReturnQuery(String query) {
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
-		}catch (SQLException e) {
+			ResetPasswordController.flag = "Success";
+		} catch (SQLException e) {
 			e.printStackTrace();
+			ResetPasswordController.flag = "Failure to Change";
 			System.out.println("noReturnQuery Maybe put a boolean here if triggered");
-			
+
 		}
 	}
 }

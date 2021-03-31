@@ -43,7 +43,6 @@ public class MainController implements Initializable {
 	private MenuItem resetPasswordMenuItem;
 	@FXML
 	private MenuItem facultyMenuItem;
-//	private KeyCode keycode;
 	private String userSelection = "";
 	private StudentProfileView studentView;
 	private AdminView adminView;

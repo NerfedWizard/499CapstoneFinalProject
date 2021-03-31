@@ -23,8 +23,8 @@
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
       </ImageView>
-		<PasswordField fx:id="passwordTextField" layoutX="120.0" layoutY="165.0" prefHeight="25.0" prefWidth="210.0" />
 		<TextField fx:id="usernameTextField" layoutX="120.0" layoutY="122.0" prefHeight="25.0" prefWidth="210.0" />
+		<PasswordField fx:id="passwordTextField" layoutX="120.0" layoutY="165.0" prefHeight="25.0" prefWidth="210.0" />
 		<Label layoutX="59.0" layoutY="126.0" text="Username" textFill="WHITE" />
 		<Label layoutX="61.0" layoutY="169.0" prefHeight="17.0" prefWidth="50.0" text="Password" textFill="WHITE" />
 		<Label layoutX="7.0" layoutY="7.0" text="Portal To Knowledge" textFill="WHITE">

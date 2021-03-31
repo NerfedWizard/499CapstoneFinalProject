@@ -56,7 +56,7 @@ public class MySQLAccess {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("select" + userType + "_id from " + userType + ";");
+			rs = stmt.executeQuery("select username from " + userType + ";");
 			while (rs.next()) {
 				result.add(rs.getString(1));
 				System.out.println(rs.getString(1));
@@ -105,49 +105,83 @@ public class MySQLAccess {
 		}
 		return name;
 	}
-/**This method here might still be of use for chagning the passsword via the new method with the reseet view */
-	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
-		String queryString = "";
-		boolean flag = false;
-		try {
-			stmt = con.createStatement();
-			if (userType.equals("Teacher")) {
-				queryString = "update teacher set password='" + newPassword + "' where password ='" + oldPassword
-						+ "';";
-				flag = true;
-			} else if (userType.equals("Student")) {
-				queryString = "update student set password ='" + newPassword + "' where password ='" + oldPassword
-						+ "';";
-				flag = true;
-			} else if (userType.equals("Faculty")) {
-				queryString = "update faculty set password ='" + newPassword + "' where password ='" + oldPassword
-						+ "';";
-				flag = true;
-			} else if (userType.equals("Guardian")) {
-				queryString = "update guardian set password ='" + newPassword + "' where password ='" + oldPassword
-						+ "';";
-				flag = true;
-			}
-
-			rs = stmt.executeQuery(queryString);
-
-		} catch (SQLException e) {
-			queryString = "Passwords didn't update";
-			e.printStackTrace();
-		}
-		return flag;
-	}
 
 	/**
-	 * Trying a method here where we can just send in the query from any view and
-	 * run it instead of having all the different methods in here that are basically
-	 * doing the same thing but with different queries the ones that need to stay
-	 * are the username and login becasue I am returning a list instead of just a
-	 * string or strings Needs the string for the query and a number for how many
-	 * columns you want back
+	 * This method here might still be of use for chagning the passsword via the new
+	 * method with the reseet view
+	 */
+//	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
+//		String queryString = "";
+//		boolean flag = false;
+//		try {
+//			stmt = con.createStatement();
+//			if (userType.equals("Teacher")) {
+//				queryString = "update teacher set password='" + newPassword + "' where password ='" + oldPassword
+//						+ "';";
+//				flag = true;
+//			} else if (userType.equals("Student")) {
+//				queryString = "update student set password ='" + newPassword + "' where password ='" + oldPassword
+//						+ "';";
+//				flag = true;
+//			} else if (userType.equals("Faculty")) {
+//				queryString = "update faculty set password ='" + newPassword + "' where password ='" + oldPassword
+//						+ "';";
+//				flag = true;
+//			} else if (userType.equals("Guardian")) {
+//				queryString = "update guardian set password ='" + newPassword + "' where password ='" + oldPassword
+//						+ "';";
+//				flag = true;
+//			}
+//
+//			rs = stmt.executeQuery(queryString);
+//
+//		} catch (SQLException e) {
+//			queryString = "Passwords didn't update";
+//			e.printStackTrace();
+//		}
+//		return flag;
+//	}
+
+	/**
+	 * Thoughts here are you pass the input string in and the return statement
+	 * requires the column numbers you want back like how many columns are you
+	 * expecting in the answer to your query. It does the normal calls to the
+	 * database and while there are objects in the answer it goes into for loop and
+	 * brings back however many columns you needed back and appends the string once
+	 * out of loop it appends the newLine and goes back into the while loop lather
+	 * rinse repeat. Should return everything in line by line format we could just
+	 * turn it back into a stringBuilder to format it or convert it into text for
+	 * the views for formatting via javaFX
 	 */
 
-	public static void runQuery(String query) {
+	public static String returnQuery(String query, int resultsNumber) {
+		StringBuilder returnResults = new StringBuilder("");
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				for (int i = 0; i < resultsNumber; i++) {
+					returnResults.append(rs.getString(resultsNumber));
+					System.out.println(returnResults.toString());
 
+				}
+				returnResults.append("\n");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("returnQuery Maybe put a boolean here if triggered");
+		}
+		return returnResults.toString();
+	}
+	/**Same as above it with no return from database */
+	public static void noReturnQuery(String query) {
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(query);
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("noReturnQuery Maybe put a boolean here if triggered");
+			
+		}
 	}
 }

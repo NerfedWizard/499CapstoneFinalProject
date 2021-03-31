@@ -62,8 +62,7 @@
 				</Menu>
 				<Menu mnemonicParsing="false" text="Account Settings">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
-                  <MenuItem mnemonicParsing="false" text="Change Username" />
+						<MenuItem mnemonicParsing="false" onAction="#updateLogin" onMenuValidation="#updateLogin" text="Change Login Info" />
 					</items>
 				</Menu>
 			</menus>

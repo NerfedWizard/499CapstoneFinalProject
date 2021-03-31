@@ -43,7 +43,7 @@ public class MainController implements Initializable {
 	private MenuItem resetPasswordMenuItem;
 	@FXML
 	private MenuItem facultyMenuItem;
-	private KeyCode keycode;
+//	private KeyCode keycode;
 	private String userSelection = "";
 	private StudentProfileView studentView;
 	private AdminView adminView;
@@ -86,6 +86,18 @@ public class MainController implements Initializable {
 		resetPasswordMenuItem.setOnAction(event1);
 
 	}
+	public void forgotInfo() {
+		Stage stage = (Stage) submitButton.getScene().getWindow();
+		if (getUserSelection().equals("Forgot Password")) {
+
+			try {
+				resetPassUser.start(stage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 
 	/**
 	 * For logging in the user of any type, but they have to select the user type
@@ -99,17 +111,17 @@ public class MainController implements Initializable {
 	public void userLogin() {
 		System.out.println(getUserSelection());// Just Testing things
 		Stage stage = (Stage) submitButton.getScene().getWindow();
-		if (getUserSelection().equals("Reset Password")) {
-
-			try {
-				resetPassUser.start(stage);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} else if (getUserSelection().equals("")) {
-			textShowLabel.setText("Please select the user from dropdown");
-		} else {
+//		if (getUserSelection().equals("Reset Password")) {
+//
+//			try {
+//				resetPassUser.start(stage);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//
+//		} else if (getUserSelection().equals("")) {
+//			textShowLabel.setText("Please select the user from dropdown");
+//		} else {
 			for (String s : MySQLAccess.getUsername(getUserSelection())) {
 				for (String p : MySQLAccess.getPassword(getUserSelection())) {
 					if (usernameTextField.getText().equals(s)) {
@@ -121,8 +133,9 @@ public class MainController implements Initializable {
 								try {
 									studentView.start(stage);
 								} catch (Exception e) {
-
+									
 									e.printStackTrace();
+//									System.out.println("In user login Exception");
 								}
 
 							} else if (getUserSelection().equals("Admin")) {
@@ -170,7 +183,7 @@ public class MainController implements Initializable {
 				}
 			}
 		}
-	}  
+//	}
 
 	public String getUserSelection() {
 		return userSelection;

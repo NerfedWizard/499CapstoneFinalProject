@@ -38,11 +38,21 @@ public class StudentController implements Initializable {
 	private Main main;
 	static String userType;
 	private static String username;
+	private ResetPasswordView rpv;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textAreaRight.setPromptText("Enter text here:");
-		main = new Main();// This was the culprit for going back to login forgot to initialize it. ARGH!!
+		main = new Main();
+		rpv = new ResetPasswordView();
+	}
+
+	public void updateLogin() {
+		try {
+			rpv.start(Main.logStage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void studentLogout() {
@@ -55,13 +65,13 @@ public class StudentController implements Initializable {
 
 	public static void setNameForTitle(String name, String userType) {
 //		StudentController.userType = userType;
-		username = name;
+		StudentController.setUsername(name);
 		System.out.println(name + "   In the student controller");
-		nameForTitle = MySQLAccess.getFirstName(name, userType);
+		StudentController.nameForTitle = MySQLAccess.getFirstName(name, userType);
 	}
 
 	public static String getUserStudentNameForTitle() {
-		return nameForTitle;
+		return StudentController.nameForTitle;
 	}
 
 	public void changeTextFlow(Text textLeft, Text textRight) {
@@ -71,7 +81,7 @@ public class StudentController implements Initializable {
 
 	/** Needs connecting to database for grade pulls */
 	public void getGrades() {
-		
+
 //		textForFlowLeft.setText("You are Failing");
 //		textForFlowRight.setText("F-");
 //		changeTextFlow(textForFlowLeft, textForFlowRight);
@@ -103,7 +113,8 @@ public class StudentController implements Initializable {
 	}
 
 	public void changePassword() {
-		
+		String passwordChange = "";
+		MySQLAccess.returnQuery(passwordChange, 2);
 //		String newPassword = "";
 //		String oldPassword = "";
 //		String passwordsForReset = "";
@@ -126,5 +137,17 @@ public class StudentController implements Initializable {
 //		System.out.println(newPassword);
 //		System.out.println(oldPassword);
 ////
+	}
+
+	public void getQuery() {
+
+	}
+
+	public static String getUsername() {
+		return username;
+	}
+
+	public static void setUsername(String username) {
+		StudentController.username = username;
 	}
 }

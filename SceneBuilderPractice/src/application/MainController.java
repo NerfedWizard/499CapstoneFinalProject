@@ -3,7 +3,6 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,8 +48,8 @@ public class MainController implements Initializable {
 	private TeacherView teacherView;
 	private ResetPasswordView resetPassUser;
 	private GuardianView guardianView;
-	private FacultyView facultyView;
-	private boolean successfulLogin = false;
+//	private FacultyView facultyView;
+//	private boolean successfulLogin = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -59,15 +58,15 @@ public class MainController implements Initializable {
 		teacherView = new TeacherView();
 		resetPassUser = new ResetPasswordView();
 		guardianView = new GuardianView();
-		facultyView = new FacultyView();
+//		facultyView = new FacultyView();
 
-		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				setUserSelection(((MenuItem) e.getSource()).getText());
-				userDropDownMenuButton.setText(getUserSelection());
-
-			}
-		};
+//		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
+//			public void handle(ActionEvent e) {
+//				setUserSelection(((MenuItem) e.getSource()).getText());
+//				userDropDownMenuButton.setText(getUserSelection());
+//
+//			}
+//		};
 		passwordTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent ke) {
@@ -77,14 +76,15 @@ public class MainController implements Initializable {
 			}
 		});
 
-		studentMenuItem.setOnAction(event1);
-		guardianMenuItem.setOnAction(event1);
-		teacherMenuItem.setOnAction(event1);
-		adminMenuItem.setOnAction(event1);
-		facultyMenuItem.setOnAction(event1);
-		resetPasswordMenuItem.setOnAction(event1);
+//		studentMenuItem.setOnAction(event1);
+//		guardianMenuItem.setOnAction(event1);
+//		teacherMenuItem.setOnAction(event1);
+//		adminMenuItem.setOnAction(event1);
+//		facultyMenuItem.setOnAction(event1);
+//		resetPasswordMenuItem.setOnAction(event1);
 
 	}
+
 	public void forgotInfo() {
 		Stage stage = (Stage) submitButton.getScene().getWindow();
 		if (getUserSelection().equals("Forgot Password")) {
@@ -110,93 +110,99 @@ public class MainController implements Initializable {
 	public void userLogin() {
 		System.out.println(getUserSelection());// Just Testing things
 		Stage stage = (Stage) submitButton.getScene().getWindow();
-//		if (getUserSelection().equals("Reset Password")) {
-//
-//			try {
-//				resetPassUser.start(stage);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//		} else if (getUserSelection().equals("")) {
-//			textShowLabel.setText("Please select the user from dropdown");
-//		} else {
-			for (String s : MySQLAccess.getUsername(getUserSelection())) {
-				for (String p : MySQLAccess.getPassword(getUserSelection())) {
-					if (usernameTextField.getText().equals(s)) {
-						if (passwordTextField.getText().equals(p)) {
-							textShowLabel.setText("Success!");
-							if (getUserSelection().equals("Student")) {
-								StudentController.setNameForTitle(s, getUserSelection());
+
+		for (String s : MySQLAccess.getUsername()) {
+//			System.out.println(s);
+			for (String p : MySQLAccess.getPassword()) {
+				if (usernameTextField.getText().equals(s)) {
+					if (passwordTextField.getText().equals(p)) {
+						textShowLabel.setText("Success!");
+						String userType = MySQLAccess
+								.returnQuery("select user_type from user where username ='" + s + "'", 1).trim();
+//						int userNum = userNum(userType);
+//						System.out.println(userType.length());
+//							setUserSelection(userType);
+						if (userType.equals("Student")) {
+							StudentController.setNameForTitle(s);
+							System.out.println(userType.length());
 //								Stage stage = (Stage) submitButton.getScene().getWindow();
-								try {
-									studentView.start(stage);
-								} catch (Exception e) {
-									
-									e.printStackTrace();
+							try {
+								studentView.start(stage);
+							} catch (Exception e) {
+								e.printStackTrace();
 //									System.out.println("In user login Exception");
-								}
-
-							} else if (getUserSelection().equals("Admin")) {
-								AdminController.setNameForTitle(s, getUserSelection());
-//								Stage stage = (Stage) submitButton.getScene().getWindow();
-								try {
-									adminView.start(stage);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							} else if (getUserSelection().equals("Teacher")) {
-								TeacherController.setNameForTitle(s, getUserSelection());
-//								Stage stage = (Stage) submitButton.getScene().getWindow();
-								try {
-									teacherView.start(stage);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							} else if (getUserSelection().equals("Faculty")) {
-								FacultyController.setNameForTitle(s, getUserSelection());
-								try {
-									facultyView.start(stage);
-								} catch (Exception e) {
-
-									e.printStackTrace();
-								}
-							} else if (getUserSelection().equals("Guardian")) {
-								GuardianController.setNameForTitle(s, getUserSelection());
-								try {
-									guardianView.start(stage);
-								} catch (Exception e) {
-
-									e.printStackTrace();
-								}
-							} else {
-								textShowLabel.setText("Please Select A User");
 							}
+						} else if (getUserSelection().equals("Admin")) {
+							AdminController.setNameForTitle(s);
+							System.out.println(userType.length());
+//								Stage stage = (Stage) submitButton.getScene().getWindow();
+							try {
+								adminView.start(stage);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} else if (getUserSelection().equals("Teacher")) {
+							TeacherController.setNameForTitle(s);
+							System.out.println(userType.length());
+//								Stage stage = (Stage) submitButton.getScene().getWindow();
+							try {
+								teacherView.start(stage);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} else if (getUserSelection().equals("Guardian")) {
+							GuardianController.setNameForTitle(s);
+							System.out.println(userType.length());
+							try {
+								guardianView.start(stage);
+							} catch (Exception e) {
 
+								e.printStackTrace();
+							}
 						} else {
-							textShowLabel.setText("Invalid Password");
+							textShowLabel.setText("Please Select A User");
 						}
+
 					} else {
-						textShowLabel.setText("Invalid UserName");
+						textShowLabel.setText("Invalid Password");
 					}
+				} else {
+					textShowLabel.setText("Invalid UserName");
 				}
 			}
 		}
+	}
 //	}
 
 	public String getUserSelection() {
-		return userSelection;
+		return this.userSelection;
 	}
 
 	public void setUserSelection(String userSelection) {
 		this.userSelection = userSelection;
 	}
 
-	public boolean isSuccessfulLogin() {
-		return successfulLogin;
-	}
+//	public int userNum(String type) {
+//		int usertype = 0;
+//		if (type.equals("Student")) {
+//			usertype = 2;
+//		} else if (type.equals("Admin")) {
+//			usertype = 0;
+//		} else if (type.equals("Teacher")) {
+//			usertype = 1;
+//		} else if (type.equals("Guardian")) {
+//			usertype = 3;
+//		} else {
+//			usertype = 9;
+//		}
+//		return usertype;
+//	}
 
-	public void setSuccessfulLogin(boolean successfulLogin) {
-		this.successfulLogin = successfulLogin;
-	}
+//	public boolean isSuccessfulLogin() {
+//		return successfulLogin;
+//	}
+//
+//	public void setSuccessfulLogin(boolean successfulLogin) {
+//		this.successfulLogin = successfulLogin;
+//	}
 }

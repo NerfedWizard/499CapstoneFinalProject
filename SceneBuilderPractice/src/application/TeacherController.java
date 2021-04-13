@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 
 public class TeacherController implements Initializable {
-	static String nameForTitle = "";
+	static String firstName = "";
 	private ResetPasswordView rpv;
 	private Main main;
 	@FXML
@@ -33,21 +33,26 @@ public class TeacherController implements Initializable {
 	private MenuItem sendEmail;
 	@FXML
 	private MenuItem manageMeetings;
+	static String username;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		rpv = new ResetPasswordView();
 		main = new Main();
-
+ 
 	}
 
-	public static void setNameForTitle(String name, String userType) {
-		System.out.println(name + "   In the student controller");
-		nameForTitle = MySQLAccess.getFirstName(name, userType);
+	public static void setNameForTitle(String userName) {
+		System.out.println(userName + "   In the student controller");
+		setUsername(userName);
+		firstName = MySQLAccess.returnQuery("SELECT first_name from user where username ='" + userName + "'", 1);
 	}
 
 	public static String getUserTeacherNameForTitle() {
-		return nameForTitle;
+		return firstName;
+	}
+	public static void setUsername(String username) {
+		TeacherController.username = username;
 	}
 
 	public void changeLogin() {
@@ -76,7 +81,7 @@ public class TeacherController implements Initializable {
 	}
 
 	public void addMaterial() {
-
+//MySQLAccess.noReturnQuery();
 	}
 
 	public void removeMaterial() {
@@ -92,7 +97,7 @@ public class TeacherController implements Initializable {
 	}
 
 	public void checkEmail() {
-
+//TextArea.set(MySQLAccess.returnQuery(query, resultsNumber);
 	}
 
 	public void sendEmail() {

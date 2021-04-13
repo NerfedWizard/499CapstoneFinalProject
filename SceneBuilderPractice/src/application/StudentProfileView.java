@@ -26,7 +26,7 @@ public class StudentProfileView extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		try {
+		try { 
 			primaryStage.setTitle(StudentController.getUserStudentNameForTitle());
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("StudentProfileView.fxml"));
 			scene = new Scene(root);

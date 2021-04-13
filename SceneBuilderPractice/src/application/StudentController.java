@@ -25,27 +25,26 @@ public class StudentController implements Initializable {
 	private TextFlow textFlow;
 	@FXML
 	private TextArea textAreaLeft;
-//	@FXML
-//	private TextArea textAreaRight;
+
 	@FXML
 	private Button logoutButton;
 	@FXML
 	private MenuItem changePass;
 	private Text textForFlowLeft = new Text();// For Output to the user
-//	private Text textForFlowRight = new Text();
-	static String nameForTitle;
+
+	static String firstName;
 	private Main main;
 	static String userType;
 	private static String username;
 	private ResetPasswordView rpv;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-//		textAreaRight.setPromptText("Enter text here:");
+	public void initialize(URL arg0, ResourceBundle arg1 ) {
+
 		main = new Main();
 		rpv = new ResetPasswordView();
 	}
-
+ 
 	public void updateLogin() {
 		try {
 			rpv.start(Main.logStage);
@@ -63,10 +62,11 @@ public class StudentController implements Initializable {
 	}
 
 	/** Setting the title for the Students window */
-	public static void setNameForTitle(String name, String userType) {
-		StudentController.setUsername(name);
-		System.out.println(name + "   In the student controller");
-		StudentController.nameForTitle = MySQLAccess.getFirstName(name, userType);
+	public static void setNameForTitle(String userName) {
+		StudentController.setUsername(userName);
+		System.out.println(userName + "   In the student controller");
+		StudentController.firstName = MySQLAccess
+				.returnQuery("SELECT first_name FROM user where username='" + userName + "'", 1);
 	}
 
 	public void checkEmail() {
@@ -79,7 +79,7 @@ public class StudentController implements Initializable {
 	 * probably be changed now with the 2 mysql methods
 	 */
 	public static String getUserStudentNameForTitle() {
-		return StudentController.nameForTitle;
+		return StudentController.firstName;
 	}
 
 	/** Still needed for setting the text to user */
@@ -89,7 +89,7 @@ public class StudentController implements Initializable {
 
 	/** Works for getting the grade of user */
 	public void getGrades() {
-		textForFlowLeft.setText("Course\t\t\tScore\tGrade\n" + MySQLAccess
+		textForFlowLeft.setText("Course\t\tScore\tGrade\n" + MySQLAccess
 				.returnQuery("select course_name, score, grade from assignment a, course c where a.username ='"
 						+ getUsername() + "' and a.course_id = c.course_id", 3));
 

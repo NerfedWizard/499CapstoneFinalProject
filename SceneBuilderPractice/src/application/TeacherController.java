@@ -43,7 +43,7 @@ public class TeacherController implements Initializable {
 	}
 
 	public static void setNameForTitle(String userName) {
-		System.out.println(userName + "   In the student controller");
+		System.out.println(userName + "   In the Teacher controller");
 		setUsername(userName);
 		firstName = MySQLAccess.returnQuery("SELECT first_name from user where username ='" + userName + "'", 1);
 	}

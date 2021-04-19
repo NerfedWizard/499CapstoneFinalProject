@@ -31,16 +31,18 @@ public class ResetPasswordController implements Initializable {
 	private Button submit;
 	@FXML
 	private MenuButton dropDownMenu;
-	@FXML
-	private MenuItem usernameItem;
+//	@FXML
+//	private MenuItem usernameItem;
 	@FXML
 	private MenuItem passwordItem;
 	private String query = "";
 	private int choice = 0;
 	static String flag = "";
+	private Main main;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		main = new Main();
 	}
 
 	/** Might need a boolean check to make sure the update performed */
@@ -52,23 +54,20 @@ public class ResetPasswordController implements Initializable {
 		System.out.println(StudentController.getUsername());
 	}
 
-	public void changeUsername() {
-		dropDownMenu.setText("Username");
-		System.out.println(StudentController.getUsername());
-		oldEntry.setText("Old Username");
-		newEntry.setText("New Username");
-		this.choice = 2;
-
-	}
+//	public void changeUsername() {
+//		dropDownMenu.setText("Username");
+//		System.out.println(StudentController.getUsername());
+//		oldEntry.setText("Old Username");
+//		newEntry.setText("New Username");
+//		this.choice = 2;
+//
+//	}
 
 	public void buttonSubmit() {
 		MainController mC = new MainController();
-		System.out.println("in the buttonSubmit " + mC.getUserSelection());
+//		System.out.println("in the buttonSubmit " + mC.getUserSelection());
 		if (this.choice == 1) {
-			this.query = "UPDATE student SET password ='" + newInsert.getText() + "'where password ='"
-					+ toBeChanged.getText() + "';";
-		} else if (this.choice == 2) {
-			this.query = "UPDATE student SET username ='" + newInsert.getText() + "'where username ='"
+			this.query = "UPDATE user SET password ='" + newInsert.getText() + "'where password ='"
 					+ toBeChanged.getText() + "';";
 		}
 		if (this.query.equals("")) {
@@ -80,5 +79,12 @@ public class ResetPasswordController implements Initializable {
 			MySQLAccess.noReturnQuery(this.query);
 		}
 		newEntry2.setText(ResetPasswordController.flag);
+		if (flag.equals("Success")) {
+			try {
+				main.start(Main.logStage);// shows you can go to any view from any view if needed
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

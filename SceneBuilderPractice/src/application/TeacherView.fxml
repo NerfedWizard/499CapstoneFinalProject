@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane minHeight="5.0" minWidth="5.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TeacherController">
+<AnchorPane minHeight="5.0" minWidth="5.0" prefHeight="812.0" prefWidth="1218.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TeacherController">
    <children>
-      <ImageView fitHeight="934.0" fitWidth="1586.0" pickOnBounds="true" preserveRatio="true" translateX="1.0" translateY="1.0" translateZ="1.0">
+      <ImageView fitHeight="910.0" fitWidth="1218.0" pickOnBounds="true" preserveRatio="true" translateX="1.0" translateY="1.0" translateZ="1.0">
          <image>
             <Image url="@Metropolitan_State_Library_and_Learning_Center.jpg" />
          </image>
@@ -51,7 +51,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <TextFlow layoutX="468.0" layoutY="374.0" prefHeight="531.0" prefWidth="750.0">
+      <TextFlow layoutX="461.0" layoutY="262.0" prefHeight="531.0" prefWidth="750.0">
          <children>
             <TextArea prefHeight="536.0" prefWidth="752.0" style="-fx-control-inner-background: #000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" />
          </children>

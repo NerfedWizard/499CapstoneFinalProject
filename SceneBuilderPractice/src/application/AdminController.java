@@ -17,7 +17,7 @@ public class AdminController implements Initializable {
 	}
 
 	public static void setNameForTitle(String name) {
-		System.out.println(name + "   In the student controller");
+		System.out.println(name + "   In the Admin controller");
 		nameForTitle = MySQLAccess.getFirstName(name);
 	}
 

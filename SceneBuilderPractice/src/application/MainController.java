@@ -42,7 +42,7 @@ public class MainController implements Initializable {
 	private MenuItem resetPasswordMenuItem;
 	@FXML
 	private MenuItem facultyMenuItem;
-	private String userSelection = "";
+//	private String userSelection = "";
 	private StudentProfileView studentView;
 	private AdminView adminView;
 	private TeacherView teacherView;
@@ -85,17 +85,24 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * This is working and sending you back to login after but instead of when
+	 * successful it is always Also this is not the one we need this is for changing
+	 * password and noth the forgot info view so need to change that but this is how
+	 * we can add the functionality to the other views like student and what not for
+	 * it to go back to login after changing the password
+	 */
 	public void forgotInfo() {
 		Stage stage = (Stage) submitButton.getScene().getWindow();
-		if (getUserSelection().equals("Forgot Password")) {
-
-			try {
-				resetPassUser.start(stage);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
+//		if (getUserSelection().equals("Forgot Password")) {
+//
+		try {
+			resetPassUser.start(stage);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+//
+//		}
 	}
 
 	/**
@@ -108,7 +115,7 @@ public class MainController implements Initializable {
 	 */
 
 	public void userLogin() {
-		System.out.println(getUserSelection());// Just Testing things
+//		System.out.println(getUserSelection());// Just Testing things
 		Stage stage = (Stage) submitButton.getScene().getWindow();
 
 		for (String s : MySQLAccess.getUsername()) {
@@ -132,7 +139,7 @@ public class MainController implements Initializable {
 								e.printStackTrace();
 //									System.out.println("In user login Exception");
 							}
-						} else if (getUserSelection().equals("Admin")) {
+						} else if (userType.equals("Admin")) {
 							AdminController.setNameForTitle(s);
 							System.out.println(userType.length());
 //								Stage stage = (Stage) submitButton.getScene().getWindow();
@@ -141,7 +148,7 @@ public class MainController implements Initializable {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						} else if (getUserSelection().equals("Teacher")) {
+						} else if (userType.equals("Teacher")) {
 							TeacherController.setNameForTitle(s);
 							System.out.println(userType.length());
 //								Stage stage = (Stage) submitButton.getScene().getWindow();
@@ -150,7 +157,7 @@ public class MainController implements Initializable {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						} else if (getUserSelection().equals("Guardian")) {
+						} else if (userType.equals("Guardian")) {
 							GuardianController.setNameForTitle(s);
 							System.out.println(userType.length());
 							try {
@@ -174,13 +181,13 @@ public class MainController implements Initializable {
 	}
 //	}
 
-	public String getUserSelection() {
-		return this.userSelection;
-	}
-
-	public void setUserSelection(String userSelection) {
-		this.userSelection = userSelection;
-	}
+//	public String getUserSelection() {
+//		return this.userSelection;
+//	}
+//
+//	public void setUserSelection(String userSelection) {
+//		this.userSelection = userSelection;
+//	}
 
 //	public int userNum(String type) {
 //		int usertype = 0;

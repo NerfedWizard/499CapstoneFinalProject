@@ -39,7 +39,7 @@ public class GuardianController implements Initializable {
 	}
 
 	public static void setNameForTitle(String name) {
-		System.out.println(name + "   In the guardian controller");
+		System.out.println(name + "   In the Guardian controller");
 		nameForTitle = MySQLAccess.getFirstName(name);
 	}
 

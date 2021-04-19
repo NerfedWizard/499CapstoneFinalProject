@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -31,22 +30,22 @@
       				</TextArea>
          </children>
 		</TextFlow>
-		<MenuBar layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="252.0">
+		<MenuBar layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="316.0">
 			<menus>
-				<Menu mnemonicParsing="false" text="Course">
+				<Menu mnemonicParsing="false" onAction="#checkCourse" onMenuValidation="#checkCourse" text="Active Course">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#getGrades" text="Grades" />
-						<Menu mnemonicParsing="false" text="Course Material">
-							<items>
+                  <Menu fx:id="courseMenu" mnemonicParsing="false" text="Course">
+                    <items>
+								<MenuItem mnemonicParsing="false" onAction="#getMaterials" text="Overview" />
 								<MenuItem mnemonicParsing="false" onAction="#getAssignments" text="Assignments" />
-								<MenuItem mnemonicParsing="false" onAction="#getMaterials" text="Materials" />
-							</items>
-						</Menu>
+      						<MenuItem mnemonicParsing="false" onAction="#getGrades" text="Grades" />
+                    </items>
+                  </Menu>
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="Messages">
 					<items>
-						<MenuItem mnemonicParsing="false" text="Send Email" />
+						<MenuItem mnemonicParsing="false" onAction="#sendMail" text="Send Email" />
 						<MenuItem mnemonicParsing="false" onAction="#checkEmail" text="Check Email" />
 						<MenuItem mnemonicParsing="false" text="Manage Meeting" />
 					</items>
@@ -54,6 +53,7 @@
 				<Menu mnemonicParsing="false" text="Account Settings">
 					<items>
 						<MenuItem mnemonicParsing="false" onAction="#updateLogin" onMenuValidation="#updateLogin" text="Change Login Info" />
+                  <MenuItem mnemonicParsing="false" onAction="#studentLogout" onMenuValidation="#studentLogout" text="Logout" />
 					</items>
 				</Menu>
 			</menus>
@@ -61,6 +61,5 @@
 				<Cursor fx:constant="DEFAULT" />
 			</cursor>
 		</MenuBar>
-      <Button fx:id="logoutButton" layoutX="957.0" layoutY="27.0" mnemonicParsing="false" onAction="#studentLogout" text="Logout" textFill="#ee0e0e" />
 	</children>
 </AnchorPane>

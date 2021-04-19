@@ -32,6 +32,8 @@ public class StudentProfileView extends Application {
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setX(300);
+			primaryStage.setY(100);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

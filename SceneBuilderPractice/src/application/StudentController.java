@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -35,6 +37,10 @@ public class StudentController implements Initializable {
 	private MenuItem changePass;
 	@FXML
 	private Menu courseMenu;
+	@FXML
+	private TilePane tilePane;
+	private TextArea emailArea;
+	private TextInputDialog emailPopup;
 	private Text textForFlowLeft = new Text();// For Output to the user
 
 	static String firstName;
@@ -49,6 +55,7 @@ public class StudentController implements Initializable {
 
 		main = new Main();
 		rpv = new ResetPasswordView();
+		textAreaLeft.setVisible(false);
 	}
 
 	public void updateLogin() {
@@ -76,13 +83,35 @@ public class StudentController implements Initializable {
 	}
 
 	public void checkEmail() {
+		textAreaLeft.setVisible(true);
+//		emailArea.setVisible(false);
+
 		textForFlowLeft.setText(MySQLAccess.returnQuery(
 				"select cast(message as NCHAR) from user_email where email ='" + username + "@p2k.com'", 1));
 		changeTextFlow(textForFlowLeft);
 	}
 
 	public void sendMail() {
-		 
+//		textAreaLeft.setVisible(false);
+		emailPopup = new TextInputDialog();
+
+		emailPopup.setHeaderText("Enter the Username you would like to send message to.");
+//		emailPopup.set("This is a test");
+		emailArea = new TextArea();
+		emailArea.setPromptText("Enter Message Here");
+		emailArea.setPrefSize(307, 376);
+		emailArea.setVisible(true);
+		tilePane.getChildren().add(emailArea);
+		emailPopup.showAndWait();
+		String recUser = emailPopup.getEditor().getText();
+		if (recUser.length() > 8) {
+			emailPopup.setHeaderText("This is not a valid Username Please Try Again");
+			emailPopup.showAndWait();
+		}
+//		textAreaLeft.setVisible(true);
+//		textForFlowLeft.setText(recUser);
+//		changeTextFlow(textForFlowLeft);
+//		emailArea.setVisible(false);
 	}
 
 	/**
@@ -100,6 +129,8 @@ public class StudentController implements Initializable {
 
 	/** Works for getting the grade of user */
 	public void getGrades() {
+		textAreaLeft.setVisible(true);
+//		emailArea.setVisible(false);
 		String course = "Course";
 		String score = "Score";
 		String grade = "Grade";
@@ -112,6 +143,8 @@ public class StudentController implements Initializable {
 	}
 
 	public void getAssignments() {
+//		emailArea.setVisible(false);
+		textAreaLeft.setVisible(true);
 		textForFlowLeft.setText("Name\t\tDue Date\n" + MySQLAccess
 				.returnQuery("select assignment_name,deadline from assignment where student_id ='" + sID + "'", 2));
 
@@ -122,6 +155,8 @@ public class StudentController implements Initializable {
 	 * Make this a string object instead of accessing the database
 	 */
 	public void getMaterials() {
+//		emailArea.setVisible(false);
+		textAreaLeft.setVisible(true);
 		textForFlowLeft.setText(
 				"Materials needed:\n Million tons of steel\nSpacesuit\nRocket Ship\nSteelworker Knowledge\nPermission slip to build Dyson Sphere around the Sun");
 		changeTextFlow(textForFlowLeft);
@@ -137,6 +172,8 @@ public class StudentController implements Initializable {
 	}
 
 	public void checkCourse() {
+//		emailArea.setVisible(false);
+		textAreaLeft.setVisible(true);
 		String courseQ = "select course_name from course c, assignment a where c.course_id = a.course_id and student_id = "
 				+ StudentController.sID;
 		courseMenu.setOnShown(new EventHandler<Event>() {

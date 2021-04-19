@@ -30,6 +30,8 @@ public class TeacherView extends Application {
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			teacherView.setScene(scene);
+			teacherView.setX(500);
+			teacherView.setY(100);
 			teacherView.show();
 		} catch (Exception e) {
 			e.printStackTrace();

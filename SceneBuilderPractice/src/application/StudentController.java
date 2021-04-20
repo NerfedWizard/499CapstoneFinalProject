@@ -12,6 +12,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -39,6 +40,10 @@ public class StudentController implements Initializable {
 	private Menu courseMenu;
 	@FXML
 	private TilePane tilePane;
+	@FXML
+	private Button sendEmail;
+	@FXML
+	private AnchorPane anchor;
 	private TextArea emailArea;
 	private TextInputDialog emailPopup;
 	private Text textForFlowLeft = new Text();// For Output to the user
@@ -55,7 +60,7 @@ public class StudentController implements Initializable {
 
 		main = new Main();
 		rpv = new ResetPasswordView();
-		textAreaLeft.setVisible(false);
+//		textAreaLeft.setVisible(false);
 	}
 
 	public void updateLogin() {
@@ -83,7 +88,8 @@ public class StudentController implements Initializable {
 	}
 
 	public void checkEmail() {
-		textAreaLeft.setVisible(true);
+//		textAreaLeft.setVisible(true);
+
 //		emailArea.setVisible(false);
 
 		textForFlowLeft.setText(MySQLAccess.returnQuery(
@@ -91,17 +97,29 @@ public class StudentController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
+	/*
+	 * Need a way to send it to the database instead of keep checking maybe add a
+	 * button on the tilepane
+	 **/
 	public void sendMail() {
-//		textAreaLeft.setVisible(false);
+//		textAreaLeft.setVisible(false);	
+		anchor.setVisible(true);
 		emailPopup = new TextInputDialog();
 
 		emailPopup.setHeaderText("Enter the Username you would like to send message to.");
 //		emailPopup.set("This is a test");
 		emailArea = new TextArea();
+		emailArea.setWrapText(true);
 		emailArea.setPromptText("Enter Message Here");
 		emailArea.setPrefSize(307, 376);
-		emailArea.setVisible(true);
-		tilePane.getChildren().add(emailArea);
+//		emailArea.setVisible(true);
+//		tilePane.getChildren().add(emailArea);
+		anchor.getChildren().add(emailArea);
+//		anchor.getChildren().add(sendEmail);
+//		tilePane.getChildren().add(sendEmail);
+
+//		tilePane.setVisible(false);// This might work for hiding all the stuff
+
 		emailPopup.showAndWait();
 		String recUser = emailPopup.getEditor().getText();
 		if (recUser.length() > 8) {
@@ -112,6 +130,13 @@ public class StudentController implements Initializable {
 //		textForFlowLeft.setText(recUser);
 //		changeTextFlow(textForFlowLeft);
 //		emailArea.setVisible(false);
+	}
+
+	public void emailSent() {
+		emailArea.clear();
+		emailArea.setVisible(false);
+		textForFlowLeft.setText("Email Sent");
+		changeTextFlow(textForFlowLeft);
 	}
 
 	/**
@@ -129,8 +154,9 @@ public class StudentController implements Initializable {
 
 	/** Works for getting the grade of user */
 	public void getGrades() {
-		textAreaLeft.setVisible(true);
+//		textAreaLeft.setVisible(true);
 //		emailArea.setVisible(false);
+		anchor.setVisible(false);
 		String course = "Course";
 		String score = "Score";
 		String grade = "Grade";
@@ -144,7 +170,8 @@ public class StudentController implements Initializable {
 
 	public void getAssignments() {
 //		emailArea.setVisible(false);
-		textAreaLeft.setVisible(true);
+		anchor.setVisible(false);
+//		textAreaLeft.setVisible(true);
 		textForFlowLeft.setText("Name\t\tDue Date\n" + MySQLAccess
 				.returnQuery("select assignment_name,deadline from assignment where student_id ='" + sID + "'", 2));
 
@@ -156,7 +183,8 @@ public class StudentController implements Initializable {
 	 */
 	public void getMaterials() {
 //		emailArea.setVisible(false);
-		textAreaLeft.setVisible(true);
+		anchor.setVisible(false);
+//		textAreaLeft.setVisible(true);
 		textForFlowLeft.setText(
 				"Materials needed:\n Million tons of steel\nSpacesuit\nRocket Ship\nSteelworker Knowledge\nPermission slip to build Dyson Sphere around the Sun");
 		changeTextFlow(textForFlowLeft);
@@ -173,7 +201,8 @@ public class StudentController implements Initializable {
 
 	public void checkCourse() {
 //		emailArea.setVisible(false);
-		textAreaLeft.setVisible(true);
+//		anchor.setVisible(false);
+//		textAreaLeft.setVisible(true);
 		String courseQ = "select course_name from course c, assignment a where c.course_id = a.course_id and student_id = "
 				+ StudentController.sID;
 		courseMenu.setOnShown(new EventHandler<Event>() {

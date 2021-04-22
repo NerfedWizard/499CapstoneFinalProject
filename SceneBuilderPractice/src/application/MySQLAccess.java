@@ -118,7 +118,7 @@ public class MySQLAccess {
 			while (rs.next()) {
 				for (int i = 1; i <= resultsNumber; i++) {
 					returnResults.append(rs.getString(i) + "\t");
-					System.out.println(returnResults.toString());
+//					System.out.println(returnResults.toString());
 
 				}
 				returnResults.append("\n");
@@ -135,6 +135,7 @@ public class MySQLAccess {
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
+			System.out.println("No return Query");
 			ResetPasswordController.flag = "Success";
 		} catch (SQLException e) {
 			e.printStackTrace();

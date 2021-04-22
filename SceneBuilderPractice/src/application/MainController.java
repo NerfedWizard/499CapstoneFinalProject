@@ -76,13 +76,6 @@ public class MainController implements Initializable {
 			}
 		});
 
-//		studentMenuItem.setOnAction(event1);
-//		guardianMenuItem.setOnAction(event1);
-//		teacherMenuItem.setOnAction(event1);
-//		adminMenuItem.setOnAction(event1);
-//		facultyMenuItem.setOnAction(event1);
-//		resetPasswordMenuItem.setOnAction(event1);
-
 	}
 
 	/**

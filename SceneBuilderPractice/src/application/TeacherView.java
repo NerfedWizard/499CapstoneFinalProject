@@ -25,12 +25,12 @@ public class TeacherView extends Application {
 	public void start(Stage teacherView) throws Exception {
 		try {
 			teacherView.setTitle(TeacherController.getUserTeacherNameForTitle());
-			teacherView.setFullScreen(true);  
+//			teacherView.setFullScreen(true);  
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("TeacherView.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			teacherView.setScene(scene);
-			teacherView.setX(500);
+			teacherView.setX(300);
 			teacherView.setY(100);
 			teacherView.show();
 		} catch (Exception e) {

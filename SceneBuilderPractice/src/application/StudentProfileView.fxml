@@ -48,7 +48,6 @@
 					<items>
 						<MenuItem mnemonicParsing="false" onAction="#sendMail" text="Send Email" />
 						<MenuItem mnemonicParsing="false" onAction="#checkEmail" text="Check Email" />
-						<MenuItem mnemonicParsing="false" text="Manage Meeting" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="Account Settings">

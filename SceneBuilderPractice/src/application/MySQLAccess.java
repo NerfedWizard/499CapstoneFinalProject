@@ -110,7 +110,7 @@ public class MySQLAccess {
 	 */
 
 	public static String returnQuery(String query, int resultsNumber) {
-		System.out.println("In sql query");
+//		System.out.println("In sql query");
 		StringBuilder returnResults = new StringBuilder("");
 		try {
 			stmt = con.createStatement();
@@ -135,7 +135,7 @@ public class MySQLAccess {
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
-			System.out.println("No return Query");
+//			System.out.println("No return Query");
 			ResetPasswordController.flag = "Success";
 		} catch (SQLException e) {
 			e.printStackTrace();

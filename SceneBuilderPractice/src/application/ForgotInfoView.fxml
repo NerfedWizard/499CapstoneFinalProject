@@ -6,12 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="143.0" prefWidth="492.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="application.ForgotInfoController">
+<AnchorPane prefHeight="143.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ForgotInfoController">
    <children>
-      <TextField layoutX="42.0" layoutY="59.0" prefHeight="25.0" prefWidth="408.0" promptText="Enter Email" />
-      <Button layoutX="167.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Submit" />
-      <Label layoutX="69.0" layoutY="14.0" prefHeight="27.0" prefWidth="356.0" text="Enter the email associated with the Account ">
+      <TextField fx:id="email" layoutX="42.0" layoutY="59.0" prefHeight="25.0" prefWidth="408.0" promptText="Enter Email" />
+      <Button fx:id="submit" layoutX="167.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEmail" prefHeight="25.0" prefWidth="160.0" text="Submit" />
+      <Label fx:id="label" layoutX="69.0" layoutY="14.0" prefHeight="27.0" prefWidth="356.0" text="Enter the email associated with the Account ">
          <font>
             <Font size="18.0" />
          </font>

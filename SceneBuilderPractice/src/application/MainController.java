@@ -48,6 +48,7 @@ public class MainController implements Initializable {
 	private TeacherView teacherView;
 	private ResetPasswordView resetPassUser;
 	private GuardianView guardianView;
+	private ForgotInfoView forgot;
 //	private FacultyView facultyView;
 //	private boolean successfulLogin = false;
 
@@ -58,6 +59,7 @@ public class MainController implements Initializable {
 		teacherView = new TeacherView();
 		resetPassUser = new ResetPasswordView();
 		guardianView = new GuardianView();
+		forgot = new ForgotInfoView();
 //		facultyView = new FacultyView();
 
 //		EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
@@ -90,7 +92,7 @@ public class MainController implements Initializable {
 //		if (getUserSelection().equals("Forgot Password")) {
 //
 		try {
-			resetPassUser.start(stage);
+			forgot.start(stage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,7 +126,7 @@ public class MainController implements Initializable {
 //							setUserSelection(userType);
 						if (userType.equals("Student")) {
 							StudentController.setNameForTitle(s);
-							System.out.println(userType.length());
+//							System.out.println(userType.length());
 //								Stage stage = (Stage) submitButton.getScene().getWindow();
 							try {
 								studentView.start(stage);

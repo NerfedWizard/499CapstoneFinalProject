@@ -30,7 +30,7 @@
 		</TextFlow>
 		<MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1009.0">
 			<menus>
-				<Menu mnemonicParsing="false" onAction="#listView" onShowing="#listView" onShown="#removeAssignment" text="Manage Course">
+				<Menu mnemonicParsing="false" onAction="#listViewGrades" onShowing="#listViewGrades" onShown="#addNewAssignment" text="Manage Course">
 					<items>
 						<Menu mnemonicParsing="false" text="Materials/Overview">
 							<items>
@@ -40,7 +40,7 @@
 						</Menu>
 						<Menu mnemonicParsing="false" text="Assignments">
 							<items>
-								<MenuItem mnemonicParsing="false" text="Remove Assignment">
+								<MenuItem mnemonicParsing="false" onAction="#addNewAssignment" text="Add Course Assignment">
                            <graphic>
                               <ListView fx:id="remAssign" editable="true" prefHeight="200.0" prefWidth="200.0" />
                            </graphic></MenuItem>
@@ -48,15 +48,10 @@
 						</Menu>
 						<Menu mnemonicParsing="false" text="Grades">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#addAssign" text="Add Graded Assignment">
+								<MenuItem mnemonicParsing="false" onAction="#addAssign" text="Grade Assignment">
                            <graphic>
 										<ListView fx:id="addGradeView" editable="true" prefHeight="200.0" prefWidth="200.0" />
                            </graphic></MenuItem>
-								<MenuItem mnemonicParsing="false" text="Alter Grade">
-									<graphic>
-										<ListView fx:id="removeGradeView" editable="true" prefHeight="200.0" prefWidth="200.0" />
-									</graphic>
-								</MenuItem>
 							</items>
 						</Menu>
 					</items>
@@ -81,15 +76,15 @@
 				<Button fx:id="sendEmail" layoutX="337.0" layoutY="343.0" mnemonicParsing="false" onAction="#emailSent" text="Send" />
 			</children>
 		</AnchorPane>
-      <AnchorPane fx:id="gradeAnchor" layoutX="522.0" layoutY="27.0" prefHeight="142.0" prefWidth="476.0">
+      <AnchorPane fx:id="gradeAnchor" layoutX="443.0" layoutY="27.0" prefHeight="142.0" prefWidth="566.0">
          <children>
             <TextField fx:id="courseNum" layoutX="6.0" layoutY="60.0" prefHeight="23.0" prefWidth="69.0" promptText="Course#">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="assignName" layoutX="75.0" layoutY="60.0" promptText="Assignment Name" />
-            <TextField fx:id="dueDate" layoutX="220.0" layoutY="60.0" promptText="YYYY-MM-DD" />
+            <TextField fx:id="assignName" layoutX="75.0" layoutY="60.0" prefHeight="23.0" prefWidth="210.0" promptText="Assignment Name" />
+            <TextField fx:id="dueDate" layoutX="283.0" layoutY="60.0" promptText="YYYY-MM-DD" />
             <TextField fx:id="stdID" layoutX="6.0" layoutY="93.0" prefHeight="23.0" prefWidth="69.0" promptText="Student ID" />
             <TextField fx:id="ptsErnd" layoutX="75.0" layoutY="93.0" promptText="Points Earned" />
             <TextField fx:id="totlPts" layoutX="220.0" layoutY="93.0" promptText="Total Points" />
@@ -105,13 +100,15 @@
             </Label>
          </children>
       </AnchorPane>
-      <Pane fx:id="labelPane" layoutX="424.0" layoutY="263.0" prefHeight="34.0" prefWidth="438.0">
+      <Pane fx:id="labelPane" layoutX="424.0" layoutY="263.0" prefHeight="34.0" prefWidth="574.0">
          <children>
-            <Label fx:id="courseMat" layoutX="45.0" layoutY="5.0" prefHeight="18.0" prefWidth="349.0" style="-fx-background-color: #000000;" text="Enter Course Material/Description Here!!!!" textFill="#2fff3d">
+            <Label fx:id="courseMat" layoutY="3.0" prefHeight="25.0" prefWidth="361.0" style="-fx-background-color: #000000;" text="Enter Course Material/Description" textFill="#2fff3d">
                <font>
                   <Font name="Candara Bold" size="18.0" />
                </font>
             </Label>
+            <TextField fx:id="courseText" layoutX="361.0" layoutY="3.0" prefHeight="23.0" prefWidth="58.0" promptText="Course#" style="-fx-background-color: #000000; -fx-text-fill: #00ff00;" />
+            <Button fx:id="matButn" contentDisplay="CENTER" layoutX="419.0" layoutY="3.0" mnemonicParsing="false" style="-fx-background-color: #000000; -fx-text-fill: #00ff00;" text="Submit" />
          </children>
       </Pane>
 	</children>

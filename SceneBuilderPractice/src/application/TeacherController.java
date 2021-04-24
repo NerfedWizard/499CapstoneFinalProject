@@ -17,6 +17,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -65,6 +67,10 @@ public class TeacherController implements Initializable {
 	private Label courseMat;
 	@FXML
 	private Pane labelPane;
+	@FXML
+	private Button matButn;
+	@FXML
+	private TextField courseText;
 
 	private Text textForFlowLeft = new Text();
 	static ArrayList<String> materials = new ArrayList<String>();
@@ -109,7 +115,9 @@ public class TeacherController implements Initializable {
 	}
 
 	/** This is working because */
-	public void listView() {
+	public void listViewGrades() {
+		textAreaLeft.clear();
+//		labelPane.setVisible(false);
 		ObservableList<String> names = FXCollections.observableArrayList();
 		String str = MySQLAccess.returnQuery("SELECT username FROM user WHERE user_type = 'Student'", 1);
 		for (String s : str.split("\\s+")) {
@@ -125,23 +133,37 @@ public class TeacherController implements Initializable {
 	 * Need sql statement for adding grades to the users This method is for
 	 * inserting a new assignment into the database and assigning the points for
 	 * each student
+	 * 
+	 * 
+	 * Change this to add student grade to assignment and have the other add the
+	 * assignment
+	 * 
+	 * Make part invisible and only show the Assignment Name StudentID pts erned tot
+	 * pts
 	 */
 	public void addAssign() {
-		gradeAnchor.setVisible(true);
-		String sdntID = addGradeView.getSelectionModel().getSelectedItem();
-		stdID.setText(MySQLAccess.returnQuery("SELECT user_id FROM user WHERE username ='" + sdntID + "'", 1));
+//		labelPane.setVisible(false);
+		courseNum.setVisible(false);
+		dueDate.setVisible(false);
 
+		gradeAnchor.setVisible(true);
+		String stdUserN = addGradeView.getSelectionModel().getSelectedItem();
+		stdID.setText(MySQLAccess.returnQuery("SELECT user_id FROM user WHERE username ='" + stdUserN + "'", 1));
+		assignName.setText(MySQLAccess
+				.returnQuery("select assignment_name from assignment where student_id =" + stdID.getText(), 1));
 //		System.out.println(query);
 
 		gradeBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				String query = "insert into assignment(assignment_name, deadline, course_id, student_id, earned_points, total_points) VALUES ('"
-						+ assignName.getText() + "', '" + dueDate.getText() + "'," + courseNum.getText() + ","
-						+ stdID.getText() + "," + ptsErnd.getText() + "," + totlPts.getText() + ")";
-				MySQLAccess.noReturnQuery(query);
-				textForFlowLeft.setText("Assignment Added for " + MySQLAccess.returnQuery(
-						"SELECT username, first_name, last_name FROM user WHERE username = '" + sdntID + "'", 3));
+//				String query = "UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points ="
+//						+ totlPts.getText() + "where student_id = " + stdID.getText();
+
+				MySQLAccess.noReturnQuery("UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points = "
+						+ totlPts.getText() + "where student_id = " + Integer.parseInt(stdID.getText())+";");
+				String studentName = MySQLAccess.returnQuery(
+						"SELECT username, first_name, last_name FROM user WHERE username = '" + stdUserN + "'", 3);
+				textForFlowLeft.setText("Assignment Added for " + studentName);
 				changeTextFlow(textForFlowLeft);
 				System.out.println("Made it in the event handler");
 
@@ -150,13 +172,16 @@ public class TeacherController implements Initializable {
 
 	}
 
-	/**
-	 * This method is for altering the grades of assignments and will be an update
-	 * not insert
-	 */
-	public void changePoints() {
-
-	}
+//	/**
+//	 * This method is for altering the grades of assignments and will be an update
+//	 * not insert
+//	 */
+//	public void changePoints() {
+////		labelPane.setVisible(false);
+//		courseNum.setVisible(false);
+//		gradeAnchor.setVisible(true);
+//
+//	}
 
 	/**
 	 * Something here to get the object for materials and edit them maybe a
@@ -165,42 +190,74 @@ public class TeacherController implements Initializable {
 	 */
 	public void addMaterial() {
 		textAreaLeft.setEditable(true);
+		courseMat.setVisible(true);
+		matButn.setVisible(true);
+		textAreaLeft.setText("Here");
 		labelPane.setVisible(true);
-//		textForFlowLeft.setText("Enter Course Material/Descriptions Here!");
-//		changeTextFlow(textForFlowLeft);
-//		textAreaLeft.clear();
-//		textAreaLeft.setPromptText("Enter Course Material/Descriptions Here!");
+		matButn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent o) {
+				MySQLAccess.noReturnQuery("UPDATE course SET overview = '" + textAreaLeft.getText()
+						+ "' WHERE course_id = " + courseText.getText());
+				textAreaLeft.setText("Description Added");
+			}
+		});
+//		labelPane.setVisible(false);
 	}
 
 	public void removeMaterial() {
-
+//		textAreaLeft.clear();
+		textAreaLeft.setEditable(false);
+		courseMat.setVisible(false);
+		labelPane.setVisible(true);
+		matButn.setVisible(false);
+		textAreaLeft.setText("Enter the Course ID to Remove Material and Press Enter");
+		courseText.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent ke) {
+				if (ke.getCode().equals(KeyCode.ENTER)) {
+					System.out.println("Remove Material Enter Handle");
+					MySQLAccess.noReturnQuery(
+							"UPDATE course SET overview = 'TBD' WHERE course_id = " + courseText.getText());
+//					textAreaLeft.clear();
+					textAreaLeft.setText("Material Removed");
+				}
+			}
+		});
+//		labelPane.setVisible(false);
 	}
 
-	public void removeAssignment() {
+	/**
+	 * For adding a new ungraded assignment with everything but student_id and
+	 * earned points
+	 */
+	public void addNewAssignment() {
+		labelPane.setVisible(false);
+		gradeAnchor.setVisible(true);
 		ObservableList<String> assign = FXCollections.observableArrayList();
-		assign.add(MySQLAccess.returnQuery("SELECT assignment_name from assignment", 1));
-//		for (String s : str.split("\\s+")) {
-//			assign.add(s);
-//		}
-		for (String s : assign) {
-			System.out.println("This is the the for loop " + s);
+		String str = MySQLAccess.returnQuery("SELECT course_name from course", 1);
+		for (String s : str.split("\\n+")) {
+			assign.add(s);
 		}
 		remAssign.setItems(assign);
-		if (remAssign.isPressed()) {
-			String str = remAssign.getSelectionModel().getSelectedItem();
-			MySQLAccess.noReturnQuery("DELETE FROM assignment WHERE assignment_name = '" + str + "'");
-		}
+		String courseSel = remAssign.getSelectionModel().getSelectedItem();
+		courseNum.setText(
+				MySQLAccess.returnQuery("SELECT course_id from course where course_name = '" + courseSel + "'", 1));
 
+		gradeBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent o) {
+				MySQLAccess.noReturnQuery("insert into  SET overview = '" + textAreaLeft.getText()
+						+ "' WHERE course_id = " + courseText.getText());
+				textAreaLeft.setText("Description Added");
+			}
+		});
 	}
-//	public void removeAssign() {
-//		
-//	}
 
 	public void changeTextFlow(Text textLeft) {
 		textAreaLeft.setText(textLeft.getText());
 	}
 
 	public void checkEmail() {
+		labelPane.setVisible(false);
 		textForFlowLeft.setText(MySQLAccess.returnQuery(
 				"select cast(message as NCHAR) from user_email where email ='" + username + "@p2k.com'", 1));
 		changeTextFlow(textForFlowLeft);
@@ -208,6 +265,7 @@ public class TeacherController implements Initializable {
 	}
 
 	public void sendMail() {
+		labelPane.setVisible(false);
 		anchor.setVisible(true);
 		emailPopup = new TextInputDialog();
 		emailPopup.setHeaderText("Enter the Username you would like to send message to.");

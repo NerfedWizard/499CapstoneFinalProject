@@ -85,7 +85,7 @@ public class StudentController implements Initializable {
 
 	public void checkEmail() {
 		textForFlowLeft.setText(MySQLAccess.returnQuery(
-				"select cast(message as NCHAR) from user_email where email ='" + username + "@p2k.com'", 1));
+				"select cast(message as NCHAR) , received from user_email where email ='" + username + "@p2k.com'", 2));
 		changeTextFlow(textForFlowLeft);
 	}
 
@@ -158,10 +158,12 @@ public class StudentController implements Initializable {
 	 * Make this a string object instead of accessing the database
 	 */
 	public void getMaterials() {
-		anchor.setVisible(false);
-		textForFlowLeft.setText(
-				"Materials needed:\n Million tons of steel\nSpacesuit\nRocket Ship\nSteelworker Knowledge\nPermission slip to build Dyson Sphere around the Sun");
+		String x = course();
+		String materials = MySQLAccess
+				.returnQuery("select cast(overview as NCHAR) from course where course_name = '" + x + "'", 1);
+		textForFlowLeft.setText(course() + " Course Description:\n" + materials);
 		changeTextFlow(textForFlowLeft);
+
 	}
 
 	public static String getUsername() {
@@ -173,6 +175,16 @@ public class StudentController implements Initializable {
 		sID = MySQLAccess.returnQuery("SELECT user_id from user where username ='" + username + "'", 1);
 	}
 
+	public String course() {
+		String courseQ = MySQLAccess.returnQuery(
+				"select course_name from course c, assignment a where c.course_id = a.course_id and student_id = "
+						+ StudentController.sID,
+				1);
+//		System.out.println(courseQ.length());
+//		System.out.println(courseQ.trim().length());
+		return courseQ.trim();
+	}
+
 	public void checkCourse() {
 		String courseQ = "select course_name from course c, assignment a where c.course_id = a.course_id and student_id = "
 				+ StudentController.sID;
@@ -182,6 +194,6 @@ public class StudentController implements Initializable {
 				courseMenu.setText(MySQLAccess.returnQuery(courseQ, 1));
 			}
 		});
-		textForFlowLeft.setText(MySQLAccess.returnQuery(courseQ, 1));
+//		textForFlowLeft.setText(MySQLAccess.returnQuery(courseQ, 1));
 	}
 }

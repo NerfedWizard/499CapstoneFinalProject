@@ -100,6 +100,7 @@ public class TeacherController implements Initializable {
 
 	public void changeLogin() {
 		try {
+			ResetPasswordController.setUser(username);
 			rpv.start(Main.logStage);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,8 +160,9 @@ public class TeacherController implements Initializable {
 //				String query = "UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points ="
 //						+ totlPts.getText() + "where student_id = " + stdID.getText();
 
-				MySQLAccess.noReturnQuery("UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points = "
-						+ totlPts.getText() + "where student_id = " + Integer.parseInt(stdID.getText())+";");
+				MySQLAccess
+						.noReturnQuery("UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points = "
+								+ totlPts.getText() + "where student_id = " + Integer.parseInt(stdID.getText()) + ";");
 				String studentName = MySQLAccess.returnQuery(
 						"SELECT username, first_name, last_name FROM user WHERE username = '" + stdUserN + "'", 3);
 				textForFlowLeft.setText("Assignment Added for " + studentName);
@@ -258,10 +260,11 @@ public class TeacherController implements Initializable {
 
 	public void checkEmail() {
 		labelPane.setVisible(false);
-		textForFlowLeft.setText(MySQLAccess.returnQuery(
-				"select cast(message as NCHAR) from user_email where email ='" + username + "@p2k.com'", 1));
+		String check = "\n"
+				+ MySQLAccess.returnQuery("SELECT date_received,cast(message as NCHAR) FROM user_email WHERE email ='"
+						+ username + "@p2k.com' order by date_received DESC limit 5", 2);
+		textForFlowLeft.setText(check);
 		changeTextFlow(textForFlowLeft);
-
 	}
 
 	public void sendMail() {
@@ -276,7 +279,7 @@ public class TeacherController implements Initializable {
 		anchor.getChildren().add(emailArea);
 		emailPopup.showAndWait();
 		sentUser = emailPopup.getEditor().getText();
-		if (sentUser.length() > 8) {
+		if (sentUser.length() > 8 || sentUser.length() < 8) {
 			emailPopup.setHeaderText("This is not a valid Username Please Try Again");
 			emailPopup.showAndWait();
 		}
@@ -285,9 +288,8 @@ public class TeacherController implements Initializable {
 
 	public void emailSent() {
 		sentUser = sentUser + "@p2k.com";
-		MySQLAccess.noReturnQuery("UPDATE user_email SET message ='" + emailArea.getText() + "\nFrom Username\n"
-				+ username + "' WHERE email ='" + sentUser + "'");
-		MySQLAccess.noReturnQuery("UPDATE user_email SET received = now() where email = '" + sentUser + "'");
+		String emailF = "FROM: " + username + "@p2k.com\n" + emailArea.getText() + "\n\n";
+		MySQLAccess.noReturnQuery("insert into user_email (email,message) values('" + sentUser + "','" + emailF + "')");
 		textForFlowLeft.setText("Email Sent\n" + sentUser);
 		changeTextFlow(textForFlowLeft);
 		emailArea.clear();

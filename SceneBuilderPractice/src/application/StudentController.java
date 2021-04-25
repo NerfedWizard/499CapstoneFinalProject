@@ -13,7 +13,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -31,8 +30,8 @@ public class StudentController implements Initializable {
 	private TextFlow textFlow;
 	@FXML
 	private TextArea textAreaLeft;
-	@FXML
-	private Button logoutButton;
+//	@FXML
+//	private Button logoutButton;
 	@FXML
 	private MenuItem changePass;
 	@FXML
@@ -62,6 +61,7 @@ public class StudentController implements Initializable {
 
 	public void updateLogin() {
 		try {
+			ResetPasswordController.setUser(username);
 			rpv.start(Main.logStage);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,8 +84,10 @@ public class StudentController implements Initializable {
 	}
 
 	public void checkEmail() {
-		textForFlowLeft.setText(MySQLAccess.returnQuery(
-				"select cast(message as NCHAR) , received from user_email where email ='" + username + "@p2k.com'", 2));
+		String check = "\n"
+				+ MySQLAccess.returnQuery("SELECT date_received,cast(message as NCHAR) FROM user_email WHERE email ='"
+						+ username + "@p2k.com' order by date_received DESC limit 5", 2);
+		textForFlowLeft.setText(check);
 		changeTextFlow(textForFlowLeft);
 	}
 
@@ -104,7 +106,7 @@ public class StudentController implements Initializable {
 		anchor.getChildren().add(emailArea);
 		emailPopup.showAndWait();
 		sentUser = emailPopup.getEditor().getText();
-		if (sentUser.length() > 8) {
+		if (sentUser.length() > 8 || sentUser.length() < 8) {
 			emailPopup.setHeaderText("This is not a valid Username Please Try Again");
 			emailPopup.showAndWait();
 		}
@@ -113,9 +115,8 @@ public class StudentController implements Initializable {
 
 	public void emailSent() {
 		sentUser = sentUser + "@p2k.com";
-		MySQLAccess.noReturnQuery("UPDATE user_email SET message ='" + emailArea.getText() + "\nFrom Username\n"
-				+ username + "' WHERE email ='" + sentUser + "'");
-		MySQLAccess.noReturnQuery("UPDATE user_email SET received = now() where email = '" + sentUser + "'");
+		String emailF = "FROM: " + username + "@p2k.com\n" + emailArea.getText() + "\n\n";
+		MySQLAccess.noReturnQuery("insert into user_email (email,message) values('" + sentUser + "','" + emailF + "')");
 		textForFlowLeft.setText("Email Sent\n" + sentUser);
 		changeTextFlow(textForFlowLeft);
 		emailArea.clear();
@@ -148,8 +149,10 @@ public class StudentController implements Initializable {
 	}
 
 	public void getAssignments() {
+		String name = "Name";
+		String dueDate = "Due Date";
 		anchor.setVisible(false);
-		textForFlowLeft.setText("Name\t\tDue Date\n" + MySQLAccess
+		textForFlowLeft.setText(String.format("%-15s %4s\n", name, dueDate) + MySQLAccess
 				.returnQuery("select assignment_name,deadline from assignment where student_id ='" + sID + "'", 2));
 		changeTextFlow(textForFlowLeft);
 	}
@@ -181,7 +184,7 @@ public class StudentController implements Initializable {
 						+ StudentController.sID,
 				1);
 //		System.out.println(courseQ.length());
-//		System.out.println(courseQ.trim().length());
+//		System.out.println(courseQ.trim().length());  
 		return courseQ.trim();
 	}
 

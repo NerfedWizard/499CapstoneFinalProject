@@ -136,10 +136,10 @@ public class MySQLAccess {
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
 //			System.out.println("No return Query");
-			ResetPasswordController.flag = "Success";
+			ResetPasswordController.flag = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			ResetPasswordController.flag = "Failure to Change";
+			ResetPasswordController.flag = false;
 			System.out.println("noReturnQuery Maybe put a boolean here if triggered");
 
 		}
@@ -151,7 +151,7 @@ public class MySQLAccess {
  * 
  * 
  * This method here might still be of use for chagning the passsword via the new
- * method with the reseet view
+ * method with the reset view
  */
 //	public static boolean changePassword(String newPassword, String oldPassword, String userType) {
 //		String queryString = "";

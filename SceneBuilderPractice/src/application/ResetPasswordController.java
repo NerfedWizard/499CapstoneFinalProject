@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
@@ -24,62 +25,73 @@ public class ResetPasswordController implements Initializable {
 	@FXML
 	private TextField toBeChanged;
 	@FXML
-	private TextField newInsert;
+	private PasswordField newInsert;
 	@FXML
-	private TextField newInsert2;
+	private PasswordField newInsert2;
 	@FXML
 	private Button submit;
-	@FXML
-	private MenuButton dropDownMenu;
+//	@FXML
+//	private MenuButton dropDownMenu;
 //	@FXML
 //	private MenuItem usernameItem;
 	@FXML
 	private MenuItem passwordItem;
 	private String query = "";
-	private int choice = 0;
-	static String flag = "";
+//	private int choice = 0;
+	static Boolean flag = false;
 	private Main main;
+	static String userName = "";
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		main = new Main();
+		oldEntry.setVisible(false);
+		newEntry.setVisible(false);
+		newEntry2.setVisible(false);
 	}
 
 	/** Might need a boolean check to make sure the update performed */
-	public void changePassword() {
-		oldEntry.setText("Old Password");
-		newEntry.setText("New Password (8 characters)");
-		dropDownMenu.setText("Password");
-		this.choice = 1;
-		System.out.println(StudentController.getUsername());
+//	public void changePassword() {
+//		oldEntry.setText("Old Password");
+//		newEntry.setText("New Password (8 characters)");
+//		System.out.println(StudentController.getUsername());
+//	}
+	public static void setUser(String user) {
+		userName = user;
 	}
 
-//	public void changeUsername() {
-//		dropDownMenu.setText("Username");
-//		System.out.println(StudentController.getUsername());
-//		oldEntry.setText("Old Username");
-//		newEntry.setText("New Username");
-//		this.choice = 2;
-//
-//	}
-
 	public void buttonSubmit() {
-		MainController mC = new MainController();
-//		System.out.println("in the buttonSubmit " + mC.getUserSelection());
-		if (this.choice == 1) {
-			this.query = "UPDATE user SET password ='" + newInsert.getText() + "'where password ='"
-					+ toBeChanged.getText() + "';";
-		}
-		if (this.query.equals("")) {
-			oldEntry.setTextFill(Color.color(1, 0, 0));
-			newEntry.setTextFill(Color.color(1, 0, 0));
-			oldEntry.setText("Required");
-			newEntry.setText("Required");
+//		oldEntry.setVisible(false);
+//		newEntry.setVisible(false);
+//		newEntry2.setVisible(false);
+		if (newInsert.getText().length() == 8) {
+			if (newInsert.getText().equals(newInsert2.getText())) {
+				this.query = "UPDATE user SET password ='" + newInsert.getText() + "'where password ='"
+						+ toBeChanged.getText() + "'and username ='" + userName + "';";
+				MySQLAccess.noReturnQuery(this.query);
+				flag = true;
+
+			} else {
+				newEntry.setVisible(true);
+				newEntry.setText("Passwords do not match");
+				flag = false;
+			}
 		} else {
-			MySQLAccess.noReturnQuery(this.query);
+			flag = false;
+			newEntry.setVisible(true);
+			newEntry.setText("Password must be 8 length");
 		}
-		newEntry2.setText(ResetPasswordController.flag);
-		if (flag.equals("Success")) {
+
+//		if (this.query.equals("")) {
+//			oldEntry.setTextFill(Color.color(1, 0, 0));
+//			newEntry.setTextFill(Color.color(1, 0, 0));
+//			oldEntry.setText("Required");
+//			newEntry.setText("Required");
+//		} else {
+//			MySQLAccess.noReturnQuery(this.query);
+//		}
+//		newEntry2.setText(ResetPasswordController.flag);
+		if (flag) {
 			try {
 				main.start(Main.logStage);// shows you can go to any view from any view if needed
 			} catch (Exception e) {

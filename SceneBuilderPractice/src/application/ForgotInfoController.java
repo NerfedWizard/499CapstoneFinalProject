@@ -25,10 +25,8 @@ public class ForgotInfoController implements Initializable {
 
 	public void checkEmail() {
 		label.setText("Reset Info Sent to " + email.getText());
-		MySQLAccess.noReturnQuery(
-				"update user_email set message = 'Please Call the School Directly To Change Password/Username' , received = now() where email ='"
-						+ email.getText() + "'");
-		closeStage();
+		MySQLAccess.noReturnQuery("insert into user_email(email,message) values('" + email.getText()
+				+ "','Please contact the school directly to change email')");
 	}
 
 	public void closeStage() {

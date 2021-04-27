@@ -27,12 +27,14 @@ public class ForgotInfoController implements Initializable {
 		label.setText("Reset Info Sent to " + email.getText());
 		MySQLAccess.noReturnQuery("insert into user_email(email,message) values('" + email.getText()
 				+ "','Please contact the school directly to change email')");
+		closeStage();
+		//if 0 then do the thing and add the 1 and do an  else
 	}
 
 	public void closeStage() {
 		try {
-			System.out.println("thread is slepping for 2 seconds");
-			Thread.sleep(2000);
+			System.out.println("thread is sleeping for 5 seconds");
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -247,7 +247,7 @@ public class TeacherController implements Initializable {
 
 		gradeBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent o) {
-				MySQLAccess.noReturnQuery("insert into  SET overview = '" + textAreaLeft.getText()
+				MySQLAccess.noReturnQuery("insert into   SET overview = '" + textAreaLeft.getText()
 						+ "' WHERE course_id = " + courseText.getText());
 				textAreaLeft.setText("Description Added");
 			}

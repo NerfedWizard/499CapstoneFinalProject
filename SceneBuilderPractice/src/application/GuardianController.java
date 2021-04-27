@@ -49,7 +49,7 @@ public class GuardianController implements Initializable {
 //		
 //	}
 	public void getStudent() {
-		String student = MySQLAccess.returnQuery("SELECT student_id from gsr where guardian_id =", 1);
+		String [] student = MySQLAccess.returnQuery("SELECT student_id from gsr where guardian_id =", 1).split("\\s+");
 	}
 
 	public static void setNameForTitle(String name) {

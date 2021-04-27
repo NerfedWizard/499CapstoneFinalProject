@@ -13,7 +13,7 @@ public class MySQLAccess {
 	 * for connecting to your database Change the database to match your database
 	 * and your password and username for your MySQL // Also you will need to have
 	 * either the command line client running or the shell in order to be able to
-	 * connect java will not open MySQL for you but it will do everything after 
+	 * connect java will not open MySQL for you but it will do everything after
 	 */
 
 	static String url = "jdbc:mysql://localhost:3306/p2k_district?useSSL=false";
@@ -23,7 +23,6 @@ public class MySQLAccess {
 	static Statement stmt;
 	static ResultSet rs;
 	static String name = "";
-//	private static ResetPasswordView resetView;
 
 	/**
 	 * Must have the sql server started on pc before the code will work meaning you
@@ -33,11 +32,10 @@ public class MySQLAccess {
 		try
 
 		{
-//			resetView = new ResetPasswordView();
 			// Connects to database
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, passwrd);
-			System.out.println("Made it here");
+//			System.out.println("Made it here");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -50,8 +48,6 @@ public class MySQLAccess {
 			rs = stmt.executeQuery("select username from user");
 			while (rs.next()) {
 				result.add(rs.getString(1));
-//				System.out.println(rs.getString(1));
-
 			}
 		} catch (SQLException e) {
 
@@ -59,6 +55,20 @@ public class MySQLAccess {
 		}
 		return result;
 	}
+
+//	public static ArrayList<String> getEmails() {
+//		ArrayList<String> email = new ArrayList<String>();
+//		try {
+//			stmt = con.createStatement();
+//			rs = stmt.executeQuery("select email from user_email");
+//			while (rs.next()) {
+//				email.add(rs.getString(1));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return email;
+//	}
 
 	public static ArrayList<String> getPassword() {
 		ArrayList<String> result = new ArrayList<String>();
@@ -76,19 +86,34 @@ public class MySQLAccess {
 		return result;
 	}
 
+	public static ArrayList<String> getEmail() {
+		ArrayList<String> result = new ArrayList<String>();
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select email from user_email");
+			while (rs.next()) {
+				result.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	/**
 	 * Only something I made to the first name of the user for the title of the
 	 * window
 	 */
 	public static String getFirstName(String username) {
-		System.out.println("In MySQL access " + username);
+//		System.out.println("In MySQL access " + username);
 		try {
 			stmt = con.createStatement();
-			String queryString = "SELECT first_name FROM user where username = '" + username + "';";
+			String queryString = "SELECT first_name FROM user WHERE username = '" + username + "';";
 			rs = stmt.executeQuery(queryString);
 			if (rs.next()) {
-				name = rs.getString(1);
-				System.out.println(name);
+			name = rs.getString(1);
+//				System.out.println(name);
 			}
 		} catch (SQLException e) {
 
@@ -125,7 +150,7 @@ public class MySQLAccess {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("returnQuery Maybe put a boolean here if triggered");
+			System.out.println("returnQuery did not execute");
 		}
 		return returnResults.toString();
 	}
@@ -140,7 +165,7 @@ public class MySQLAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			ResetPasswordController.flag = false;
-			System.out.println("noReturnQuery Maybe put a boolean here if triggered");
+			System.out.println("noReturnQuery did not execute");
 
 		}
 	}

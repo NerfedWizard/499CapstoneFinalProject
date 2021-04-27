@@ -46,18 +46,17 @@ public class MainController implements Initializable {
 	private StudentProfileView studentView;
 	private AdminView adminView;
 	private TeacherView teacherView;
-	private ResetPasswordView resetPassUser;
+//	private ResetPasswordView resetPassUser;
 	private GuardianView guardianView;
 	private ForgotInfoView forgot;
-//	private FacultyView facultyView;
-//	private boolean successfulLogin = false;
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		studentView = new StudentProfileView();
 		adminView = new AdminView();
 		teacherView = new TeacherView();
-		resetPassUser = new ResetPasswordView();
+//		resetPassUser = new ResetPasswordView();
 		guardianView = new GuardianView();
 		forgot = new ForgotInfoView();
 //		facultyView = new FacultyView();
@@ -136,7 +135,7 @@ public class MainController implements Initializable {
 							}
 						} else if (userType.equals("Admin")) {
 							AdminController.setNameForTitle(s);
-							System.out.println(userType.length());
+//							System.out.println(userType.length());
 //								Stage stage = (Stage) submitButton.getScene().getWindow();
 							try {
 								adminView.start(stage);
@@ -145,7 +144,7 @@ public class MainController implements Initializable {
 							}
 						} else if (userType.equals("Teacher")) {
 							TeacherController.setNameForTitle(s);
-							System.out.println(userType.length());
+//							System.out.println(userType.length());
 //								Stage stage = (Stage) submitButton.getScene().getWindow();
 							try {
 								teacherView.start(stage);
@@ -154,7 +153,7 @@ public class MainController implements Initializable {
 							}
 						} else if (userType.equals("Guardian")) {
 							GuardianController.setNameForTitle(s);
-							System.out.println(userType.length());
+//							System.out.println(userType.length());
 							try {
 								guardianView.start(stage);
 							} catch (Exception e) {
@@ -174,37 +173,4 @@ public class MainController implements Initializable {
 			}
 		}
 	}
-//	}
-
-//	public String getUserSelection() {
-//		return this.userSelection;
-//	}
-//
-//	public void setUserSelection(String userSelection) {
-//		this.userSelection = userSelection;
-//	}
-
-//	public int userNum(String type) {
-//		int usertype = 0;
-//		if (type.equals("Student")) {
-//			usertype = 2;
-//		} else if (type.equals("Admin")) {
-//			usertype = 0;
-//		} else if (type.equals("Teacher")) {
-//			usertype = 1;
-//		} else if (type.equals("Guardian")) {
-//			usertype = 3;
-//		} else {
-//			usertype = 9;
-//		}
-//		return usertype;
-//	}
-
-//	public boolean isSuccessfulLogin() {
-//		return successfulLogin;
-//	}
-//
-//	public void setSuccessfulLogin(boolean successfulLogin) {
-//		this.successfulLogin = successfulLogin;
-//	}
 }

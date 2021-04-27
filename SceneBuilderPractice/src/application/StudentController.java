@@ -42,15 +42,20 @@ public class StudentController implements Initializable {
 	private AnchorPane anchor;
 
 	private String sentUser = "";
+	static String firstName;
+	static String userType;
+	static String sID = "";
+	private static String username;
+	
 	private TextArea emailArea;
 	private TextInputDialog emailPopup;
 	private Text textForFlowLeft = new Text();// For Output to the user
-	static String firstName;
+	
 	private Main main;
-	static String userType;
-	private static String username;
 	private ResetPasswordView rpv;
-	static String sID = "";
+	
+	
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

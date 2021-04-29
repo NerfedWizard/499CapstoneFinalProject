@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,13 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-/** @author LoelN Copy the stuff from the other sent/check email */
+/**
+ * @author LoelN
+ * 
+ * 
+ *         Same features as the student but with added benefit of checking on
+ *         multiple students
+ */
 public class GuardianController implements Initializable {
 	static String nameForTitle = "";
 	private ResetPasswordView rpv;
@@ -57,6 +62,9 @@ public class GuardianController implements Initializable {
 
 	}
 
+	/**
+	 * Gets the students linked to this guardian
+	 */
 	public void getStudents() {
 		ObservableList<String> studList = FXCollections.observableArrayList();
 		String student = MySQLAccess.returnQuery(
@@ -68,6 +76,9 @@ public class GuardianController implements Initializable {
 		students.setItems(studList);
 	}
 
+	/**
+	 * @param name
+	 */
 	public static void setNameForTitle(String name) {
 
 		guardianUsername = name;
@@ -76,10 +87,16 @@ public class GuardianController implements Initializable {
 
 	}
 
+	/**
+	 * @return NameForTitle
+	 */
 	public static String getUserGuardianNameForTitle() {
 		return nameForTitle;
 	}
 
+	/**
+	 * Change Login
+	 */
 	public void changeLogin() {
 		try {
 			ResetPasswordController.setUser(guardianUsername);
@@ -89,6 +106,9 @@ public class GuardianController implements Initializable {
 		}
 	}
 
+	/**
+	 * Log out
+	 */
 	public void logout() {
 		try {
 			main.start(Main.logStage);// shows you can go to any view from any view if needed
@@ -97,7 +117,7 @@ public class GuardianController implements Initializable {
 		}
 	}
 
-	/** Need sql statement for adding grades to the users */
+	/** Checks the current selected students grade */
 	public void checkGrades() {
 		String score = "Score";
 		String grade = "Grade";
@@ -107,6 +127,9 @@ public class GuardianController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
+	/**
+	 * Checks messages
+	 */
 	public void checkMessages() {
 		String check = "\n" + MySQLAccess
 				.returnQuery("SELECT date_received,cast(message_text as NCHAR) FROM message WHERE username ='"
@@ -115,6 +138,9 @@ public class GuardianController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
+	/**
+	 * Sends a message
+	 */
 	public void sendMess() {
 		anchor.setVisible(true);
 		messagePopup = new TextInputDialog();
@@ -133,6 +159,9 @@ public class GuardianController implements Initializable {
 
 	}
 
+	/**
+	 * Confirm message sent
+	 */
 	public void messageSent() {
 //		sentUser = sentUser + "@p2k.com";
 		String messageF = "FROM: " + guardianUsername + "\n" + messageArea.getText() + "\n\n";
@@ -145,17 +174,7 @@ public class GuardianController implements Initializable {
 	}
 
 	/**
-	 * Thoughts here is grab the course for selected student and maybe add their
-	 * assignment with due date on itot
-	 * 
-	 * 
-	 * Working
-	 * 
-	 * 
-	 * 
-	 * 
-	 * Working but want the format to be better and still need to get all the
-	 * comments added to the project
+	 * Gets the current courses for the linked students
 	 */
 	public void courseList() {
 		String course = MySQLAccess.returnQuery(
@@ -174,7 +193,11 @@ public class GuardianController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
-	/** Still needed for setting the text to user */
+	/**
+	 * Still needed for setting the text to user
+	 * 
+	 * @param textLeft
+	 */
 	public void changeTextFlow(Text textLeft) {
 		textAreaLeft.setText(textLeft.getText());
 	}

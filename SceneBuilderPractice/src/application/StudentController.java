@@ -17,10 +17,11 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 /**
- * Controller to be used for the student profile
+ * @author Loel Nelson
  * 
- * Had to go with a login button outside of the menu for going back to the login
- * view now inside the menu it will have change password and change user name
+ *         Controller to be used for the student profile Handles all the
+ *         functionality of the student view with redirects to changing password
+ *         and logging out. Both ultimately bring you back to the login.
  */
 public class StudentController implements Initializable {
 
@@ -59,6 +60,13 @@ public class StudentController implements Initializable {
 		anchor.setVisible(false);
 	}
 
+	/**
+	 * The following 2 methods are shared throughout looking back I would rather
+	 * make a separate class the calls these methods. Maybe when updated I will
+	 * change these around
+	 */
+
+	/** Starting the change password window */
 	public void updateLogin() {
 		try {
 			ResetPasswordController.setUser(studUsername);
@@ -68,6 +76,7 @@ public class StudentController implements Initializable {
 		}
 	}
 
+	/** Send student back to login */
 	public void studentLogout() {
 		try {
 			main.start(Main.logStage);// shows you can go to any view from any view if needed
@@ -76,13 +85,23 @@ public class StudentController implements Initializable {
 		}
 	}
 
-	/** Setting the title for the Students window */
+	/**
+	 * Setting the title for the Students window
+	 * 
+	 * @param userName - the username of the student is needed to get first name for
+	 *                 title of student view. This method is called when the user
+	 *                 signs in from the login window
+	 */
 	public static void setNameForTitle(String userName) {
 		StudentController.setUsername(userName);
 		StudentController.firstName = MySQLAccess
 				.returnQuery("SELECT first_name FROM user where username='" + userName + "'", 1);
 	}
 
+	/**
+	 * Checks the last 10 messages sent to the user in chronological order. A simple
+	 * delete of the limit 10 would allow receiving all the messages.
+	 */
 	public void checkMessages() {
 		String check = "\n" + MySQLAccess
 				.returnQuery("SELECT date_received,cast(message_text as NCHAR) FROM message WHERE username ='"
@@ -91,9 +110,13 @@ public class StudentController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
-	/*
-	 * Need a way to send it to the database instead of keep checking maybe add a
-	 * button on the tilepane
+	/**
+	 * Start of sending a message. It opens up the AnchorPane where the TextArea is
+	 * and a popup asks for the username you wish to send the message to. The popup
+	 * was not needed I could have had a textfield but I found the popup while
+	 * looking for other JavaFX built ins and thought it would be fun. This only
+	 * gathers the information, the actual sending of the message doesn't happen
+	 * until you hit send and that calls the method message sent
 	 **/
 	public void sendMessage() {
 		anchor.setVisible(true);
@@ -113,8 +136,11 @@ public class StudentController implements Initializable {
 
 	}
 
+	/**
+	 * Sends the message to the user and prompts the user when message is sent in
+	 * the main TextArea
+	 */
 	public void messageSent() {
-//		sentUser = sentUser + "@p2k.com";
 		String messageF = "FROM: " + studUsername + "\n" + messageArea.getText() + "\n\n";
 		MySQLAccess.noReturnQuery(
 				"insert into message (username,message_text) values('" + sentUser + "','" + messageF + "')");
@@ -125,19 +151,26 @@ public class StudentController implements Initializable {
 	}
 
 	/**
-	 * for setting the first name instead of username this and the above can
-	 * probably be changed now with the 2 mysql methods
+	 * Adds the first name of user to the top of the window. No real purpose
+	 * strictly personal preference
+	 * 
+	 * @return StudentController.firstName
 	 */
 	public static String getUserStudentNameForTitle() {
 		return StudentController.firstName;
 	}
 
-	/** Still needed for setting the text to user */
+	/**
+	 * Used for sending the text back to the user via TextArea, which I made to look
+	 * like a Linux terminal just because I could.
+	 * 
+	 * @param textLeft
+	 */
 	public void changeTextFlow(Text textLeft) {
 		textAreaLeft.setText(textLeft.getText());
 	}
 
-	/** Works for getting the grade of user */
+	/** Prints the students score percent and letter grade to the TextArea */
 	public void getGrades() {
 		anchor.setVisible(false);
 		String score = "Score";
@@ -148,6 +181,7 @@ public class StudentController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
+	/** Returns the assignment to the student */
 	public void getAssignments() {
 		String name = "Name";
 		String dueDate = "Due Date";
@@ -158,7 +192,7 @@ public class StudentController implements Initializable {
 	}
 
 	/**
-	 * Make this a string object instead of accessing the database
+	 * Gets the course description and prints back to user
 	 */
 	public void getMaterials() {
 		String x = course();
@@ -169,25 +203,42 @@ public class StudentController implements Initializable {
 
 	}
 
+	/**
+	 * For returning the username of the student currently signed in
+	 * 
+	 * @return studUsername
+	 */
 	public static String getUsername() {
 		return studUsername;
 	}
 
+	/**
+	 * Sets the username and provides the students ID
+	 * 
+	 * @param username
+	 */
 	public static void setUsername(String username) {
 		StudentController.studUsername = username;
 		sID = MySQLAccess.returnQuery("SELECT user_id from user where username ='" + username + "'", 1);
 	}
 
+	/**
+	 * Gets the current active course for the student
+	 * 
+	 * @return courseQ.trim() - course trimmed of the whitespace
+	 */
 	public String course() {
 		String courseQ = MySQLAccess.returnQuery(
 				"select course_name from course c, assignment a where c.course_id = a.course_id and student_id = "
 						+ StudentController.sID,
 				1);
-//		System.out.println(courseQ.length());
-//		System.out.println(courseQ.trim().length());  
 		return courseQ.trim();
 	}
 
+	/**
+	 * Used for updating the the menu item to the current course name instead of the
+	 * generic course
+	 */
 	public void checkCourse() {
 		String courseQ = "select course_name from course c, assignment a where c.course_id = a.course_id and student_id = "
 				+ StudentController.sID;
@@ -197,6 +248,5 @@ public class StudentController implements Initializable {
 				courseMenu.setText(MySQLAccess.returnQuery(courseQ, 1));
 			}
 		});
-//		textForFlowLeft.setText(MySQLAccess.returnQuery(courseQ, 1));
 	}
 }

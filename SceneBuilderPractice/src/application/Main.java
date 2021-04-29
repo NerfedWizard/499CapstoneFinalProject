@@ -1,5 +1,5 @@
 package application;
-/***/
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author Loel Cedar Adnan Luke team CALL
+ * 
+ *         Main Program for starting the program and this stage is used
+ *         throughout the program and the scene are swapped depending on the
+ *         user
+ */
 public class Main extends Application {
 
 	@FXML
@@ -31,6 +38,9 @@ public class Main extends Application {
 		}
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		MySQLAccess.startDB();
 		launch(args);

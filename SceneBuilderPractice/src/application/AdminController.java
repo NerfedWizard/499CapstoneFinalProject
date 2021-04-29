@@ -73,6 +73,9 @@ public class AdminController implements Initializable {
 		rpv = new ResetPasswordView();
 	}
 
+	/**
+	 * Setting the TextFields visible for creating a user
+	 */
 	public void createUser() {
 		userAnchor.setVisible(true);
 		userLabel.setText("Enter information to create user");
@@ -88,6 +91,9 @@ public class AdminController implements Initializable {
 		choice = 1;
 	}
 
+	/**
+	 * Adds a new user to the database
+	 */
 	public void userChanges() {
 		textAreaLeft.clear();
 		if (choice == 1) {
@@ -104,6 +110,9 @@ public class AdminController implements Initializable {
 		}
 	}
 
+	/**
+	 * Removes the user from the database
+	 */
 	public void removeUser() {
 		userAnchor.setVisible(true);
 		userLabel.setText("Enter username to remove user");
@@ -120,6 +129,10 @@ public class AdminController implements Initializable {
 		choice = 2;
 	}
 
+	/**
+	 * For changing password but can easily converted to change username as well
+	 * with some if statements so a unique username is used
+	 */
 	public void updateLogin() {
 		try {
 			ResetPasswordController.setUser(adminUsername);
@@ -129,23 +142,33 @@ public class AdminController implements Initializable {
 		}
 	}
 
+	/** Logging out */
 	public void logout() {
 		try {
-			main.start(Main.logStage);// shows you can go to any view from any view if needed
+			main.start(Main.logStage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Follwing methods are for setting the name at the top of the screen
+	 * 
+	 * @param name
+	 */
 	public static void setNameForTitle(String name) {
 		adminUsername = name;
 		nameForTitle = MySQLAccess.getFirstName(adminUsername);
 	}
 
+	/**
+	 * @return nameForTitle
+	 */
 	public static String getUserAdminNameForTitle() {
 		return nameForTitle;
 	}
 
+	/** Checks the users messages */
 	public void checkMessages() {
 		String check = "\n" + MySQLAccess
 				.returnQuery("SELECT date_received,cast(message_text as NCHAR) FROM message WHERE username ='"
@@ -154,10 +177,10 @@ public class AdminController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
-	/*
-	 * Need a way to send it to the database instead of keep checking maybe add a
-	 * button on the tilepane
-	 **/
+	/**
+	 * Starts the AnchorPane to show the message area for the text to be entered
+	 * into
+	 */
 	public void sendMessage() {
 		anchor.setVisible(true);
 		sndMes.setVisible(true);
@@ -178,7 +201,7 @@ public class AdminController implements Initializable {
 
 	}
 
-	/** Get the list of names from the database in an ArrayList just like log in */
+	/** Sending mass messages to all users */
 	public void sendMassMessage() {
 		anchor.setVisible(true);
 		sndMes.setVisible(false);
@@ -190,14 +213,13 @@ public class AdminController implements Initializable {
 		anchor.getChildren().add(messageArea);
 	}
 
+	/** Get the list of names from the database in an ArrayList just like log in */
 	public void massSent() {
 		for (String s : MySQLAccess.getUsername()) {
 			String users = s;
-			String emailF = "FROM: " + adminUsername
-					+ "\n" + messageArea.getText() + "\n";
+			String emailF = "FROM: " + adminUsername + "\n" + messageArea.getText() + "\n";
 			MySQLAccess.noReturnQuery(
 					"INSERT INTO message (username, message_text) VALUES ('" + users + "','" + emailF + "')");
-
 		}
 		textForFlowLeft.setText("Message Sent To All Users\n");
 		changeTextFlow(textForFlowLeft);
@@ -205,8 +227,11 @@ public class AdminController implements Initializable {
 		anchor.setVisible(false);
 	}
 
+	/**
+	 * Confirmation the message is sent and adds the signature of the sender to top
+	 * of mail and inserts into database
+	 */
 	public void messageSent() {
-//		sentUser = sentUser + "@p2k.com";
 		String emailF = "FROM: " + adminUsername + "\n" + messageArea.getText() + "\n\n";
 		MySQLAccess.noReturnQuery(
 				"insert into message (username,message_text) values('" + sentUser + "','" + emailF + "')");
@@ -216,6 +241,11 @@ public class AdminController implements Initializable {
 		anchor.setVisible(false);
 	}
 
+	/**
+	 * Sets the text to the main TextArea
+	 * 
+	 * @param textLeft
+	 */
 	public void changeTextFlow(Text textLeft) {
 		textAreaLeft.setText(textLeft.getText());
 	}

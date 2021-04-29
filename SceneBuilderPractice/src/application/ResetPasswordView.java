@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author loeln
+ *
+ */
 public class ResetPasswordView extends Application {
 	@FXML
 	private AnchorPane root;
@@ -19,7 +23,7 @@ public class ResetPasswordView extends Application {
 	public void start(Stage rStage) throws Exception {
 		resetStage = rStage;
 		try {
-			
+
 			resetStage.setTitle("Reset Password Username");
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
 			scene = new Scene(root);
@@ -32,6 +36,9 @@ public class ResetPasswordView extends Application {
 
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -23,6 +23,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+/**
+ * @author loeln
+ *
+ */
 public class TeacherController implements Initializable {
 	static String firstName = "";
 	private String sentUser = "";
@@ -84,20 +88,32 @@ public class TeacherController implements Initializable {
 		labelPane.setVisible(false);
 	}
 
+	/**
+	 * @param userName
+	 */
 	public static void setNameForTitle(String userName) {
 
 		setUsername(userName);
 		firstName = MySQLAccess.returnQuery("SELECT first_name from user where username ='" + userName + "'", 1);
 	}
 
+	/**
+	 * @return firstName
+	 */
 	public static String getUserTeacherNameForTitle() {
 		return firstName;
 	}
 
+	/**
+	 * @param username
+	 */
 	public static void setUsername(String username) {
 		TeacherController.teachUsername = username;
 	}
 
+	/**
+	 * Changes the password for the teacher
+	 */
 	public void changeLogin() {
 		try {
 			ResetPasswordController.setUser(teachUsername);
@@ -107,6 +123,9 @@ public class TeacherController implements Initializable {
 		}
 	}
 
+	/**
+	 * Logging out
+	 */
 	public void teacherLogout() {
 		try {
 			main.start(Main.logStage);// shows you can go to any view from any view if needed
@@ -115,13 +134,12 @@ public class TeacherController implements Initializable {
 		}
 	}
 
-	/** This is working because */
+	/** Sets the student usernames as a observable list for the teacher */
 	public void listViewGrades() {
 		textAreaLeft.clear();
 		ObservableList<String> names = FXCollections.observableArrayList();
 		String str = MySQLAccess.returnQuery("SELECT username FROM user WHERE user_type = 'Student'", 1);
 		for (String s : str.split("\\s+")) {
-//			System.out.println(s);
 			names.add(s);
 		}
 		addGradeView.setItems(names);
@@ -130,19 +148,10 @@ public class TeacherController implements Initializable {
 	}
 
 	/**
-	 * Need sql statement for adding grades to the users This method is for
-	 * inserting a new assignment into the database and assigning the points for
-	 * each student
-	 * 
-	 * 
-	 * Change this to add student grade to assignment and have the other add the
-	 * assignment
-	 * 
-	 * Make part invisible and only show the Assignment Name StudentID pts erned tot
-	 * pts
+	 * Adds an assignment to the database
 	 */
 	public void addAssign() {
-//		labelPane.setVisible(false);
+
 		courseNum.setVisible(false);
 		dueDate.setVisible(false);
 
@@ -151,14 +160,10 @@ public class TeacherController implements Initializable {
 		stdID.setText(MySQLAccess.returnQuery("SELECT user_id FROM user WHERE username ='" + stdUserN + "'", 1));
 		assignName.setText(MySQLAccess
 				.returnQuery("select assignment_name from assignment where student_id =" + stdID.getText(), 1));
-//		System.out.println(query);
 
 		gradeBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-//				String query = "UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points ="
-//						+ totlPts.getText() + "where student_id = " + stdID.getText();
-
 				MySQLAccess
 						.noReturnQuery("UPDATE assignment set earned_points=" + ptsErnd.getText() + ", total_points = "
 								+ totlPts.getText() + "where student_id = " + Integer.parseInt(stdID.getText()) + ";");
@@ -174,9 +179,7 @@ public class TeacherController implements Initializable {
 	}
 
 	/**
-	 * Something here to get the object for materials and edit them maybe a
-	 * ArrayList with string objects made in the main controller class or here but
-	 * make it static so everyone can see it
+	 * Adds an overview/materials to the course in the database
 	 */
 	public void addMaterial() {
 		textAreaLeft.setEditable(true);
@@ -194,6 +197,9 @@ public class TeacherController implements Initializable {
 		});
 	}
 
+	/**
+	 * Removes the description of the course
+	 */
 	public void removeMaterial() {
 		textAreaLeft.setEditable(false);
 		gradeAnchor.setVisible(false);
@@ -240,10 +246,18 @@ public class TeacherController implements Initializable {
 		});
 	}
 
+	/**
+	 * Adds text to the display are back to user
+	 * 
+	 * @param textLeft
+	 */
 	public void changeTextFlow(Text textLeft) {
 		textAreaLeft.setText(textLeft.getText());
 	}
 
+	/**
+	 * Checks messages
+	 */
 	public void checkMessages() {
 		labelPane.setVisible(false);
 		gradeAnchor.setVisible(false);
@@ -254,6 +268,9 @@ public class TeacherController implements Initializable {
 		changeTextFlow(textForFlowLeft);
 	}
 
+	/**
+	 * Opens the message area of the window
+	 */
 	public void sendMessage() {
 		labelPane.setVisible(false);
 		anchor.setVisible(true);
@@ -274,6 +291,9 @@ public class TeacherController implements Initializable {
 
 	}
 
+	/**
+	 * Sends the message to the user
+	 */
 	public void messageSent() {
 		String messgeF = "FROM: " + teachUsername + "\n" + messageArea.getText() + "\n\n";
 		MySQLAccess.noReturnQuery(

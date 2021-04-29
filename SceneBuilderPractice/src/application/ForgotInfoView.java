@@ -7,6 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author loeln
+ *
+ *The forgot password view 
+ */
 public class ForgotInfoView extends Application{
 
 	@FXML
@@ -32,8 +37,11 @@ public class ForgotInfoView extends Application{
 		}
 
 	}
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		
+		launch(args);
 
 	}
 

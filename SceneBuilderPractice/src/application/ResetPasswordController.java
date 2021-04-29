@@ -11,6 +11,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * @author loeln
+ *
+ */
 public class ResetPasswordController implements Initializable {
 	@FXML
 	private Label oldEntry;
@@ -28,14 +32,10 @@ public class ResetPasswordController implements Initializable {
 	private PasswordField newInsert2;
 	@FXML
 	private Button submit;
-//	@FXML
-//	private MenuButton dropDownMenu;
-//	@FXML
-//	private MenuItem usernameItem;
+
 	@FXML
 	private MenuItem passwordItem;
 	private String query = "";
-//	private int choice = 0;
 	static Boolean flag = false;
 	private Main main;
 	static String userName = "";
@@ -48,20 +48,18 @@ public class ResetPasswordController implements Initializable {
 		newEntry2.setVisible(false);
 	}
 
-	/** Might need a boolean check to make sure the update performed */
-//	public void changePassword() {
-//		oldEntry.setText("Old Password");
-//		newEntry.setText("New Password (8 characters)");
-//		System.out.println(StudentController.getUsername());
-//	}
+	/**
+	 * @param user
+	 */
 	public static void setUser(String user) {
 		userName = user;
 	}
 
+	/**
+	 * For changing password
+	 */
 	public void buttonSubmit() {
-//		oldEntry.setVisible(false);
-//		newEntry.setVisible(false);
-//		newEntry2.setVisible(false);
+
 		if (newInsert.getText().length() == 8) {
 			if (newInsert.getText().equals(newInsert2.getText())) {
 				this.query = "UPDATE user SET password ='" + newInsert.getText() + "'where password ='"
@@ -80,15 +78,6 @@ public class ResetPasswordController implements Initializable {
 			newEntry.setText("Password must be 8 length");
 		}
 
-//		if (this.query.equals("")) {
-//			oldEntry.setTextFill(Color.color(1, 0, 0));
-//			newEntry.setTextFill(Color.color(1, 0, 0));
-//			oldEntry.setText("Required");
-//			newEntry.setText("Required");
-//		} else {
-//			MySQLAccess.noReturnQuery(this.query);
-//		}
-//		newEntry2.setText(ResetPasswordController.flag);
 		if (flag) {
 			try {
 				main.start(Main.logStage);// shows you can go to any view from any view if needed

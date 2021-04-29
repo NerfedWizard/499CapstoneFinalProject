@@ -26,17 +26,17 @@ import javafx.scene.text.Text;
 public class TeacherController implements Initializable {
 	static String firstName = "";
 	private String sentUser = "";
-	private TextArea emailArea;
-	private TextInputDialog emailPopup;
+	private TextArea messageArea;
+	private TextInputDialog messagePopup;
 	private Main main;
 	static String userType;
-	private static String username;
+	private static String teachUsername;
 	private ResetPasswordView rpv;
 	static String sID = "";
 	@FXML
 	private AnchorPane gradeAnchor;
 	@FXML
-	private Button sendEmail;
+	private Button sendMessage;
 	@FXML
 	private AnchorPane anchor;
 	@FXML
@@ -95,12 +95,12 @@ public class TeacherController implements Initializable {
 	}
 
 	public static void setUsername(String username) {
-		TeacherController.username = username;
+		TeacherController.teachUsername = username;
 	}
 
 	public void changeLogin() {
 		try {
-			ResetPasswordController.setUser(username);
+			ResetPasswordController.setUser(teachUsername);
 			rpv.start(Main.logStage);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,11 +118,10 @@ public class TeacherController implements Initializable {
 	/** This is working because */
 	public void listViewGrades() {
 		textAreaLeft.clear();
-//		labelPane.setVisible(false);
 		ObservableList<String> names = FXCollections.observableArrayList();
 		String str = MySQLAccess.returnQuery("SELECT username FROM user WHERE user_type = 'Student'", 1);
 		for (String s : str.split("\\s+")) {
-			System.out.println(s);
+//			System.out.println(s);
 			names.add(s);
 		}
 		addGradeView.setItems(names);
@@ -174,17 +173,6 @@ public class TeacherController implements Initializable {
 
 	}
 
-//	/**
-//	 * This method is for altering the grades of assignments and will be an update
-//	 * not insert
-//	 */
-//	public void changePoints() {
-////		labelPane.setVisible(false);
-//		courseNum.setVisible(false);
-//		gradeAnchor.setVisible(true);
-//
-//	}
-
 	/**
 	 * Something here to get the object for materials and edit them maybe a
 	 * ArrayList with string objects made in the main controller class or here but
@@ -192,6 +180,7 @@ public class TeacherController implements Initializable {
 	 */
 	public void addMaterial() {
 		textAreaLeft.setEditable(true);
+		gradeAnchor.setVisible(false);
 		courseMat.setVisible(true);
 		matButn.setVisible(true);
 		textAreaLeft.setText("Here");
@@ -203,12 +192,11 @@ public class TeacherController implements Initializable {
 				textAreaLeft.setText("Description Added");
 			}
 		});
-//		labelPane.setVisible(false);
 	}
 
 	public void removeMaterial() {
-//		textAreaLeft.clear();
 		textAreaLeft.setEditable(false);
+		gradeAnchor.setVisible(false);
 		courseMat.setVisible(false);
 		labelPane.setVisible(true);
 		matButn.setVisible(false);
@@ -220,12 +208,10 @@ public class TeacherController implements Initializable {
 					System.out.println("Remove Material Enter Handle");
 					MySQLAccess.noReturnQuery(
 							"UPDATE course SET overview = 'TBD' WHERE course_id = " + courseText.getText());
-//					textAreaLeft.clear();
 					textAreaLeft.setText("Material Removed");
 				}
 			}
 		});
-//		labelPane.setVisible(false);
 	}
 
 	/**
@@ -258,41 +244,43 @@ public class TeacherController implements Initializable {
 		textAreaLeft.setText(textLeft.getText());
 	}
 
-	public void checkEmail() {
+	public void checkMessages() {
 		labelPane.setVisible(false);
-		String check = "\n"
-				+ MySQLAccess.returnQuery("SELECT date_received,cast(message as NCHAR) FROM user_email WHERE email ='"
-						+ username + "@p2k.com' order by date_received DESC limit 5", 2);
+		gradeAnchor.setVisible(false);
+		String check = "\n" + MySQLAccess
+				.returnQuery("SELECT date_received,cast(message_text as NCHAR) FROM message WHERE username ='"
+						+ teachUsername + "' order by date_received DESC limit 10", 2);
 		textForFlowLeft.setText(check);
 		changeTextFlow(textForFlowLeft);
 	}
 
-	public void sendMail() {
+	public void sendMessage() {
 		labelPane.setVisible(false);
 		anchor.setVisible(true);
-		emailPopup = new TextInputDialog();
-		emailPopup.setHeaderText("Enter the Username you would like to send message to.");
-		emailArea = new TextArea();
-		emailArea.setWrapText(true);
-		emailArea.setPromptText("Enter Message Here");
-		emailArea.setPrefSize(307, 376);
-		anchor.getChildren().add(emailArea);
-		emailPopup.showAndWait();
-		sentUser = emailPopup.getEditor().getText();
+		gradeAnchor.setVisible(false);
+		messagePopup = new TextInputDialog();
+		messagePopup.setHeaderText("Enter the Username you would like to send message to.");
+		messageArea = new TextArea();
+		messageArea.setWrapText(true);
+		messageArea.setPromptText("Enter Message Here");
+		messageArea.setPrefSize(307, 376);
+		anchor.getChildren().add(messageArea);
+		messagePopup.showAndWait();
+		sentUser = messagePopup.getEditor().getText();
 		if (sentUser.length() > 8 || sentUser.length() < 8) {
-			emailPopup.setHeaderText("This is not a valid Username Please Try Again");
-			emailPopup.showAndWait();
+			messagePopup.setHeaderText("This is not a valid Username Please Try Again");
+			messagePopup.showAndWait();
 		}
 
 	}
 
-	public void emailSent() {
-		sentUser = sentUser + "@p2k.com";
-		String emailF = "FROM: " + username + "@p2k.com\n" + emailArea.getText() + "\n\n";
-		MySQLAccess.noReturnQuery("insert into user_email (email,message) values('" + sentUser + "','" + emailF + "')");
-		textForFlowLeft.setText("Email Sent\n" + sentUser);
+	public void messageSent() {
+		String messgeF = "FROM: " + teachUsername + "\n" + messageArea.getText() + "\n\n";
+		MySQLAccess.noReturnQuery(
+				"insert into message (username,message_text) values('" + sentUser + "','" + messgeF + "')");
+		textForFlowLeft.setText("Message Sent\n" + sentUser);
 		changeTextFlow(textForFlowLeft);
-		emailArea.clear();
+		messageArea.clear();
 		anchor.setVisible(false);
 	}
 }

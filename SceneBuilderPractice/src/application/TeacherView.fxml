@@ -16,9 +16,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane accessibleRole="MENU_BAR" maxHeight="1080.0" maxWidth="1920.0" minHeight="5.0" minWidth="5.0" prefHeight="696.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TeacherController">
+<AnchorPane accessibleRole="MENU_BAR" maxHeight="1080.0" maxWidth="1920.0" minHeight="5.0" minWidth="5.0" prefHeight="681.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TeacherController">
 	<children>
-		<ImageView fitHeight="903.0" fitWidth="1290.0" layoutY="-160.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="864.0" fitWidth="1290.0" layoutX="-163.0" layoutY="-174.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@resizedPortal.jpg" />
 			</image>
@@ -41,9 +41,9 @@
 				</Menu>
 				<Menu mnemonicParsing="false" text="Messages">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#sendMail" text="Send Email" />
+						<MenuItem mnemonicParsing="false" onAction="#sendMessage" text="Send Email" />
 
-						<MenuItem mnemonicParsing="false" onAction="#checkEmail" text="Check Email" />
+						<MenuItem mnemonicParsing="false" onAction="#checkMessages" text="Check Email" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" onAction="#listViewGrades" onShowing="#listViewGrades" onShown="#addNewAssignment" text="Manage Course">
@@ -78,7 +78,7 @@
 		</MenuBar>
 		<AnchorPane fx:id="anchor" layoutX="14.0" layoutY="297.0" prefHeight="385.0" prefWidth="398.0">
 			<children>
-				<Button fx:id="sendEmail" layoutX="351.0" layoutY="14.0" mnemonicParsing="false" onAction="#emailSent" text="Send" />
+				<Button fx:id="sendMessage" layoutX="351.0" layoutY="14.0" mnemonicParsing="false" onAction="#messageSent" text="Send" />
 			</children>
 		</AnchorPane>
 		<AnchorPane fx:id="gradeAnchor" layoutX="482.0" layoutY="114.0" prefHeight="142.0" prefWidth="515.0">

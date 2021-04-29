@@ -31,7 +31,7 @@
 				</TextArea>
 			</children>
 		</TextFlow>
-		<MenuBar layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="316.0">
+		<MenuBar layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #808080;">
 			<menus>
 				<Menu mnemonicParsing="false" onAction="#checkCourse" onMenuValidation="#checkCourse" text="Active Course">
 					<items>
@@ -46,8 +46,8 @@
 				</Menu>
 				<Menu mnemonicParsing="false" text="Messages">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#sendMail" text="Send Email" />
-						<MenuItem mnemonicParsing="false" onAction="#checkEmail" text="Check Email" />
+						<MenuItem mnemonicParsing="false" onAction="#sendMessage" text="Send Message" />
+						<MenuItem mnemonicParsing="false" onAction="#checkMessages" text="Check Messages" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="Account Settings">
@@ -61,9 +61,9 @@
 				<Cursor fx:constant="DEFAULT" />
 			</cursor>
 		</MenuBar>
-      <AnchorPane fx:id="anchor" layoutX="14.0" layoutY="297.0" prefHeight="385.0" prefWidth="362.0">
+      <AnchorPane fx:id="anchor" layoutX="14.0" layoutY="276.0" prefHeight="385.0" prefWidth="362.0">
          <children>
-            <Button fx:id="sendEmail" layoutX="319.0" layoutY="14.0" mnemonicParsing="false" onAction="#emailSent" text="Send" />
+            <Button fx:id="sendMessage" layoutX="319.0" layoutY="14.0" mnemonicParsing="false" onAction="#messageSent" style="-fx-background-color: #808080; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="Send" />
          </children>
       </AnchorPane>
 	</children>

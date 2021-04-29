@@ -34,9 +34,9 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Message">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#sendMail" text="Send Email - User" />
-                  <MenuItem mnemonicParsing="false" onAction="#sendMassMail" text="Send Email - Mass" />
-                  <MenuItem mnemonicParsing="false" onAction="#checkEmail" text="Check Email" />
+                <MenuItem mnemonicParsing="false" onAction="#sendMessage" text="Send Message - User" />
+                  <MenuItem mnemonicParsing="false" onAction="#sendMassMessage" text="Send Message - Mass" />
+                  <MenuItem mnemonicParsing="false" onAction="#checkMessages" text="Check Message" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Login">
@@ -58,11 +58,11 @@
       </TextFlow>
       <AnchorPane fx:id="anchor" layoutX="7.0" layoutY="380.0" prefHeight="395.0" prefWidth="572.0">
          <children>
-            <Button fx:id="sndEmBt" layoutX="341.0" layoutY="14.0" mnemonicParsing="false" onAction="#emailSent" prefHeight="25.0" prefWidth="51.0" style="-fx-background-color: #808080; -fx-text-fill: #ffffff;" text="Send">
+            <Button fx:id="sndMes" layoutX="341.0" layoutY="14.0" mnemonicParsing="false" onAction="#messageSent" prefHeight="25.0" prefWidth="51.0" style="-fx-background-color: #808080; -fx-text-fill: #ffffff;" text="Send">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button fx:id="mssEmal" layoutX="341.0" layoutY="56.0" mnemonicParsing="false" onAction="#massSent" prefHeight="25.0" prefWidth="51.0" style="-fx-background-color: #808080; -fx-text-fill: #ffffff;" text="Send">
+            <Button fx:id="mssMess" layoutX="341.0" layoutY="56.0" mnemonicParsing="false" onAction="#massSent" prefHeight="25.0" prefWidth="51.0" style="-fx-background-color: #808080; -fx-text-fill: #ffffff;" text="Send">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>

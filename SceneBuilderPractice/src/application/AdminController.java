@@ -44,9 +44,9 @@ public class AdminController implements Initializable {
 	@FXML
 	private TextField newSchool;
 	@FXML
-	private Button sndEmBt;
+	private Button sndMes;
 	@FXML
-	private Button mssEmal;
+	private Button mssMess;
 	@FXML
 	private TextFlow textFlow;
 	@FXML
@@ -57,12 +57,12 @@ public class AdminController implements Initializable {
 	private Button usrBT;
 
 	private String sentUser = "";
-	private TextArea emailArea;
-	private TextInputDialog emailPopup;
+	private TextArea messageArea;
+	private TextInputDialog messagePopup;
 	private Text textForFlowLeft = new Text();
 	private ResetPasswordView rpv;
 	private Main main;
-	private static String username;
+	private static String adminUsername;
 	private int choice = 0;
 
 	@Override
@@ -73,7 +73,7 @@ public class AdminController implements Initializable {
 		rpv = new ResetPasswordView();
 	}
 
-	public void createUser() { 
+	public void createUser() {
 		userAnchor.setVisible(true);
 		userLabel.setText("Enter information to create user");
 		newUser.setVisible(true);
@@ -122,7 +122,7 @@ public class AdminController implements Initializable {
 
 	public void updateLogin() {
 		try {
-			ResetPasswordController.setUser(username);
+			ResetPasswordController.setUser(adminUsername);
 			rpv.start(Main.logStage);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,18 +138,18 @@ public class AdminController implements Initializable {
 	}
 
 	public static void setNameForTitle(String name) {
-		username = name;
-		nameForTitle = MySQLAccess.getFirstName(username);
+		adminUsername = name;
+		nameForTitle = MySQLAccess.getFirstName(adminUsername);
 	}
 
 	public static String getUserAdminNameForTitle() {
 		return nameForTitle;
 	}
 
-	public void checkEmail() {
-		String check = "\n"
-				+ MySQLAccess.returnQuery("SELECT date_received,cast(message as NCHAR) FROM user_email WHERE email ='"
-						+ username + "@p2k.com' order by date_received DESC limit 5", 2);
+	public void checkMessages() {
+		String check = "\n" + MySQLAccess
+				.returnQuery("SELECT date_received,cast(message_text as NCHAR) FROM message WHERE username ='"
+						+ adminUsername + "' order by date_received DESC limit 10", 2);
 		textForFlowLeft.setText(check);
 		changeTextFlow(textForFlowLeft);
 	}
@@ -158,60 +158,61 @@ public class AdminController implements Initializable {
 	 * Need a way to send it to the database instead of keep checking maybe add a
 	 * button on the tilepane
 	 **/
-	public void sendMail() {
+	public void sendMessage() {
 		anchor.setVisible(true);
-		sndEmBt.setVisible(true);
-		mssEmal.setVisible(false);
-		emailPopup = new TextInputDialog();
-		emailPopup.setHeaderText("Enter the Username you would like to send message to.");
-		emailArea = new TextArea();
-		emailArea.setWrapText(true);
-		emailArea.setPromptText("Enter Message Here");
-		emailArea.setPrefSize(307, 376);
-		anchor.getChildren().add(emailArea);
-		emailPopup.showAndWait();
-		sentUser = emailPopup.getEditor().getText();
+		sndMes.setVisible(true);
+		mssMess.setVisible(false);
+		messagePopup = new TextInputDialog();
+		messagePopup.setHeaderText("Enter the Username you would like to send message to.");
+		messageArea = new TextArea();
+		messageArea.setWrapText(true);
+		messageArea.setPromptText("Enter Message Here");
+		messageArea.setPrefSize(307, 376);
+		anchor.getChildren().add(messageArea);
+		messagePopup.showAndWait();
+		sentUser = messagePopup.getEditor().getText();
 		if (sentUser.length() > 8 || sentUser.length() < 8) {
-			emailPopup.setHeaderText("This is not a valid Username Please Try Again");
-			emailPopup.showAndWait();
+			messagePopup.setHeaderText("This is not a valid Username Please Try Again");
+			messagePopup.showAndWait();
 		}
 
 	}
 
 	/** Get the list of names from the database in an ArrayList just like log in */
-	public void sendMassMail() {
+	public void sendMassMessage() {
 		anchor.setVisible(true);
-		sndEmBt.setVisible(false);
-		mssEmal.setVisible(true);
-		emailArea = new TextArea();
-		emailArea.setWrapText(true);
-		emailArea.setPromptText("Enter Message Here");
-		emailArea.setPrefSize(307, 376);
-		anchor.getChildren().add(emailArea);
+		sndMes.setVisible(false);
+		mssMess.setVisible(true);
+		messageArea = new TextArea();
+		messageArea.setWrapText(true);
+		messageArea.setPromptText("Enter Message Here");
+		messageArea.setPrefSize(307, 376);
+		anchor.getChildren().add(messageArea);
 	}
 
 	public void massSent() {
 		for (String s : MySQLAccess.getUsername()) {
-
-			String email = s + "@p2k.com";
-			String emailF = "FROM: " + username + "@p2k.com\n" + emailArea.getText() + "\n";
-			MySQLAccess
-					.noReturnQuery("INSERT INTO user_email (email, message) VALUES ('" + email + "','" + emailF + "')");
+			String users = s;
+			String emailF = "FROM: " + adminUsername
+					+ "\n" + messageArea.getText() + "\n";
+			MySQLAccess.noReturnQuery(
+					"INSERT INTO message (username, message_text) VALUES ('" + users + "','" + emailF + "')");
 
 		}
-		textForFlowLeft.setText("Email Sent To All Users\n");
+		textForFlowLeft.setText("Message Sent To All Users\n");
 		changeTextFlow(textForFlowLeft);
-		emailArea.clear();
+		messageArea.clear();
 		anchor.setVisible(false);
 	}
 
-	public void emailSent() {
-		sentUser = sentUser + "@p2k.com";
-		String emailF = "FROM: " + username + "@p2k.com\n" + emailArea.getText() + "\n\n";
-		MySQLAccess.noReturnQuery("insert into user_email (email,message) values('" + sentUser + "','" + emailF + "')");
-		textForFlowLeft.setText("Email Sent\n" + sentUser);
+	public void messageSent() {
+//		sentUser = sentUser + "@p2k.com";
+		String emailF = "FROM: " + adminUsername + "\n" + messageArea.getText() + "\n\n";
+		MySQLAccess.noReturnQuery(
+				"insert into message (username,message_text) values('" + sentUser + "','" + emailF + "')");
+		textForFlowLeft.setText("Message Sent\n" + sentUser);
 		changeTextFlow(textForFlowLeft);
-		emailArea.clear();
+		messageArea.clear();
 		anchor.setVisible(false);
 	}
 

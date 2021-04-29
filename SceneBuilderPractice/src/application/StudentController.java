@@ -30,14 +30,12 @@ public class StudentController implements Initializable {
 	private TextFlow textFlow;
 	@FXML
 	private TextArea textAreaLeft;
-//	@FXML
-//	private Button logoutButton;
 	@FXML
 	private MenuItem changePass;
 	@FXML
 	private Menu courseMenu;
 	@FXML
-	private Button sendEmail;
+	private Button sendMessage;
 	@FXML
 	private AnchorPane anchor;
 
@@ -45,17 +43,14 @@ public class StudentController implements Initializable {
 	static String firstName;
 	static String userType;
 	static String sID = "";
-	private static String username;
-	
-	private TextArea emailArea;
-	private TextInputDialog emailPopup;
+	private static String studUsername;
+
+	private TextArea messageArea;
+	private TextInputDialog messagePopup;
 	private Text textForFlowLeft = new Text();// For Output to the user
-	
+
 	private Main main;
 	private ResetPasswordView rpv;
-	
-	
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -66,7 +61,7 @@ public class StudentController implements Initializable {
 
 	public void updateLogin() {
 		try {
-			ResetPasswordController.setUser(username);
+			ResetPasswordController.setUser(studUsername);
 			rpv.start(Main.logStage);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,10 +83,10 @@ public class StudentController implements Initializable {
 				.returnQuery("SELECT first_name FROM user where username='" + userName + "'", 1);
 	}
 
-	public void checkEmail() {
-		String check = "\n"
-				+ MySQLAccess.returnQuery("SELECT date_received,cast(message as NCHAR) FROM user_email WHERE email ='"
-						+ username + "@p2k.com' order by date_received DESC limit 5", 2);
+	public void checkMessages() {
+		String check = "\n" + MySQLAccess
+				.returnQuery("SELECT date_received,cast(message_text as NCHAR) FROM message WHERE username ='"
+						+ studUsername + "' order by date_received DESC limit 10", 2);
 		textForFlowLeft.setText(check);
 		changeTextFlow(textForFlowLeft);
 	}
@@ -100,31 +95,32 @@ public class StudentController implements Initializable {
 	 * Need a way to send it to the database instead of keep checking maybe add a
 	 * button on the tilepane
 	 **/
-	public void sendMail() {
+	public void sendMessage() {
 		anchor.setVisible(true);
-		emailPopup = new TextInputDialog();
-		emailPopup.setHeaderText("Enter the Username you would like to send message to.");
-		emailArea = new TextArea();
-		emailArea.setWrapText(true);
-		emailArea.setPromptText("Enter Message Here");
-		emailArea.setPrefSize(307, 376);
-		anchor.getChildren().add(emailArea);
-		emailPopup.showAndWait();
-		sentUser = emailPopup.getEditor().getText();
+		messagePopup = new TextInputDialog();
+		messagePopup.setHeaderText("Enter the Username you would like to send message to.");
+		messageArea = new TextArea();
+		messageArea.setWrapText(true);
+		messageArea.setPromptText("Enter Message Here");
+		messageArea.setPrefSize(307, 376);
+		anchor.getChildren().add(messageArea);
+		messagePopup.showAndWait();
+		sentUser = messagePopup.getEditor().getText();
 		if (sentUser.length() > 8 || sentUser.length() < 8) {
-			emailPopup.setHeaderText("This is not a valid Username Please Try Again");
-			emailPopup.showAndWait();
+			messagePopup.setHeaderText("This is not a valid Username Please Try Again");
+			messagePopup.showAndWait();
 		}
 
 	}
 
-	public void emailSent() {
-		sentUser = sentUser + "@p2k.com";
-		String emailF = "FROM: " + username + "@p2k.com\n" + emailArea.getText() + "\n\n";
-		MySQLAccess.noReturnQuery("insert into user_email (email,message) values('" + sentUser + "','" + emailF + "')");
-		textForFlowLeft.setText("Email Sent\n" + sentUser);
+	public void messageSent() {
+//		sentUser = sentUser + "@p2k.com";
+		String messageF = "FROM: " + studUsername + "\n" + messageArea.getText() + "\n\n";
+		MySQLAccess.noReturnQuery(
+				"insert into message (username,message_text) values('" + sentUser + "','" + messageF + "')");
+		textForFlowLeft.setText("Message Sent\n" + sentUser);
 		changeTextFlow(textForFlowLeft);
-		emailArea.clear();
+		messageArea.clear();
 		anchor.setVisible(false);
 	}
 
@@ -144,12 +140,11 @@ public class StudentController implements Initializable {
 	/** Works for getting the grade of user */
 	public void getGrades() {
 		anchor.setVisible(false);
-		String course = "Course";
 		String score = "Score";
 		String grade = "Grade";
-		textForFlowLeft.setText(String.format("%-15s %4s %-3s\n", course, score, grade) + MySQLAccess
-				.returnQuery("select course_name, score, grade from assignment a, course c where a.student_id ='" + sID
-						+ "' and a.course_id = c.course_id", 3));
+		textForFlowLeft.setText(String.format("%-4s %-3s\n", score, grade)
+				+ MySQLAccess.returnQuery("select score, grade from assignment a, course c where a.student_id ='" + sID
+						+ "' and a.course_id = c.course_id", 2));
 		changeTextFlow(textForFlowLeft);
 	}
 
@@ -175,11 +170,11 @@ public class StudentController implements Initializable {
 	}
 
 	public static String getUsername() {
-		return username;
+		return studUsername;
 	}
 
 	public static void setUsername(String username) {
-		StudentController.username = username;
+		StudentController.studUsername = username;
 		sID = MySQLAccess.returnQuery("SELECT user_id from user where username ='" + username + "'", 1);
 	}
 

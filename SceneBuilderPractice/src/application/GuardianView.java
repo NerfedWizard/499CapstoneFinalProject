@@ -7,12 +7,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author loeln
+ *
+ */
 public class GuardianView extends Application {
 	@FXML
 	private Scene scene;
 	@FXML
 	private AnchorPane root;
 
+	/**
+	 * 
+	 */
 	public GuardianView() {
 
 	}
@@ -20,7 +27,7 @@ public class GuardianView extends Application {
 	@Override
 	public void start(Stage guardStage) throws Exception {
 		try {
-			guardStage.setTitle("Guardian View");
+			guardStage.setTitle(GuardianController.getUserGuardianNameForTitle());
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("GuardianView.fxml"));
 			scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -31,6 +38,9 @@ public class GuardianView extends Application {
 		}
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

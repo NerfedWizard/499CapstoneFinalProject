@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author loeln
+ *
+ */
 public class AdminView extends Application {
 
 	@FXML
@@ -14,6 +18,9 @@ public class AdminView extends Application {
 	@FXML
 	private AnchorPane root;
 
+	/**
+	 * 
+	 */
 	public AdminView() {
 	}
 
@@ -31,6 +38,9 @@ public class AdminView extends Application {
 		}
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

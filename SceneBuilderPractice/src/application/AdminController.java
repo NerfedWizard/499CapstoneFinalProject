@@ -15,7 +15,11 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 /**
- * I think making a text field for the database stuff is the way to go
+ * @author loeln
+ * 
+ * 
+ *         Admin controller
+ * 
  * 
  */
 public class AdminController implements Initializable {
@@ -152,7 +156,7 @@ public class AdminController implements Initializable {
 	}
 
 	/**
-	 * Follwing methods are for setting the name at the top of the screen
+	 * Following methods are for setting the name at the top of the screen
 	 * 
 	 * @param name
 	 */
@@ -213,13 +217,28 @@ public class AdminController implements Initializable {
 		anchor.getChildren().add(messageArea);
 	}
 
-	/** Get the list of names from the database in an ArrayList just like log in */
+	/**
+	 * Get the list of names from the database in an ArrayList just like log in
+	 * 
+	 * 
+	 * Want to add a part to send a string that can have any character in any
+	 * combination
+	 */
 	public void massSent() {
 		for (String s : MySQLAccess.getUsername()) {
 			String users = s;
-			String emailF = "FROM: " + adminUsername + "\n" + messageArea.getText() + "\n";
+			StringBuilder sb = new StringBuilder();
+			String messageF = "FROM: " + adminUsername + "\n" + messageArea.getText() + "\n";
+			sb.append(messageF);
+//			for (String x : sb.toString().split("(?!^)")) {
+//				System.out.println(
+//						"In the message loop to separate string looking for special characters\n\'\" Like those\n" + x);
+//				if(x.equals("'")) {
+//					
+//				}
+//			}
 			MySQLAccess.noReturnQuery(
-					"INSERT INTO message (username, message_text) VALUES ('" + users + "','" + emailF + "')");
+					"INSERT INTO message (username, message_text) VALUES ('" + users + "','" + messageF + "')");
 		}
 		textForFlowLeft.setText("Message Sent To All Users\n");
 		changeTextFlow(textForFlowLeft);

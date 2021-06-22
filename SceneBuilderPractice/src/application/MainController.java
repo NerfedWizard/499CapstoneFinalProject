@@ -111,7 +111,7 @@ public class MainController implements Initializable {
 					if (passwordTextField.getText().equals(p)) {
 						textShowLabel.setText("Success!");
 						String userType = MySQLAccess
-								.returnQuery("select user_type from user where username ='" + s + "'", 1).trim();
+								.returnQuery("select user_type from user where username ='" + s + "'", 1).trim();//Have to trim off extra whitespace for equal() work
 						if (userType.equals("Student")) {
 							StudentController.setNameForTitle(s);
 

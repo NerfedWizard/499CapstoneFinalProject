@@ -158,6 +158,8 @@ public class AdminController implements Initializable {
 	/**
 	 * Following methods are for setting the name at the top of the screen
 	 * 
+	 * Should change this to the returnQuery() and get rid of firstName method
+	 * 
 	 * @param name
 	 */
 	public static void setNameForTitle(String name) {

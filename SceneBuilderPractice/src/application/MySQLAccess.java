@@ -97,6 +97,8 @@ public class MySQLAccess {
 	/**
 	 * Only something I made to the first name of the user for the title of the
 	 * window
+	 * 
+	 * Could get rid of this if change the admin controller 
 	 */
 	public static String getFirstName(String username) {
 		try {

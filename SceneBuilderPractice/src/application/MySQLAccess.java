@@ -22,7 +22,7 @@ public class MySQLAccess {
 	 * connect java will not open MySQL for you but it will do everything after
 	 */
 
-	static String url = "jdbc:mysql://localhost:3306/p2k_district?useSSL=false";// Make the database whatever name your
+	static String url = "jdbc:mysql://192.168.1.25:3306/p2k_district?allowPublicKeyRetrieval=true&useSSL=false";// Make the database whatever name your
 																				// database is all other keep the same
 	static String user = "root";// Username to login into database default is root
 	static String passwrd = "root";// Password to login in default is root
@@ -40,7 +40,7 @@ public class MySQLAccess {
 
 		{
 			// Connects to database
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, passwrd);
 			;
 		} catch (Exception e) {

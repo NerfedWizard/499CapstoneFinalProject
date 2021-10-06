@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author loeln
- *
- */
-module fullNelly {
-}
